@@ -174,7 +174,9 @@
             <li>✓ 구제신청서 제출 대행 포함</li>
             <li>✓ 공인노무사 직접 작성</li>
           </ul>
-          <a href="index.html#contact" class="lm-cta">신청하기</a>
+          <button class="lm-cta" onclick="openPayment('1차 서면 작성', 490000)">
+            카드 결제하기 💳
+          </button>
         </div>
         <div class="lm-plan">
           <h3>2차 서면 작성</h3>
@@ -185,7 +187,9 @@
             <li>✓ 수정 횟수 무제한</li>
             <li>✓ 동일 사건에 한함</li>
           </ul>
-          <a href="index.html#contact" class="lm-cta outline">신청하기</a>
+          <button class="lm-cta outline" onclick="openPayment('2차 서면 작성', 290000)">
+            카드 결제하기 💳
+          </button>
         </div>
         <div class="lm-plan">
           <h3>3차 이후 서면</h3>
@@ -196,9 +200,15 @@
             <li>✓ 수정 횟수 무제한</li>
             <li>✓ 동일 사건에 한함</li>
           </ul>
-          <a href="index.html#contact" class="lm-cta outline">신청하기</a>
+          <button class="lm-cta outline" onclick="openPayment('3차 이후 서면', 190000)">
+            카드 결제하기 💳
+          </button>
         </div>
       </div>
+      <p style="text-align:center;color:rgba(255,255,255,0.3);font-size:12px;margin-top:20px;line-height:1.7">
+        카드 결제는 국내외 모든 신용·체크카드를 지원합니다.<br/>
+        결제 후 담당 노무사가 영업일 기준 1일 이내 연락드립니다.
+      </p>
     </div>
   </section>
 
@@ -257,10 +267,235 @@
     </div>
   </footer>
 
+  <!-- ── 결제 모달 ── -->
+  <div class="pay-overlay" id="payOverlay">
+    <div class="pay-modal">
+      <button class="pay-close" onclick="closePayment()">×</button>
+      <div class="pay-header">
+        <div class="pay-logo">⚖ L-Master</div>
+        <div class="pay-product" id="payProduct"></div>
+        <div class="pay-amount" id="payAmount"></div>
+      </div>
+      <div class="pay-body">
+        <div class="pay-step" id="payStep1">
+          <div class="pay-field">
+            <label>이름</label>
+            <input type="text" id="payName" placeholder="홍길동"/>
+          </div>
+          <div class="pay-field">
+            <label>이메일</label>
+            <input type="email" id="payEmail" placeholder="example@email.com"/>
+          </div>
+          <div class="pay-field">
+            <label>연락처</label>
+            <input type="tel" id="payPhone" placeholder="010-0000-0000"/>
+          </div>
+          <div class="pay-field">
+            <label>사건 유형</label>
+            <select id="payCaseType">
+              <option value="">선택해주세요</option>
+              <option>부당해고</option>
+              <option>부당징계</option>
+              <option>부당인사발령</option>
+              <option>차별 시정</option>
+              <option>기타</option>
+            </select>
+          </div>
+          <button class="pay-next-btn" onclick="goPayStep2()">다음 — 결제 정보 입력 →</button>
+        </div>
+        <div class="pay-step" id="payStep2" style="display:none">
+          <div class="pay-field">
+            <label>카드 번호</label>
+            <input type="text" id="cardNum" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatCard(this)"/>
+          </div>
+          <div class="pay-row">
+            <div class="pay-field">
+              <label>유효기간</label>
+              <input type="text" id="cardExp" placeholder="MM / YY" maxlength="7" oninput="formatExp(this)"/>
+            </div>
+            <div class="pay-field">
+              <label>CVC</label>
+              <input type="text" id="cardCvc" placeholder="000" maxlength="3"/>
+            </div>
+          </div>
+          <div class="pay-field">
+            <label>카드 소유자 이름</label>
+            <input type="text" id="cardName" placeholder="카드에 표시된 이름"/>
+          </div>
+          <div class="pay-secure">
+            🔒 결제 정보는 SSL 암호화로 안전하게 처리됩니다
+          </div>
+          <button class="pay-next-btn" onclick="submitPayment()">
+            <span id="payBtnText">결제하기</span>
+          </button>
+          <button class="pay-back-btn" onclick="goPayStep1()">← 이전으로</button>
+        </div>
+        <div class="pay-step" id="payStep3" style="display:none">
+          <div class="pay-success">
+            <div class="pay-success-icon">✓</div>
+            <h3>결제가 완료되었습니다</h3>
+            <p id="paySuccessMsg"></p>
+            <p style="color:rgba(255,255,255,0.5);font-size:13px;margin-top:12px;line-height:1.7">
+              담당 노무사가 영업일 기준 1일 이내<br/>
+              입력하신 연락처로 연락드립니다.
+            </p>
+            <button class="pay-next-btn" onclick="closePayment()" style="margin-top:24px">확인</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+  .pay-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7); z-index: 9999;
+    align-items: center; justify-content: center; padding: 20px;
+  }
+  .pay-overlay.open { display: flex; }
+  .pay-modal {
+    background: #141e2d; border: 1px solid rgba(201,168,76,0.2);
+    width: 100%; max-width: 480px; max-height: 90vh;
+    overflow-y: auto; position: relative; padding: 0;
+  }
+  .pay-close {
+    position: absolute; top: 14px; right: 18px;
+    background: none; border: none; color: rgba(255,255,255,0.5);
+    font-size: 22px; cursor: pointer; z-index: 2; line-height: 1;
+  }
+  .pay-close:hover { color: #fff; }
+  .pay-header {
+    background: linear-gradient(135deg, #0d1b2a, #1b2e45);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 28px 32px 24px;
+  }
+  .pay-logo {
+    font-family: var(--ff-serif); font-size: 16px;
+    color: var(--gold); margin-bottom: 12px; letter-spacing: 0.05em;
+  }
+  .pay-product { font-size: 18px; font-weight: 500; color: #fff; margin-bottom: 6px; }
+  .pay-amount  {
+    font-family: var(--ff-serif); font-size: 2rem;
+    color: var(--gold); font-weight: 400;
+  }
+  .pay-body { padding: 28px 32px 32px; }
+  .pay-field { margin-bottom: 16px; }
+  .pay-field label {
+    display: block; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); margin-bottom: 6px;
+  }
+  .pay-field input,
+  .pay-field select {
+    width: 100%; background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #fff; font-family: var(--ff-sans); font-size: 14px;
+    padding: 11px 14px; outline: none; box-sizing: border-box;
+    transition: border-color 0.2s;
+  }
+  .pay-field input:focus,
+  .pay-field select:focus { border-color: var(--gold); }
+  .pay-field input::placeholder { color: rgba(255,255,255,0.25); }
+  .pay-field select option { background: #141e2d; }
+  .pay-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .pay-secure {
+    font-size: 12px; color: rgba(255,255,255,0.35);
+    text-align: center; margin: 8px 0 16px; padding: 8px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .pay-next-btn {
+    width: 100%; background: var(--gold); color: var(--navy);
+    border: none; font-family: var(--ff-sans); font-weight: 700;
+    font-size: 14px; padding: 15px; cursor: pointer;
+    transition: background 0.2s; margin-top: 4px;
+  }
+  .pay-next-btn:hover { background: var(--gold2); }
+  .pay-back-btn {
+    width: 100%; background: transparent;
+    border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.5);
+    font-family: var(--ff-sans); font-size: 13px; padding: 10px;
+    cursor: pointer; margin-top: 10px; transition: all 0.2s;
+  }
+  .pay-back-btn:hover { border-color: rgba(255,255,255,0.3); color: #fff; }
+  .pay-success { text-align: center; padding: 16px 0; }
+  .pay-success-icon {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(39,174,96,0.15); border: 2px solid #27ae60;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; color: #27ae60; margin: 0 auto 20px;
+  }
+  .pay-success h3 {
+    font-family: var(--ff-serif); font-size: 22px;
+    color: #fff; margin-bottom: 12px;
+  }
+  .pay-success p { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.7; }
+  </style>
+
   <script src="script.js"></script>
   <script>
-    // lmaster 페이지는 항상 nav scrolled 상태
     document.getElementById('navbar').classList.add('scrolled');
+
+    let _payProduct = '', _payAmount = 0;
+
+    function openPayment(product, amount) {
+      _payProduct = product;
+      _payAmount  = amount;
+      document.getElementById('payProduct').textContent = product;
+      document.getElementById('payAmount').textContent  = '₩' + amount.toLocaleString();
+      document.getElementById('payStep1').style.display = '';
+      document.getElementById('payStep2').style.display = 'none';
+      document.getElementById('payStep3').style.display = 'none';
+      document.getElementById('payOverlay').classList.add('open');
+    }
+    function closePayment() {
+      document.getElementById('payOverlay').classList.remove('open');
+    }
+    function goPayStep1() {
+      document.getElementById('payStep1').style.display = '';
+      document.getElementById('payStep2').style.display = 'none';
+    }
+    function goPayStep2() {
+      const name  = document.getElementById('payName').value.trim();
+      const email = document.getElementById('payEmail').value.trim();
+      const phone = document.getElementById('payPhone').value.trim();
+      const type  = document.getElementById('payCaseType').value;
+      if (!name || !email || !phone || !type) {
+        alert('모든 항목을 입력해주세요.'); return;
+      }
+      document.getElementById('payStep1').style.display = 'none';
+      document.getElementById('payStep2').style.display = '';
+    }
+    function formatCard(el) {
+      let v = el.value.replace(/\D/g,'').slice(0,16);
+      el.value = v.replace(/(.{4})/g,'$1 ').trim();
+    }
+    function formatExp(el) {
+      let v = el.value.replace(/\D/g,'').slice(0,4);
+      if (v.length >= 2) v = v.slice(0,2) + ' / ' + v.slice(2);
+      el.value = v;
+    }
+    function submitPayment() {
+      const num  = document.getElementById('cardNum').value.replace(/\s/g,'');
+      const exp  = document.getElementById('cardExp').value;
+      const cvc  = document.getElementById('cardCvc').value;
+      const name = document.getElementById('cardName').value.trim();
+      if (num.length < 15 || !exp || cvc.length < 3 || !name) {
+        alert('카드 정보를 모두 입력해주세요.'); return;
+      }
+      const btn = document.getElementById('payBtnText');
+      btn.textContent = '처리 중...';
+      setTimeout(() => {
+        document.getElementById('payStep2').style.display = 'none';
+        document.getElementById('payStep3').style.display = '';
+        const payer = document.getElementById('payName').value;
+        document.getElementById('paySuccessMsg').textContent =
+          `${payer}님의 "${_payProduct}" 결제가 완료되었습니다. (₩${_payAmount.toLocaleString()})`;
+        btn.textContent = '결제하기';
+      }, 1500);
+    }
+    document.getElementById('payOverlay').addEventListener('click', e => {
+      if (e.target === document.getElementById('payOverlay')) closePayment();
+    });
   </script>
 </body>
 </html>

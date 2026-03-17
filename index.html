@@ -52,17 +52,18 @@
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <p class="hero-sub animate-up">노동법의 최고 전문가 집단</p>
-      <h1 class="hero-title animate-up delay-1">
+      <p class="hero-firm animate-up">노무법인 C&amp;L</p>
+      <p class="hero-sub animate-up delay-1">노동법의 최고 전문가 집단</p>
+      <h1 class="hero-title animate-up delay-2">
         노동의 가치를<br/>
         <em>법으로 증명합니다</em>
       </h1>
-      <p class="hero-desc animate-up delay-2">
+      <p class="hero-desc animate-up delay-3">
         기업 인사노무 컨설팅부터<br/>
         노동위원회 서면 대리까지<br/>
         실력과 신뢰로 함께합니다
       </p>
-      <div class="hero-cta animate-up delay-3">
+      <div class="hero-cta animate-up delay-4">
         <a href="#service" class="btn-primary">서비스 알아보기</a>
         <a href="#contact" class="btn-outline">상담 문의</a>
       </div>
@@ -207,19 +208,6 @@
         </div>
       </div>
 
-      <!-- L-Master 배너 -->
-      <div class="lmaster-banner">
-        <div class="lmaster-banner-text">
-          <span class="lmaster-banner-label">NEW SERVICE</span>
-          <strong>노동위원회 서면 대리 — L-Master</strong>
-          <p>
-            AI 할루시네이션 없이,<br/>
-            공인노무사가 직접 작성하는<br/>
-            노동위원회 서면 대리 서비스입니다
-          </p>
-        </div>
-        <a href="lmaster.html" class="btn-primary">L-Master 자세히 보기 →</a>
-      </div>
     </div>
   </section>
 
@@ -227,12 +215,19 @@
   <section class="section column-section" id="column">
     <div class="container">
       <div class="section-label">Column</div>
-      <h2 class="section-title">노무 칼럼</h2>
-      <p class="section-sub">
-        노동법 최신 동향과<br/>
-        실무 인사이트를 공유합니다
-      </p>
-      <div class="column-grid">
+      <div class="column-header-row">
+        <div>
+          <h2 class="section-title">노무 칼럼</h2>
+          <p class="section-sub">
+            노동법 최신 동향과<br/>
+            실무 인사이트를 공유합니다
+          </p>
+        </div>
+        <a href="column.html" class="btn-outline dark">전체 게시판 →</a>
+      </div>
+      <!-- 최신글 미리보기: localStorage 데이터 기반으로 JS가 채워넣음 -->
+      <div class="column-grid" id="columnPreview">
+        <!-- 기본 샘플 글 (JS가 없을 때 fallback) -->
         <div class="column-card featured-card">
           <div>
             <div class="col-category">노동법 이슈</div>
@@ -245,7 +240,7 @@
           </div>
           <div class="col-meta">
             <span>2024.11.15</span>
-            <a href="#" class="col-read">읽기 →</a>
+            <a href="column.html?id=1" class="col-read">읽기 →</a>
           </div>
         </div>
         <div class="column-card">
@@ -258,7 +253,7 @@
           </p>
           <div class="col-meta">
             <span>2024.10.22</span>
-            <a href="#" class="col-read">읽기 →</a>
+            <a href="column.html?id=2" class="col-read">읽기 →</a>
           </div>
         </div>
         <div class="column-card">
@@ -271,7 +266,7 @@
           </p>
           <div class="col-meta">
             <span>2024.09.30</span>
-            <a href="#" class="col-read">읽기 →</a>
+            <a href="column.html?id=3" class="col-read">읽기 →</a>
           </div>
         </div>
         <div class="column-card">
@@ -284,12 +279,9 @@
           </p>
           <div class="col-meta">
             <span>2024.09.05</span>
-            <a href="#" class="col-read">읽기 →</a>
+            <a href="column.html?id=4" class="col-read">읽기 →</a>
           </div>
         </div>
-      </div>
-      <div class="col-more-wrap">
-        <a href="#" class="btn-outline dark">칼럼 전체보기</a>
       </div>
     </div>
   </section>
