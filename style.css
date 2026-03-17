@@ -1044,3 +1044,30 @@ body {
   .form-row { grid-template-columns: 1fr; }
   .contact-form-wrap { padding: 24px 20px; }
 }
+
+/* ── About Why Items ── */
+.about-why-item {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 36px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid rgba(13,27,42,0.08);
+}
+.about-why-item:last-of-type { border-bottom: none; margin-bottom: 0; }
+.about-why-num {
+  font-family: var(--ff-serif);
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: rgba(201,168,76,0.25);
+  line-height: 1;
+  min-width: 40px;
+  padding-top: 4px;
+}
+.about-why-title {
+  font-family: var(--ff-serif);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
