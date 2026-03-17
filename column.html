@@ -8,172 +8,81 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500&display=swap" rel="stylesheet">
   <style>
-    /* ── 게시판 전용 스타일 ── */
-    .board-wrap { padding-top: 100px; min-height: 100vh; background: var(--light); }
-    .board-top  { background: var(--navy); padding: 64px 0 48px; margin-bottom: 0; }
-    .board-top .section-label { color: var(--gold); }
-    .board-top .section-title { color: #fff; margin-bottom: 0; }
+    body { background: #f5f0e8; }
 
-    /* 로그인 바 */
-    .auth-bar {
-      background: var(--white);
-      border-bottom: 1px solid rgba(13,27,42,0.08);
-      padding: 10px 0;
-      position: sticky;
-      top: 68px;
-      z-index: 90;
-    }
-    .auth-bar-inner {
-      max-width: 1100px; margin: 0 auto; padding: 0 32px;
-      display: flex; align-items: center; justify-content: flex-end; gap: 12px;
-    }
-    .auth-status { font-size: 13px; color: var(--gray); }
-    .auth-status strong { color: var(--navy); }
-    .btn-sm {
-      font-size: 12px; font-weight: 600; padding: 7px 16px;
-      background: var(--navy); color: #fff; border: none; cursor: pointer;
-      font-family: var(--ff-sans); transition: background 0.2s;
-    }
-    .btn-sm:hover { background: var(--navy2); }
-    .btn-sm.outline {
-      background: transparent; color: var(--navy);
-      border: 1.5px solid rgba(13,27,42,0.2);
-    }
-    .btn-sm.outline:hover { border-color: var(--gold); color: var(--gold); }
-    .btn-sm.gold { background: var(--gold); color: var(--navy); }
-    .btn-sm.gold:hover { background: var(--gold2); }
+    /* 인증 바 */
+    .auth-bar { background:#fff; border-bottom:1px solid rgba(13,27,42,0.08); padding:10px 0; position:sticky; top:68px; z-index:90; }
+    .auth-bar-inner { max-width:1100px; margin:0 auto; padding:0 32px; display:flex; align-items:center; justify-content:flex-end; gap:12px; }
+    .auth-status { font-size:13px; color:#6b7280; }
+    .auth-status strong { color:#0d1b2a; }
+    .btn-sm { font-size:12px; font-weight:600; padding:7px 18px; background:#0d1b2a; color:#fff; border:none; cursor:pointer; font-family:'Noto Sans KR',sans-serif; transition:background .2s; }
+    .btn-sm:hover { background:#1b2e45; }
+    .btn-sm.gold { background:#c9a84c; color:#0d1b2a; }
+    .btn-sm.gold:hover { background:#e8c96a; }
+    .btn-sm.line { background:transparent; color:#0d1b2a; border:1.5px solid rgba(13,27,42,0.2); }
+    .btn-sm.line:hover { border-color:#c9a84c; color:#c9a84c; }
 
-    /* 게시판 레이아웃 */
-    .board-body { max-width: 1100px; margin: 0 auto; padding: 48px 32px 80px; }
-    .board-toolbar {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 24px; gap: 16px; flex-wrap: wrap;
-    }
-    .board-count { font-size: 13px; color: var(--gray); }
-    .board-count strong { color: var(--navy); font-weight: 600; }
+    /* 헤더 */
+    .board-hero { background:#0d1b2a; padding:72px 0 48px; }
+    .board-hero .section-label { color:#c9a84c; }
+    .board-hero h1 { font-family:'Cormorant Garamond',serif; font-size:2.6rem; font-weight:400; color:#fff; margin-top:8px; }
 
-    /* 글 목록 */
-    .post-list { display: flex; flex-direction: column; gap: 0; }
-    .post-item {
-      display: grid;
-      grid-template-columns: 80px 1fr 100px 100px;
-      align-items: center;
-      padding: 18px 20px;
-      border-bottom: 1px solid rgba(13,27,42,0.07);
-      background: var(--white);
-      transition: background 0.15s;
-      gap: 12px;
-    }
-    .post-item:first-child { border-top: 2px solid var(--navy); }
-    .post-item:hover { background: #fafaf4; }
-    .post-num { font-size: 12px; color: var(--gray2); text-align: center; }
-    .post-num.notice {
-      background: var(--gold); color: var(--navy);
-      font-size: 10px; font-weight: 700; padding: 2px 8px;
-      letter-spacing: 0.05em; text-align: center;
-    }
-    .post-title-wrap { display: flex; flex-direction: column; gap: 4px; }
-    .post-cat {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
-      color: var(--gold); text-transform: uppercase;
-    }
-    .post-title {
-      font-size: 15px; font-weight: 500; color: var(--navy);
-      text-decoration: none; line-height: 1.4;
-      cursor: pointer;
-    }
-    .post-title:hover { color: var(--gold); }
-    .post-author { font-size: 13px; color: var(--gray); text-align: center; }
-    .post-date   { font-size: 12px; color: var(--gray2); text-align: center; }
+    /* 본문 */
+    .board-body { max-width:1100px; margin:0 auto; padding:48px 32px 80px; }
+    .board-toolbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:12px; }
+    .board-count { font-size:13px; color:#6b7280; }
+    .board-count strong { color:#0d1b2a; font-weight:600; }
 
-    /* 글 작성 모달 */
-    .modal-overlay {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.55); z-index: 999;
-      align-items: center; justify-content: center;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal {
-      background: var(--white); width: 100%; max-width: 680px;
-      max-height: 90vh; overflow-y: auto;
-      padding: 40px; position: relative;
-    }
-    .modal-title {
-      font-family: var(--ff-serif); font-size: 22px; font-weight: 500;
-      color: var(--navy); margin-bottom: 28px;
-    }
-    .modal-close {
-      position: absolute; top: 16px; right: 20px;
-      background: none; border: none; font-size: 22px;
-      cursor: pointer; color: var(--gray); line-height: 1;
-    }
-    .modal .form-group { margin-bottom: 16px; }
-    .modal .form-group label {
-      display: block; font-size: 11px; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--gray); margin-bottom: 6px;
-    }
-    .modal .form-group input,
-    .modal .form-group select,
-    .modal .form-group textarea {
-      width: 100%; background: var(--light);
-      border: 1px solid rgba(13,27,42,0.12);
-      padding: 12px 14px; font-family: var(--ff-sans);
-      font-size: 14px; color: var(--navy); outline: none;
-      transition: border-color 0.2s; box-sizing: border-box;
-    }
-    .modal .form-group input:focus,
-    .modal .form-group select:focus,
-    .modal .form-group textarea:focus { border-color: var(--gold); }
-    .modal-actions { display: flex; gap: 10px; margin-top: 24px; justify-content: flex-end; }
+    /* 목록 테이블 */
+    .post-table { width:100%; border-collapse:collapse; background:#fff; }
+    .post-table thead tr { background:#0d1b2a; }
+    .post-table thead th { padding:12px 16px; font-size:12px; font-weight:600; letter-spacing:.08em; color:rgba(255,255,255,.65); text-align:left; }
+    .post-table thead th:nth-child(1) { width:60px; text-align:center; }
+    .post-table thead th:nth-child(3) { width:90px; text-align:center; }
+    .post-table thead th:nth-child(4) { width:100px; text-align:center; }
+    .post-table tbody tr { border-bottom:1px solid rgba(13,27,42,.06); transition:background .15s; }
+    .post-table tbody tr:hover { background:#fafaf4; }
+    .post-table tbody td { padding:14px 16px; font-size:14px; color:#6b7280; vertical-align:middle; }
+    .post-table tbody td:nth-child(1) { text-align:center; font-size:12px; }
+    .post-table tbody td:nth-child(3), .post-table tbody td:nth-child(4) { text-align:center; font-size:12px; }
+    .post-cat-badge { display:inline-block; font-size:10px; font-weight:700; letter-spacing:.1em; color:#c9a84c; background:rgba(201,168,76,.1); padding:2px 7px; margin-right:8px; }
+    .post-title-link { font-size:15px; font-weight:500; color:#0d1b2a; cursor:pointer; transition:color .15s; }
+    .post-title-link:hover { color:#c9a84c; }
 
     /* 글 읽기 */
-    .post-view { background: var(--white); padding: 48px; }
-    .post-view-header { border-bottom: 2px solid var(--navy); padding-bottom: 20px; margin-bottom: 32px; }
-    .post-view-cat {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
-      color: var(--gold); text-transform: uppercase; margin-bottom: 10px;
-    }
-    .post-view-title {
-      font-family: var(--ff-serif); font-size: 26px;
-      font-weight: 500; color: var(--navy); line-height: 1.4; margin-bottom: 12px;
-    }
-    .post-view-meta { font-size: 13px; color: var(--gray); }
-    .post-view-body {
-      font-size: 15px; line-height: 2; color: var(--navy);
-      white-space: pre-wrap; margin-bottom: 40px;
-    }
-    .post-view-back {
-      display: inline-block; font-size: 13px; font-weight: 600;
-      color: var(--gray); text-decoration: none;
-      padding-bottom: 3px; border-bottom: 1px solid var(--gray);
-      cursor: pointer; transition: color 0.2s, border-color 0.2s;
-    }
-    .post-view-back:hover { color: var(--navy); border-color: var(--navy); }
+    .post-view-wrap { background:#fff; padding:48px; }
+    .pv-cat { font-size:10px; font-weight:700; letter-spacing:.15em; color:#c9a84c; text-transform:uppercase; margin-bottom:10px; }
+    .pv-title { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:500; color:#0d1b2a; line-height:1.4; margin-bottom:12px; }
+    .pv-meta { font-size:13px; color:#9ca3af; margin-bottom:32px; padding-bottom:24px; border-bottom:1px solid rgba(13,27,42,.08); }
+    .pv-body { font-size:15px; line-height:2; color:#374151; white-space:pre-wrap; margin-bottom:40px; }
+    .pv-back { display:inline-block; font-size:13px; color:#6b7280; cursor:pointer; border-bottom:1px solid #9ca3af; padding-bottom:2px; }
+    .pv-back:hover { color:#0d1b2a; border-color:#0d1b2a; }
 
-    /* 로그인 모달 */
-    .login-modal {
-      background: var(--white); width: 100%; max-width: 400px;
-      padding: 48px 40px; position: relative;
-    }
+    /* 모달 */
+    .overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:999; align-items:center; justify-content:center; padding:20px; }
+    .overlay.open { display:flex; }
+    .modal-box { background:#fff; width:100%; max-width:480px; padding:40px; position:relative; max-height:90vh; overflow-y:auto; }
+    .modal-box.wide { max-width:680px; }
+    .modal-title { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:500; color:#0d1b2a; margin-bottom:24px; }
+    .modal-close { position:absolute; top:14px; right:18px; background:none; border:none; font-size:22px; cursor:pointer; color:#9ca3af; }
+    .mf { margin-bottom:16px; }
+    .mf label { display:block; font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:#6b7280; margin-bottom:6px; }
+    .mf input, .mf select, .mf textarea { width:100%; background:#f9f9f6; border:1px solid rgba(13,27,42,.12); padding:11px 14px; font-family:'Noto Sans KR',sans-serif; font-size:14px; color:#0d1b2a; outline:none; box-sizing:border-box; transition:border-color .2s; resize:vertical; }
+    .mf input:focus, .mf select:focus, .mf textarea:focus { border-color:#c9a84c; }
+    .modal-actions { display:flex; justify-content:flex-end; gap:10px; margin-top:20px; }
+    .err-msg { display:none; background:#fdf0ee; color:#c0392b; font-size:13px; padding:10px 12px; margin-bottom:16px; }
 
     /* 페이지네이션 */
-    .pagination {
-      display: flex; gap: 6px; justify-content: center; margin-top: 32px;
-    }
-    .page-btn {
-      width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
-      border: 1px solid rgba(13,27,42,0.12); background: var(--white);
-      font-size: 13px; color: var(--gray); cursor: pointer; transition: all 0.15s;
-    }
-    .page-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
-    .page-btn:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+    .paging { display:flex; gap:4px; justify-content:center; margin-top:28px; }
+    .pg-btn { width:34px; height:34px; display:flex; align-items:center; justify-content:center; border:1px solid rgba(13,27,42,.12); background:#fff; font-size:13px; color:#6b7280; cursor:pointer; transition:all .15s; }
+    .pg-btn.on { background:#0d1b2a; color:#fff; border-color:#0d1b2a; }
+    .pg-btn:hover:not(.on) { border-color:#c9a84c; color:#c9a84c; }
 
-    @media (max-width: 600px) {
-      .post-item { grid-template-columns: 1fr; gap: 4px; }
-      .post-num, .post-author, .post-date { display: none; }
-      .modal, .post-view { padding: 24px 20px; }
-      .board-body { padding: 32px 20px 60px; }
+    @media(max-width:700px){
+      .post-table thead th:nth-child(3), .post-table thead th:nth-child(4),
+      .post-table tbody td:nth-child(3), .post-table tbody td:nth-child(4){ display:none; }
+      .post-view-wrap, .modal-box { padding:24px 18px; }
+      .board-body { padding:32px 18px 60px; }
     }
   </style>
 </head>
@@ -183,32 +92,32 @@
   <header class="nav-header scrolled" id="navbar">
     <div class="nav-inner">
       <a href="index.html" class="logo">
-        <svg class="logo-svg" viewBox="0 0 148 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="logo-svg" viewBox="0 0 148 40" fill="none">
           <path d="M19 7 C9 7 3 13 3 20 C3 27 9 33 19 33 L19 28 C12 28 8.5 24.5 8.5 20 C8.5 15.5 12 12 19 12 Z" fill="#c9a84c"/>
           <rect x="24" y="16.5" width="5" height="5" rx="0.8" fill="#c9a84c" transform="rotate(45 26.5 19)"/>
           <path d="M34 7 L34 33 L49 33 L49 28 L39 28 L39 7 Z" fill="#c9a84c"/>
           <line x1="57" y1="9" x2="57" y2="31" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
           <text x="64" y="17" font-family="'Noto Sans KR',sans-serif" font-size="8.5" font-weight="500" fill="rgba(255,255,255,0.65)" letter-spacing="1.5">노무법인</text>
-          <text x="64" y="31" font-family="'Cormorant Garamond',serif" font-size="17" font-weight="500" fill="#ffffff" letter-spacing="1.5">C&amp;L</text>
+          <text x="64" y="31" font-family="'Cormorant Garamond',serif" font-size="17" font-weight="500" fill="#fff" letter-spacing="1.5">C&amp;L</text>
         </svg>
       </a>
       <nav class="nav-links">
-        <a href="index.html"         class="nav-link">Home</a>
-        <a href="index.html#about"   class="nav-link">About Us</a>
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#about" class="nav-link">About Us</a>
         <a href="index.html#service" class="nav-link">Service</a>
-        <a href="lmaster.html"       class="nav-link lmaster-link">L-Master</a>
-        <a href="column.html"        class="nav-link active">Column</a>
+        <a href="lmaster.html" class="nav-link lmaster-link">L-Master</a>
+        <a href="column.html" class="nav-link active">Column</a>
         <a href="index.html#clients" class="nav-link">Clients</a>
         <a href="index.html#contact" class="nav-link">Contact</a>
       </nav>
       <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
     </div>
     <div class="mobile-menu" id="mobileMenu">
-      <a href="index.html"         class="mob-link">Home</a>
-      <a href="index.html#about"   class="mob-link">About Us</a>
+      <a href="index.html" class="mob-link">Home</a>
+      <a href="index.html#about" class="mob-link">About Us</a>
       <a href="index.html#service" class="mob-link">Service</a>
-      <a href="lmaster.html"       class="mob-link">L-Master</a>
-      <a href="column.html"        class="mob-link">Column</a>
+      <a href="lmaster.html" class="mob-link">L-Master</a>
+      <a href="column.html" class="mob-link">Column</a>
       <a href="index.html#clients" class="mob-link">Clients</a>
       <a href="index.html#contact" class="mob-link">Contact</a>
     </div>
@@ -217,98 +126,89 @@
   <!-- 인증 바 -->
   <div class="auth-bar">
     <div class="auth-bar-inner">
-      <span class="auth-status" id="authStatus">로그인이 필요합니다</span>
-      <button class="btn-sm outline" id="loginBtn" onclick="openLogin()">로그인</button>
-      <button class="btn-sm" id="logoutBtn" onclick="doLogout()" style="display:none">로그아웃</button>
+      <span class="auth-status" id="authStatus"></span>
+      <button class="btn-sm line" id="loginBtn" onclick="openLogin()">로그인</button>
+      <button class="btn-sm line" id="logoutBtn" onclick="doLogout()" style="display:none">로그아웃</button>
     </div>
   </div>
 
-  <!-- 게시판 헤더 -->
-  <div class="board-top">
+  <!-- 헤더 -->
+  <div class="board-hero">
     <div class="container">
       <div class="section-label">Column</div>
-      <h1 class="section-title" style="font-size:2.2rem">노무 칼럼</h1>
+      <h1>노무 칼럼</h1>
     </div>
   </div>
 
   <!-- 게시판 본문 -->
   <div class="board-body">
-    <!-- 목록 뷰 -->
+
+    <!-- 목록 -->
     <div id="listView">
       <div class="board-toolbar">
         <p class="board-count">총 <strong id="postCount">0</strong>개의 글</p>
-        <button class="btn-sm gold" id="writeBtn" onclick="openWrite()" style="display:none">
-          + 글 작성
-        </button>
+        <button class="btn-sm gold" id="writeBtn" onclick="openWrite()" style="display:none">+ 글 작성</button>
       </div>
-      <div class="post-list" id="postList"></div>
-      <div class="pagination" id="pagination"></div>
+      <table class="post-table">
+        <thead>
+          <tr>
+            <th>번호</th><th>제목</th><th>작성자</th><th>날짜</th>
+          </tr>
+        </thead>
+        <tbody id="postList"></tbody>
+      </table>
+      <div class="paging" id="paging"></div>
     </div>
-    <!-- 글 읽기 뷰 -->
+
+    <!-- 읽기 -->
     <div id="postView" style="display:none">
-      <div class="post-view">
-        <div class="post-view-header">
-          <div class="post-view-cat" id="viewCat"></div>
-          <div class="post-view-title" id="viewTitle"></div>
-          <div class="post-view-meta" id="viewMeta"></div>
-        </div>
-        <div class="post-view-body" id="viewBody"></div>
-        <span class="post-view-back" onclick="showList()">← 목록으로</span>
+      <div class="post-view-wrap">
+        <div class="pv-cat" id="pvCat"></div>
+        <div class="pv-title" id="pvTitle"></div>
+        <div class="pv-meta" id="pvMeta"></div>
+        <div class="pv-body" id="pvBody"></div>
+        <span class="pv-back" onclick="showList()">← 목록으로</span>
       </div>
     </div>
   </div>
 
   <!-- 로그인 모달 -->
-  <div class="modal-overlay" id="loginModal">
-    <div class="login-modal">
-      <button class="modal-close" onclick="closeLogin()">×</button>
-      <h2 class="modal-title">로그인</h2>
-      <div id="loginError" style="display:none;color:#c0392b;font-size:13px;margin-bottom:12px;padding:10px;background:#fdf0ee;"></div>
-      <div class="form-group">
-        <label>아이디</label>
-        <input type="text" id="loginId" placeholder="아이디를 입력하세요" onkeydown="if(event.key==='Enter')doLogin()"/>
-      </div>
-      <div class="form-group">
-        <label>비밀번호</label>
-        <input type="password" id="loginPw" placeholder="비밀번호를 입력하세요" onkeydown="if(event.key==='Enter')doLogin()"/>
-      </div>
+  <div class="overlay" id="loginModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('loginModal')">×</button>
+      <h2 class="modal-title">관리자 로그인</h2>
+      <div class="err-msg" id="loginErr">아이디 또는 비밀번호가 올바르지 않습니다.</div>
+      <div class="mf"><label>아이디</label><input type="text" id="loginId" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+      <div class="mf"><label>비밀번호</label><input type="password" id="loginPw" onkeydown="if(event.key==='Enter')doLogin()"/></div>
       <div class="modal-actions">
-        <button class="btn-sm outline" onclick="closeLogin()">취소</button>
+        <button class="btn-sm line" onclick="closeModal('loginModal')">취소</button>
         <button class="btn-sm gold" onclick="doLogin()">로그인</button>
       </div>
-      <p style="font-size:12px;color:var(--gray2);margin-top:20px;line-height:1.6">
-        관리자 계정으로 로그인하면<br/>칼럼을 작성·수정·삭제할 수 있습니다.
+      <p style="font-size:12px;color:#9ca3af;margin-top:16px;line-height:1.6">
+        관리자 계정으로 로그인하면 칼럼을 작성할 수 있습니다.<br/>
+        방문자는 로그인 없이 모든 칼럼을 읽을 수 있습니다.
       </p>
     </div>
   </div>
 
   <!-- 글 작성 모달 -->
-  <div class="modal-overlay" id="writeModal">
-    <div class="modal">
-      <button class="modal-close" onclick="closeWrite()">×</button>
-      <h2 class="modal-title" id="writeModalTitle">새 칼럼 작성</h2>
+  <div class="overlay" id="writeModal">
+    <div class="modal-box wide">
+      <button class="modal-close" onclick="closeModal('writeModal')">×</button>
+      <h2 class="modal-title" id="writeTitle">새 칼럼 작성</h2>
       <input type="hidden" id="editId"/>
-      <div class="form-group">
+      <div class="mf">
         <label>카테고리</label>
-        <select id="postCat">
-          <option value="노동법 이슈">노동법 이슈</option>
-          <option value="HR 실무">HR 실무</option>
-          <option value="노동위원회">노동위원회</option>
-          <option value="임금·퇴직금">임금·퇴직금</option>
-          <option value="ESG">ESG</option>
-          <option value="기타">기타</option>
+        <select id="pCat">
+          <option>노동법 이슈</option><option>HR 실무</option>
+          <option>노동위원회</option><option>임금·퇴직금</option>
+          <option>ESG</option><option>기타</option>
         </select>
       </div>
-      <div class="form-group">
-        <label>제목</label>
-        <input type="text" id="postTitleInput" placeholder="칼럼 제목을 입력하세요"/>
-      </div>
-      <div class="form-group">
-        <label>본문</label>
-        <textarea id="postBody" rows="12" placeholder="내용을 입력하세요"></textarea>
-      </div>
+      <div class="mf"><label>제목</label><input type="text" id="pTitleInput" placeholder="칼럼 제목"/></div>
+      <div class="mf"><label>본문</label><textarea id="pBody" rows="12" placeholder="내용을 입력하세요"></textarea></div>
       <div class="modal-actions">
-        <button class="btn-sm outline" onclick="closeWrite()">취소</button>
+        <button class="btn-sm line" onclick="closeModal('writeModal')">취소</button>
         <button class="btn-sm gold" onclick="submitPost()">등록하기</button>
       </div>
     </div>
@@ -319,148 +219,112 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <svg class="footer-logo-svg" viewBox="0 0 148 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg class="footer-logo-svg" viewBox="0 0 148 40" fill="none">
             <path d="M19 7 C9 7 3 13 3 20 C3 27 9 33 19 33 L19 28 C12 28 8.5 24.5 8.5 20 C8.5 15.5 12 12 19 12 Z" fill="#c9a84c"/>
             <rect x="24" y="16.5" width="5" height="5" rx="0.8" fill="#c9a84c" transform="rotate(45 26.5 19)"/>
             <path d="M34 7 L34 33 L49 33 L49 28 L39 28 L39 7 Z" fill="#c9a84c"/>
             <line x1="57" y1="9" x2="57" y2="31" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
-            <text x="64" y="17" font-family="'Noto Sans KR',sans-serif" font-size="8.5" font-weight="500" fill="rgba(255,255,255,0.5)" letter-spacing="1.5">노무법인</text>
-            <text x="64" y="31" font-family="'Cormorant Garamond',serif" font-size="17" font-weight="500" fill="rgba(255,255,255,0.8)" letter-spacing="1.5">C&amp;L</text>
+            <text x="64" y="17" font-family="'Noto Sans KR',sans-serif" font-size="8.5" fill="rgba(255,255,255,0.5)" letter-spacing="1.5">노무법인</text>
+            <text x="64" y="31" font-family="'Cormorant Garamond',serif" font-size="17" fill="rgba(255,255,255,0.8)" letter-spacing="1.5">C&amp;L</text>
           </svg>
           <p>노동의 가치를 법으로 증명합니다.</p>
           <p class="footer-copy">©2024 노무법인 C&amp;L. ALL RIGHTS RESERVED.</p>
         </div>
-        <div class="footer-links">
-          <h4>서비스</h4>
-          <a href="index.html#service">HR 컨설팅</a>
-          <a href="index.html#service">노무 컨설팅</a>
-          <a href="lmaster.html">L-Master</a>
-        </div>
-        <div class="footer-links">
-          <h4>정보</h4>
-          <a href="index.html#about">About Us</a>
-          <a href="column.html">Column</a>
-          <a href="index.html#contact">Contact</a>
-        </div>
-        <div class="footer-links">
-          <h4>법적 고지</h4>
-          <a href="#">개인정보처리방침</a>
-          <a href="#">이용약관</a>
-        </div>
+        <div class="footer-links"><h4>정보</h4><a href="index.html#about">About Us</a><a href="column.html">Column</a><a href="index.html#contact">Contact</a></div>
+        <div class="footer-links"><h4>법적 고지</h4><a href="#">개인정보처리방침</a><a href="#">이용약관</a></div>
       </div>
     </div>
   </footer>
 
   <script src="script.js"></script>
   <script>
-  /* ──────────────────────────────
-     설정
-     관리자 계정: admin / cnl2024!
-     (GitHub Pages는 서버가 없으므로 localStorage에 글을 저장합니다)
-  ────────────────────────────── */
-  const ADMIN_ID = 'admin';
-  const ADMIN_PW = 'cnl2024!';
+  /* ── 설정 : 관리자 계정 ── */
+  const ADMIN = { id: 'admin', pw: 'cnl2024!' };
   const PER_PAGE = 10;
-  let currentPage = 1;
+  let page = 1;
 
-  /* 기본 샘플 데이터 */
-  const SAMPLE_POSTS = [
-    { id:1, cat:'노동법 이슈', title:'2024년 최저임금 인상과 기업 대응 전략', body:'최저임금 인상이 기업의 임금 체계에 미치는 영향과 합리적인 대응 방안을 살펴봅니다.\n\n2024년 최저임금은 시간당 9,860원으로 전년 대비 2.5% 인상되었습니다. 이에 따라 기업의 인건비 부담이 증가하고 있으며, 특히 소규모 사업장에서는 임금 체계 전반에 대한 재검토가 필요합니다.\n\n합리적인 대응 방안으로는 ① 통상임금 재산정, ② 복리후생 제도 개편, ③ 근무 형태 최적화 등을 검토하시기 바랍니다.', author:'관리자', date:'2024.11.15' },
-    { id:2, cat:'HR 실무', title:'포괄임금제, 여전히 유효한가', body:'최근 판례 동향과 포괄임금제 운용 시 주의사항을 정리했습니다.\n\n대법원은 최근 포괄임금제의 유효성에 대해 보다 엄격한 기준을 적용하고 있습니다. 업무 성격상 근로시간 산정이 어렵거나 당사자 사이에 약정이 있는 경우에 한해 인정되며, 실제 연장·야간 근로가 없음에도 포괄임금제를 적용하는 경우 무효 판단 위험이 있습니다.', author:'관리자', date:'2024.10.22' },
-    { id:3, cat:'노동위원회', title:'부당해고 구제신청, 핵심 쟁점 정리', body:'노동위원회 부당해고 사건에서 승소를 위해 반드시 확인해야 할 핵심 법리를 설명합니다.\n\n부당해고 구제신청의 핵심 쟁점은 ① 해고의 정당한 이유 존부, ② 절차적 정당성(해고예고, 서면통지), ③ 해고 사유의 특정 여부입니다.\n\n특히 징계해고의 경우 취업규칙상 징계 사유에 해당하는지, 비례의 원칙에 위반되지 않는지를 면밀히 검토해야 합니다.', author:'관리자', date:'2024.09.30' },
-    { id:4, cat:'ESG', title:'ESG 경영과 노동 기준: 기업의 준비 체크리스트', body:'ESG 평가에서 노동 기준이 차지하는 비중과 기업이 준비해야 할 항목들을 안내합니다.\n\nESG 평가에서 S(사회) 항목 중 노동 기준은 중요한 비중을 차지합니다. 주요 점검 항목으로는 ① 결사의 자유 및 단체교섭권 보장, ② 강제 노동 및 아동 노동 금지, ③ 직장 내 괴롭힘 방지 정책, ④ 안전한 근무 환경 확보, ⑤ 공정한 임금 지급 등이 있습니다.', author:'관리자', date:'2024.09.05' },
+  /* ── 샘플 데이터 ── */
+  const SAMPLES = [
+    { id:1, cat:'노동법 이슈', title:'2024년 최저임금 인상과 기업 대응 전략',
+      body:'최저임금 인상이 기업의 임금 체계에 미치는 영향과 합리적인 대응 방안을 살펴봅니다.\n\n2024년 최저임금은 시간당 9,860원으로 전년 대비 2.5% 인상되었습니다. 이에 따라 기업의 인건비 부담이 증가하고 있으며, 특히 소규모 사업장에서는 임금 체계 전반에 대한 재검토가 필요합니다.\n\n합리적인 대응 방안으로는 ① 통상임금 재산정 ② 복리후생 제도 개편 ③ 근무 형태 최적화 등을 검토하시기 바랍니다.',
+      author:'관리자', date:'2024.11.15' },
+    { id:2, cat:'HR 실무', title:'포괄임금제, 여전히 유효한가',
+      body:'최근 판례 동향과 포괄임금제 운용 시 주의사항을 정리했습니다.\n\n대법원은 최근 포괄임금제의 유효성에 대해 보다 엄격한 기준을 적용하고 있습니다. 업무 성격상 근로시간 산정이 어렵거나 당사자 사이에 약정이 있는 경우에 한해 인정되며, 실제 연장·야간 근로가 없음에도 포괄임금제를 적용하는 경우 무효 판단 위험이 있습니다.',
+      author:'관리자', date:'2024.10.22' },
+    { id:3, cat:'노동위원회', title:'부당해고 구제신청, 핵심 쟁점 정리',
+      body:'노동위원회 부당해고 사건에서 승소를 위해 반드시 확인해야 할 핵심 법리를 설명합니다.\n\n부당해고 구제신청의 핵심 쟁점은 ① 해고의 정당한 이유 존부 ② 절차적 정당성(해고예고·서면통지) ③ 해고 사유의 특정 여부입니다.\n\n특히 징계해고의 경우 취업규칙상 징계 사유에 해당하는지, 비례의 원칙에 위반되지 않는지를 면밀히 검토해야 합니다.',
+      author:'관리자', date:'2024.09.30' },
+    { id:4, cat:'ESG', title:'ESG 경영과 노동 기준: 기업의 준비 체크리스트',
+      body:'ESG 평가에서 노동 기준이 차지하는 비중과 기업이 준비해야 할 항목들을 안내합니다.\n\nESG 평가에서 S(사회) 항목 중 노동 기준은 중요한 비중을 차지합니다. 주요 점검 항목으로는 ① 결사의 자유 및 단체교섭권 보장 ② 강제 노동 및 아동 노동 금지 ③ 직장 내 괴롭힘 방지 정책 ④ 안전한 근무 환경 확보 ⑤ 공정한 임금 지급 등이 있습니다.',
+      author:'관리자', date:'2024.09.05' },
   ];
 
-  /* localStorage 초기화 */
   function getPosts() {
     const raw = localStorage.getItem('cnl_posts');
-    if (!raw) {
-      localStorage.setItem('cnl_posts', JSON.stringify(SAMPLE_POSTS));
-      return [...SAMPLE_POSTS];
-    }
+    if (!raw) { localStorage.setItem('cnl_posts', JSON.stringify(SAMPLES)); return [...SAMPLES]; }
     return JSON.parse(raw);
   }
-  function savePosts(posts) {
-    localStorage.setItem('cnl_posts', JSON.stringify(posts));
-  }
-  function isLoggedIn() {
-    return localStorage.getItem('cnl_login') === 'true';
+  function savePosts(list) { localStorage.setItem('cnl_posts', JSON.stringify(list)); }
+  function isAdmin() { return localStorage.getItem('cnl_auth') === 'ok'; }
+
+  function updateAuthUI() {
+    const ok = isAdmin();
+    document.getElementById('authStatus').innerHTML = ok
+      ? '관리자 로그인 중 — <strong>글 작성 가능</strong>'
+      : '';
+    document.getElementById('loginBtn').style.display  = ok ? 'none' : '';
+    document.getElementById('logoutBtn').style.display = ok ? ''     : 'none';
+    document.getElementById('writeBtn').style.display  = ok ? ''     : 'none';
   }
 
-  /* 인증 UI */
-  function updateAuthUI() {
-    const logged = isLoggedIn();
-    document.getElementById('authStatus').innerHTML = logged
-      ? '관리자로 로그인됨 — <strong>글 작성 가능</strong>'
-      : '방문자 모드 — 칼럼을 자유롭게 읽으실 수 있습니다';
-    document.getElementById('loginBtn').style.display  = logged ? 'none' : '';
-    document.getElementById('logoutBtn').style.display = logged ? '' : 'none';
-    document.getElementById('writeBtn').style.display  = logged ? '' : 'none';
-  }
-  function openLogin()  { document.getElementById('loginModal').classList.add('open'); document.getElementById('loginId').focus(); }
-  function closeLogin() { document.getElementById('loginModal').classList.remove('open'); document.getElementById('loginError').style.display='none'; }
+  function openLogin()  { openModal('loginModal'); setTimeout(()=>document.getElementById('loginId').focus(),100); }
   function doLogin() {
     const id = document.getElementById('loginId').value.trim();
     const pw = document.getElementById('loginPw').value;
-    if (id === ADMIN_ID && pw === ADMIN_PW) {
-      localStorage.setItem('cnl_login', 'true');
-      closeLogin();
-      updateAuthUI();
-      renderList();
+    if (id === ADMIN.id && pw === ADMIN.pw) {
+      localStorage.setItem('cnl_auth','ok');
+      closeModal('loginModal');
+      updateAuthUI(); renderList();
     } else {
-      const el = document.getElementById('loginError');
-      el.style.display = 'block';
-      el.textContent = '아이디 또는 비밀번호가 올바르지 않습니다.';
+      document.getElementById('loginErr').style.display = 'block';
     }
   }
-  function doLogout() {
-    localStorage.removeItem('cnl_login');
-    updateAuthUI();
-    renderList();
-  }
+  function doLogout() { localStorage.removeItem('cnl_auth'); updateAuthUI(); renderList(); }
 
-  /* 목록 렌더 */
   function renderList() {
-    const posts = getPosts().sort((a,b) => b.id - a.id);
+    const posts = getPosts().sort((a,b)=>b.id-a.id);
     const total = posts.length;
     document.getElementById('postCount').textContent = total;
-
-    const start = (currentPage - 1) * PER_PAGE;
-    const page  = posts.slice(start, start + PER_PAGE);
-
-    const listEl = document.getElementById('postList');
-    listEl.innerHTML = page.length === 0
-      ? '<p style="text-align:center;padding:48px;color:var(--gray2);font-size:14px">등록된 칼럼이 없습니다.</p>'
-      : page.map((p, idx) => `
-        <div class="post-item">
-          <div class="post-num">${total - start - idx}</div>
-          <div class="post-title-wrap">
-            <span class="post-cat">${p.cat}</span>
-            <span class="post-title" onclick="showPost(${p.id})">${p.title}</span>
-          </div>
-          <div class="post-author">${p.author}</div>
-          <div class="post-date">${p.date}</div>
-        </div>
-      `).join('');
-
-    /* 페이지네이션 */
+    const slice = posts.slice((page-1)*PER_PAGE, page*PER_PAGE);
+    const tbody = document.getElementById('postList');
+    if (!slice.length) {
+      tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:48px;color:#9ca3af;font-size:14px">등록된 칼럼이 없습니다.</td></tr>';
+    } else {
+      tbody.innerHTML = slice.map((p, i) => `
+        <tr>
+          <td>${total - (page-1)*PER_PAGE - i}</td>
+          <td>
+            <span class="post-cat-badge">${p.cat}</span>
+            <span class="post-title-link" onclick="showPost(${p.id})">${p.title}</span>
+          </td>
+          <td>${p.author}</td>
+          <td>${p.date}</td>
+        </tr>`).join('');
+    }
     const pages = Math.ceil(total / PER_PAGE);
-    const pagEl = document.getElementById('pagination');
-    pagEl.innerHTML = Array.from({length: pages}, (_, i) =>
-      `<button class="page-btn${i+1===currentPage?' active':''}" onclick="goPage(${i+1})">${i+1}</button>`
+    document.getElementById('paging').innerHTML = Array.from({length:pages},(_,i)=>
+      `<button class="pg-btn${i+1===page?' on':''}" onclick="goPage(${i+1})">${i+1}</button>`
     ).join('');
   }
-  function goPage(p) { currentPage = p; renderList(); window.scrollTo(0,300); }
+  function goPage(p) { page=p; renderList(); window.scrollTo(0,300); }
 
-  /* 글 읽기 */
   function showPost(id) {
-    const posts = getPosts();
-    const p = posts.find(x => x.id === id);
+    const p = getPosts().find(x=>x.id===id);
     if (!p) return;
-    document.getElementById('viewCat').textContent   = p.cat;
-    document.getElementById('viewTitle').textContent = p.title;
-    document.getElementById('viewMeta').textContent  = `${p.author} · ${p.date}`;
-    document.getElementById('viewBody').textContent  = p.body;
+    document.getElementById('pvCat').textContent   = p.cat;
+    document.getElementById('pvTitle').textContent = p.title;
+    document.getElementById('pvMeta').textContent  = `${p.author} · ${p.date}`;
+    document.getElementById('pvBody').textContent  = p.body;
     document.getElementById('listView').style.display = 'none';
     document.getElementById('postView').style.display = '';
     window.scrollTo(0, 200);
@@ -470,58 +334,43 @@
     document.getElementById('listView').style.display = '';
   }
 
-  /* 글 작성/수정 */
-  function openWrite(editId) {
-    if (!isLoggedIn()) { openLogin(); return; }
-    document.getElementById('editId').value = editId || '';
-    if (editId) {
-      const p = getPosts().find(x => x.id === editId);
-      document.getElementById('writeModalTitle').textContent = '칼럼 수정';
-      document.getElementById('postCat').value = p.cat;
-      document.getElementById('postTitleInput').value = p.title;
-      document.getElementById('postBody').value = p.body;
-    } else {
-      document.getElementById('writeModalTitle').textContent = '새 칼럼 작성';
-      document.getElementById('postCat').value = '노동법 이슈';
-      document.getElementById('postTitleInput').value = '';
-      document.getElementById('postBody').value = '';
-    }
-    document.getElementById('writeModal').classList.add('open');
+  function openWrite() {
+    if (!isAdmin()) { openLogin(); return; }
+    document.getElementById('editId').value = '';
+    document.getElementById('writeTitle').textContent = '새 칼럼 작성';
+    document.getElementById('pCat').value = '노동법 이슈';
+    document.getElementById('pTitleInput').value = '';
+    document.getElementById('pBody').value = '';
+    openModal('writeModal');
   }
-  function closeWrite() { document.getElementById('writeModal').classList.remove('open'); }
   function submitPost() {
-    const title = document.getElementById('postTitleInput').value.trim();
-    const body  = document.getElementById('postBody').value.trim();
-    const cat   = document.getElementById('postCat').value;
-    const editId = document.getElementById('editId').value;
-    if (!title || !body) { alert('제목과 본문을 입력해주세요.'); return; }
+    const title = document.getElementById('pTitleInput').value.trim();
+    const body  = document.getElementById('pBody').value.trim();
+    const cat   = document.getElementById('pCat').value;
+    if (!title || !body) { alert('제목과 본문을 모두 입력해주세요.'); return; }
     const posts = getPosts();
     const today = new Date();
-    const dateStr = `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,'0')}.${String(today.getDate()).padStart(2,'0')}`;
-    if (editId) {
-      const idx = posts.findIndex(x => x.id === Number(editId));
-      posts[idx] = { ...posts[idx], cat, title, body };
-    } else {
-      const newId = posts.length ? Math.max(...posts.map(x=>x.id)) + 1 : 1;
-      posts.push({ id: newId, cat, title, body, author: '관리자', date: dateStr });
-    }
+    const d = `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,'0')}.${String(today.getDate()).padStart(2,'0')}`;
+    const newId = posts.length ? Math.max(...posts.map(x=>x.id))+1 : 1;
+    posts.push({ id:newId, cat, title, body, author:'관리자', date:d });
     savePosts(posts);
-    closeWrite();
+    closeModal('writeModal');
     renderList();
   }
 
-  /* 초기화 */
+  function openModal(id)  { document.getElementById(id).classList.add('open'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); document.getElementById('loginErr') && (document.getElementById('loginErr').style.display='none'); }
+
+  document.querySelectorAll('.overlay').forEach(el => {
+    el.addEventListener('click', e => { if (e.target===el) el.classList.remove('open'); });
+  });
+
   updateAuthUI();
   renderList();
 
-  /* URL 파라미터로 글 바로열기 (index.html 카드에서 링크 클릭 시) */
-  const params = new URLSearchParams(location.search);
-  if (params.get('id')) showPost(Number(params.get('id')));
-
-  /* 모달 외부 클릭 닫기 */
-  document.querySelectorAll('.modal-overlay').forEach(el => {
-    el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); });
-  });
+  // URL ?id=N 으로 바로 글 열기
+  const qid = new URLSearchParams(location.search).get('id');
+  if (qid) showPost(Number(qid));
   </script>
 </body>
 </html>
