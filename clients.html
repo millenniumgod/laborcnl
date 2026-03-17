@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Clients | 노무법인 C&amp;L</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500&display=swap" rel="stylesheet">
+  <style>
+    .clients-section-wrap{background:#fff;padding:72px 0 80px}
+    .logo-grid{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center;margin-top:40px}
+    .cl-box{width:154px;height:70px;background:#fff;border:1px solid rgba(13,27,42,.1);display:flex;align-items:center;justify-content:center;padding:10px 14px;transition:all .2s;box-sizing:border-box}
+    .cl-box:hover{border-color:rgba(201,168,76,.5);box-shadow:0 4px 20px rgba(13,27,42,.1);transform:translateY(-2px)}
+    .cl-box svg{max-width:100%;max-height:48px}
+    .testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:48px}
+    .testi-card{background:#f5f0e8;padding:28px 32px;border-left:3px solid var(--gold)}
+    .testi-card blockquote{font-size:14.5px;color:#374151;line-height:1.85;margin-bottom:12px;font-style:italic}
+    .testi-card cite{font-size:12px;color:#9ca3af;font-style:normal}
+    @media(max-width:700px){.testi-grid{grid-template-columns:1fr}.cl-box{width:130px;height:60px}}
+  </style>
+</head>
+<body>
+<header class="nav-header scrolled" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <svg class="logo-svg" viewBox="0 0 148 40" fill="none">
+        <path d="M19 7 C9 7 3 13 3 20 C3 27 9 33 19 33 L19 28 C12 28 8.5 24.5 8.5 20 C8.5 15.5 12 12 19 12 Z" fill="#c9a84c"/>
+        <rect x="24" y="16.5" width="5" height="5" rx="0.8" fill="#c9a84c" transform="rotate(45 26.5 19)"/>
+        <path d="M34 7 L34 33 L49 33 L49 28 L39 28 L39 7 Z" fill="#c9a84c"/>
+        <line x1="57" y1="9" x2="57" y2="31" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <text x="64" y="17" font-family="'Noto Sans KR',sans-serif" font-size="8.5" fill="rgba(255,255,255,0.65)" letter-spacing="1.5">노무법인</text>
+        <text x="64" y="31" font-family="'Cormorant Garamond',serif" font-size="17" fill="#fff" letter-spacing="1.5">C&amp;L</text>
+      </svg>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link">Home</a><a href="about.html" class="nav-link">About Us</a>
+      <a href="service.html" class="nav-link">Service</a><a href="lmaster.html" class="nav-link lmaster-link">L-Master</a>
+      <a href="column.html" class="nav-link">Column</a><a href="clients.html" class="nav-link active">Clients</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="mob-link">Home</a><a href="about.html" class="mob-link">About Us</a>
+    <a href="service.html" class="mob-link">Service</a><a href="lmaster.html" class="mob-link">L-Master</a>
+    <a href="column.html" class="mob-link">Column</a><a href="clients.html" class="mob-link">Clients</a>
+    <a href="contact.html" class="mob-link">Contact</a>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="section-label">Clients</div>
+    <h1>주요 고객사</h1>
+    <p>노무법인 C&amp;L의 컨설턴트들은 다양한 회사들과 함께하였습니다.<br/>이제 여러분의 차례입니다.</p>
+  </div>
+</div>
+
+<div class="clients-section-wrap">
+  <div class="container">
+    <div class="section-label">Partner Companies</div>
+    <h2 class="section-title">함께한 기업들</h2>
+    <p class="section-sub">제조·금융·유통·IT·의료·건설·공공 등 다양한 산업의 기업들과 함께합니다</p>
+
+    <!-- 로고 그리드 — 업종별 SVG 로고 -->
+    <div class="logo-grid">
+
+      <!-- 제조 대기업 계열 -->
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="8" width="28" height="28" rx="2" fill="#1428A0"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="13" font-weight="900" fill="#fff" text-anchor="middle">S</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">전자·제조</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">대기업 계열사</text>
+        </svg>
+      </div>
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="14" fill="#A50034"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="12" font-weight="900" fill="#fff" text-anchor="middle">LG</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">전자·화학</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">대기업 계열사</text>
+        </svg>
+      </div>
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="2" fill="#002C5F"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="10" font-weight="900" fill="#fff" text-anchor="middle">HMC</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">자동차</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">대기업 계열사</text>
+        </svg>
+      </div>
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="2" fill="#E8532A"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="11" font-weight="900" fill="#fff" text-anchor="middle">SK</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">에너지·화학</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">대기업 계열사</text>
+        </svg>
+      </div>
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="2" fill="#003087"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="11" font-weight="900" fill="#fff" text-anchor="middle">LS</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">전선·전기</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">계열사</text>
+        </svg>
+      </div>
+
+      <!-- 금융 -->
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="2" fill="#005BAC"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="8" font-weight="900" fill="#fff" text-anchor="middle">BANK</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">금융</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">시중은행</text>
+        </svg>
+      </div>
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="2" fill="#007AC2"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="8" font-weight="900" fill="#fff" text-anchor="middle">INS</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">금융</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">보험·증권사</text>
+        </svg>
+      </div>
+
+      <!-- 유통·서비스 -->
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="2" fill="#E31837"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="8.5" font-weight="900" fill="#fff" text-anchor="middle">MART</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">유통</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">대형 유통사</text>
+        </svg>
+      </div>
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="2" fill="#00704A"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="7" font-weight="900" fill="#fff" text-anchor="middle">F&amp;B</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">식음료</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">식음료 기업</text>
+        </svg>
+      </div>
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="2" fill="#FF6900"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="8" font-weight="900" fill="#fff" text-anchor="middle">HTL</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">숙박</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">호텔·리조트</text>
+        </svg>
+      </div>
+
+      <!-- IT -->
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="6" fill="#5865F2"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="9" font-weight="900" fill="#fff" text-anchor="middle">IT</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">IT · Tech</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">IT 기업</text>
+        </svg>
+      </div>
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="6" fill="#7C3AED"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="8" font-weight="900" fill="#fff" text-anchor="middle">STP</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">IT · 스타트업</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">스타트업</text>
+        </svg>
+      </div>
+
+      <!-- 의료·제약 -->
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="2" fill="#00A650"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="8" font-weight="900" fill="#fff" text-anchor="middle">MED</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">의료</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">병원·의료법인</text>
+        </svg>
+      </div>
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="2" fill="#0091C7"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="8" font-weight="900" fill="#fff" text-anchor="middle">PHR</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">제약·바이오</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">제약사</text>
+        </svg>
+      </div>
+
+      <!-- 건설·물류 -->
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="2" fill="#F5A623"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="8" font-weight="900" fill="#fff" text-anchor="middle">CON</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">건설</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">건설사</text>
+        </svg>
+      </div>
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="2" fill="#374151"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="8" font-weight="900" fill="#fff" text-anchor="middle">LOG</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">물류·운수</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">물류기업</text>
+        </svg>
+      </div>
+
+      <!-- 공공·교육 -->
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="2" fill="#1E3A5F"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="8" font-weight="900" fill="#fff" text-anchor="middle">PUB</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">공공</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">공공기관</text>
+        </svg>
+      </div>
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="2" fill="#059669"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="8" font-weight="900" fill="#fff" text-anchor="middle">EDU</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">교육</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">교육기관</text>
+        </svg>
+      </div>
+
+      <!-- 미디어·문화 / 패션 -->
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="2" fill="#C0392B"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="8" font-weight="900" fill="#fff" text-anchor="middle">MDA</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">미디어·엔터</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">방송·미디어</text>
+        </svg>
+      </div>
+      <div class="cl-box">
+        <svg viewBox="0 0 130 44" fill="none">
+          <rect x="2" y="8" width="28" height="28" rx="2" fill="#9B59B6"/>
+          <text x="16" y="27" font-family="Arial,sans-serif" font-size="8" font-weight="900" fill="#fff" text-anchor="middle">FSN</text>
+          <text x="40" y="20" font-family="'Noto Sans KR',sans-serif" font-size="9" fill="#555" font-weight="700">패션·뷰티</text>
+          <text x="40" y="33" font-family="'Noto Sans KR',sans-serif" font-size="11" fill="#0d1b2a" font-weight="700">패션·유통</text>
+        </svg>
+      </div>
+    </div>
+
+    <p style="text-align:center;font-size:12.5px;color:#9ca3af;margin-top:22px;line-height:1.7">
+      고객사 정보는 비밀유지 계약에 따라 개별 사명을 공개하지 않습니다.<br/>
+      실제 자문·컨설팅 이력은 별도 문의 시 확인 가능합니다.
+    </p>
+
+    <!-- 후기 -->
+    <div style="margin-top:64px">
+      <h2 class="section-title">고객 후기</h2>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <blockquote>
+            "복잡한 노동 분쟁을 신속하게 해결해 주셨습니다.<br/>
+            단순한 법률 서비스가 아니라 진정한 파트너를 만났습니다."
+          </blockquote>
+          <cite>— 제조업 A사 인사팀장</cite>
+        </div>
+        <div class="testi-card">
+          <blockquote>
+            "취업규칙 전면 개정을 맡겼는데, 법률 위반 리스크를 꼼꼼히 짚어주셔서<br/>
+            이후 노무 관리가 훨씬 수월해졌습니다."
+          </blockquote>
+          <cite>— IT 기업 B사 대표</cite>
+        </div>
+        <div class="testi-card">
+          <blockquote>
+            "성과평가 제도 설계부터 임금체계 개편까지<br/>
+            현장에서 실제로 작동하는 솔루션을 제시해 주셨습니다."
+          </blockquote>
+          <cite>— 유통업 C사 HR팀장</cite>
+        </div>
+        <div class="testi-card">
+          <blockquote>
+            "ESG 평가를 앞두고 노동 기준 점검을 요청했는데,<br/>
+            예상보다 훨씬 체계적으로 준비할 수 있었습니다."
+          </blockquote>
+          <cite>— 중견기업 D사 경영기획팀</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg class="footer-logo-svg" viewBox="0 0 148 40" fill="none">
+          <path d="M19 7 C9 7 3 13 3 20 C3 27 9 33 19 33 L19 28 C12 28 8.5 24.5 8.5 20 C8.5 15.5 12 12 19 12 Z" fill="#c9a84c"/>
+          <rect x="24" y="16.5" width="5" height="5" rx="0.8" fill="#c9a84c" transform="rotate(45 26.5 19)"/>
+          <path d="M34 7 L34 33 L49 33 L49 28 L39 28 L39 7 Z" fill="#c9a84c"/>
+          <line x1="57" y1="9" x2="57" y2="31" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+          <text x="64" y="17" font-family="'Noto Sans KR',sans-serif" font-size="8.5" fill="rgba(255,255,255,0.5)" letter-spacing="1.5">노무법인</text>
+          <text x="64" y="31" font-family="'Cormorant Garamond',serif" font-size="17" fill="rgba(255,255,255,0.8)" letter-spacing="1.5">C&amp;L</text>
+        </svg>
+        <p>노동의 가치를 법으로 증명합니다.</p>
+        <p class="footer-copy">©2018 노무법인 C&amp;L. ALL RIGHTS RESERVED.</p>
+      </div>
+      <div class="footer-links"><h4>서비스</h4><a href="service.html">HR 컨설팅</a><a href="service.html">노무 컨설팅</a><a href="lmaster.html">L-Master</a></div>
+      <div class="footer-links"><h4>정보</h4><a href="about.html">About Us</a><a href="column.html">Column</a><a href="clients.html">Clients</a><a href="contact.html">Contact</a></div>
+      <div class="footer-links"><h4>법적 고지</h4><a href="#">개인정보처리방침</a><a href="#">이용약관</a></div>
+    </div>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

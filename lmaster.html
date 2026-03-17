@@ -1,624 +1,815 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>L-Master | 노동위원회 서면 대리 — 노무법인 C&amp;L</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="lmaster.css" />
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="lmaster.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500&display=swap" rel="stylesheet">
-  <style>
-    /* 탭 전환 */
-    .lm-tab-bar {
-      display: flex;
-      border-bottom: 2px solid rgba(255,255,255,0.08);
-      margin-bottom: 60px;
-      gap: 0;
-    }
-    .lm-tab {
-      flex: 1; max-width: 260px;
-      padding: 18px 24px;
-      font-size: 15px; font-weight: 500;
-      color: rgba(255,255,255,0.4);
-      cursor: pointer;
-      border-bottom: 3px solid transparent;
-      margin-bottom: -2px;
-      transition: color .2s, border-color .2s;
-      text-align: center;
-    }
-    .lm-tab.active {
-      color: var(--gold);
-      border-bottom-color: var(--gold);
-    }
-    .lm-tab:hover:not(.active) { color: rgba(255,255,255,0.7); }
-    .lm-tab-content { display: none; }
-    .lm-tab-content.active { display: block; }
-
-    /* 대상별 Hero 강조색 */
-    .lm-tag-worker {
-      background: rgba(39,110,174,0.15);
-      border: 1px solid rgba(39,110,174,0.3);
-      color: #5ba3d9;
-      font-size: 11px; font-weight: 700; letter-spacing: .15em;
-      padding: 5px 14px; display: inline-block; margin-bottom: 20px;
-    }
-    .lm-tag-employer {
-      background: rgba(174,39,39,0.15);
-      border: 1px solid rgba(174,39,39,0.3);
-      color: #d95b5b;
-      font-size: 11px; font-weight: 700; letter-spacing: .15em;
-      padding: 5px 14px; display: inline-block; margin-bottom: 20px;
-    }
-  </style>
 </head>
 <body class="lm-body">
 
-  <!-- NAV -->
-  <header class="nav-header scrolled" id="navbar">
-    <div class="nav-inner">
-      <a href="index.html" class="logo">
-        <svg class="logo-svg" viewBox="0 0 148 40" fill="none">
-          <path d="M19 7 C9 7 3 13 3 20 C3 27 9 33 19 33 L19 28 C12 28 8.5 24.5 8.5 20 C8.5 15.5 12 12 19 12 Z" fill="#c9a84c"/>
-          <rect x="24" y="16.5" width="5" height="5" rx="0.8" fill="#c9a84c" transform="rotate(45 26.5 19)"/>
-          <path d="M34 7 L34 33 L49 33 L49 28 L39 28 L39 7 Z" fill="#c9a84c"/>
-          <line x1="57" y1="9" x2="57" y2="31" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
-          <text x="64" y="17" font-family="'Noto Sans KR',sans-serif" font-size="8.5" font-weight="500" fill="rgba(255,255,255,0.65)" letter-spacing="1.5">노무법인</text>
-          <text x="64" y="31" font-family="'Cormorant Garamond',serif" font-size="17" font-weight="500" fill="#ffffff" letter-spacing="1.5">C&amp;L</text>
-        </svg>
-      </a>
-      <nav class="nav-links">
-        <a href="index.html"         class="nav-link">Home</a>
-        <a href="index.html#about"   class="nav-link">About Us</a>
-        <a href="index.html#service" class="nav-link">Service</a>
-        <a href="lmaster.html"       class="nav-link lmaster-link active">L-Master</a>
-        <a href="column.html"        class="nav-link">Column</a>
-        <a href="index.html#clients" class="nav-link">Clients</a>
-        <a href="index.html#contact" class="nav-link">Contact</a>
-      </nav>
-      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<!-- NAV -->
+<header class="nav-header scrolled" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <svg class="logo-svg" viewBox="0 0 148 40" fill="none">
+        <path d="M19 7 C9 7 3 13 3 20 C3 27 9 33 19 33 L19 28 C12 28 8.5 24.5 8.5 20 C8.5 15.5 12 12 19 12 Z" fill="#c9a84c"/>
+        <rect x="24" y="16.5" width="5" height="5" rx="0.8" fill="#c9a84c" transform="rotate(45 26.5 19)"/>
+        <path d="M34 7 L34 33 L49 33 L49 28 L39 28 L39 7 Z" fill="#c9a84c"/>
+        <line x1="57" y1="9" x2="57" y2="31" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <!-- 명시적 white 로 고정 -->
+        <text x="64" y="17" font-family="'Noto Sans KR',sans-serif" font-size="8.5" font-weight="500" fill="rgba(255,255,255,0.65)" letter-spacing="1.5">노무법인</text>
+        <text x="64" y="31" font-family="'Cormorant Garamond',serif" font-size="17" font-weight="500" fill="#ffffff" letter-spacing="1.5">C&amp;L</text>
+      </svg>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About Us</a>
+      <a href="service.html" class="nav-link">Service</a>
+      <a href="lmaster.html" class="nav-link lmaster-link active">L-Master</a>
+      <a href="column.html" class="nav-link">Column</a>
+      <a href="clients.html" class="nav-link">Clients</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="mob-link">Home</a><a href="about.html" class="mob-link">About Us</a>
+    <a href="service.html" class="mob-link">Service</a><a href="lmaster.html" class="mob-link">L-Master</a>
+    <a href="column.html" class="mob-link">Column</a><a href="clients.html" class="mob-link">Clients</a>
+    <a href="contact.html" class="mob-link">Contact</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="lm-hero">
+  <div class="lm-hero-bg"></div>
+  <div class="lm-bg-text">L-MASTER</div>
+  <div class="container lm-hero-inner">
+    <div class="lm-badge">LABOR COMMITTEE SPECIALIST</div>
+    <div class="lm-logo-wrap">
+      <span class="lm-logo-icon">⚖</span>
+      <span class="lm-logo-text">L-Master</span>
     </div>
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="index.html"         class="mob-link">Home</a>
-      <a href="index.html#about"   class="mob-link">About Us</a>
-      <a href="index.html#service" class="mob-link">Service</a>
-      <a href="lmaster.html"       class="mob-link">L-Master</a>
-      <a href="column.html"        class="mob-link">Column</a>
-      <a href="index.html#clients" class="mob-link">Clients</a>
-      <a href="index.html#contact" class="mob-link">Contact</a>
+    <h1 class="lm-hero-title">
+      노동위원회 서면,<br/>
+      <em>처음부터 끝까지 책임집니다</em>
+    </h1>
+    <p class="lm-hero-sub">
+      근로자와 사용자, 양측 모두를 위한<br/>
+      공인노무사 직접 작성 서면 대리 서비스
+    </p>
+    <div class="lm-hero-cta">
+      <button class="btn-primary" onclick="switchTab('worker')">나홀로 노동위 — 근로자</button>
+      <button class="btn-outline" onclick="switchTab('employer')">나홀로 노동위 — 회사</button>
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- ── HERO ── -->
-  <section class="lm-hero">
-    <div class="lm-hero-bg"></div>
-    <div class="lm-bg-text">L-MASTER</div>
-    <div class="container lm-hero-content">
-      <div class="lm-badge">LABOR COMMITTEE SPECIALIST</div>
-      <div class="lm-logo-wrap">
-        <span class="lm-logo-icon">⚖</span>
-        <span class="lm-logo-text">L-Master</span>
+<!-- TAB 영역 -->
+<section class="lm-section dark" id="lmContent">
+  <div class="container">
+    <div class="lm-tab-bar">
+      <div class="lm-tab active" id="tab-worker"   onclick="switchTab('worker')">👤 나홀로 노동위 — 근로자</div>
+      <div class="lm-tab"        id="tab-employer" onclick="switchTab('employer')">🏢 나홀로 노동위 — 회사</div>
+    </div>
+
+    <!-- ── 근로자 탭 ── -->
+    <div class="lm-tab-content active" id="content-worker">
+      <div style="margin-bottom:40px">
+        <div class="lm-tag-worker">FOR WORKERS</div>
+        <h2 class="lm-section-title">
+          부당해고 · 부당징계 · 부당인사발령<br/>
+          <em>근로자의 권리, 엘마스터가 지킵니다</em>
+        </h2>
       </div>
-      <h1 class="lm-hero-title">
-        노동위원회 서면,<br/>
-        <em>처음부터 끝까지 책임집니다</em>
-      </h1>
-      <p class="lm-hero-sub">
-        근로자와 사용자, 양측 모두를 위한<br/>
-        공인노무사 직접 작성 서면 대리 서비스
-      </p>
-      <div class="lm-hero-cta">
-        <a href="#worker"   class="btn-primary"   onclick="switchTab('worker');return false;">나홀로 노동위 — 근로자</a>
-        <a href="#employer" class="btn-outline"   onclick="switchTab('employer');return false;">나홀로 노동위 — 회사</a>
+
+      <h3 style="font-family:var(--ff-serif);font-size:1.5rem;font-weight:400;color:#fff;margin-bottom:24px">왜 엘마스터인가요?</h3>
+      <div class="lm-reasons">
+        <div class="lm-reason">
+          <div class="lm-reason-icon">🚫</div>
+          <h4>AI 할루시네이션 NO</h4>
+          <p>존재하지 않는 판례를 인용하거나 사실관계를 왜곡하는 AI에게 당신의 운명을 맡기지 마세요. 엘마스터는 공인노무사가 직접 작성합니다.</p>
+        </div>
+        <div class="lm-reason">
+          <div class="lm-reason-icon">🛡</div>
+          <h4>공격과 방어까지 책임</h4>
+          <p>1차 이유서·답변서뿐 아니라 상대방의 반박에 맞춰 재반박 보충 서면까지 끝까지 함께합니다.</p>
+        </div>
+        <div class="lm-reason">
+          <div class="lm-reason-icon">💰</div>
+          <h4>합리적인 비용</h4>
+          <p>고액 선임료 없이, 승소의 핵심인 서면만 전문가 수준으로 갖출 수 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="lm-detail-grid" style="margin-top:48px">
+        <div class="lm-detail-item">
+          <div class="lm-detail-num">01</div>
+          <h3>생계가 달린 절박한 서면,<br/>AI에 던져둘 수 없습니다</h3>
+          <p>부당해고, 부당징계, 부당인사발령… 근로자에게 노동위원회는 마지막 희망입니다. AI 할루시네이션으로 사건을 망치는 경우가 허다합니다. 엘마스터는 공인노무사가 직접 작성합니다.</p>
+        </div>
+        <div class="lm-detail-item">
+          <div class="lm-detail-num">02</div>
+          <h3>공격과 방어까지<br/>책임집니다</h3>
+          <p>사용자는 대형 로펌이나 노무법인을 선임해 당신의 주장을 조목조목 반박해 올 것입니다. 엘마스터는 상대방의 답변서를 분석해 재반박 보충 서면까지 끝까지 함께합니다.</p>
+        </div>
+        <div class="lm-detail-item">
+          <div class="lm-detail-num">03</div>
+          <h3>선임료의 벽은 낮추고,<br/>서면의 품격은 높였습니다</h3>
+          <p>말은 서툴러도 괜찮습니다. 서면만 전문가 수준으로 갖춰져 있다면 충분히 이길 수 있습니다. 엘마스터는 오직 '승소하는 서면'에만 집중합니다.</p>
+        </div>
+      </div>
+
+      <!-- 요금 -->
+      <h3 style="font-family:var(--ff-serif);font-size:1.5rem;font-weight:400;color:#fff;margin:56px 0 24px">서비스 요금</h3>
+      <div class="lm-plan-grid">
+        <div class="lm-plan featured">
+          <div class="lm-plan-badge">가장 많이 선택</div>
+          <h3>1차 서면 작성</h3>
+          <div class="lm-price"><span class="lm-won">₩</span>490,000</div>
+          <ul class="lm-features">
+            <li>✓ 이유서 또는 답변서 작성</li>
+            <li>✓ 동일 서면 수정 횟수 무제한</li>
+            <li>✓ 구제신청서 제출 대행 포함</li>
+            <li>✓ 공인노무사 직접 작성</li>
+          </ul>
+          <button class="lm-plan-cta" onclick="openPayment('근로자 1차 서면 작성',490000)">카드 결제하기 💳</button>
+        </div>
+        <div class="lm-plan">
+          <h3>2차 서면 작성</h3>
+          <div class="lm-price"><span class="lm-won">₩</span>290,000</div>
+          <ul class="lm-features">
+            <li>✓ 1차 구매 고객 한정</li>
+            <li>✓ 보충 서면 1회 제공</li>
+            <li>✓ 동일 서면 수정 횟수 무제한</li>
+            <li>✓ 동일 사건에 한함</li>
+          </ul>
+          <button class="lm-plan-cta outline" onclick="openPayment('근로자 2차 서면 작성',290000)">카드 결제하기 💳</button>
+        </div>
+        <div class="lm-plan">
+          <h3>3차 이후 서면</h3>
+          <div class="lm-price"><span class="lm-won">₩</span>190,000</div>
+          <ul class="lm-features">
+            <li>✓ 1·2차 구매 고객 한정</li>
+            <li>✓ 추가 서면 1회 제공</li>
+            <li>✓ 동일 서면 수정 횟수 무제한</li>
+            <li>✓ 동일 사건에 한함</li>
+          </ul>
+          <button class="lm-plan-cta outline" onclick="openPayment('근로자 3차 이후 서면',190000)">카드 결제하기 💳</button>
+        </div>
+      </div>
+
+      <div class="lm-cta-inner">
+        <p class="lm-cta-quote">"노동위원회 싸움은<br/>서면에서 시작해 서면에서 끝납니다."</p>
+        <p class="lm-cta-sub">AI의 무책임한 문장에 당신의 운명을 걸지 마십시오.<br/>근로자의 정당한 권리, 엘마스터가 실력으로 되찾아 드리겠습니다.</p>
+        <a href="contact.html" class="btn-primary">엘마스터 상담 신청</a>
       </div>
     </div>
-  </section>
 
-  <!-- ── 탭 콘텐츠 ── -->
-  <section class="lm-section" id="lmContent" style="padding-top:64px">
-    <div class="container">
+    <!-- ── 회사 탭 ── -->
+    <div class="lm-tab-content" id="content-employer">
+      <div style="margin-bottom:40px">
+        <div class="lm-tag-employer">FOR EMPLOYERS</div>
+        <h2 class="lm-section-title">
+          AI만 믿고 회사의 인사권을<br/>
+          <em>무너뜨리게 두시겠습니까?</em>
+        </h2>
+        <p style="color:var(--lm-muted,rgba(255,255,255,.45));font-size:15px;line-height:1.9;max-width:620px">
+          노동위원회 싸움은 서면에서 시작해 서면에서 끝납니다.<br/>
+          회사의 정당한 인사권을 입증하기 위한 싸움에<br/>
+          정보왜곡·할루시네이션 투성이인 AI에게 맡길 수는 없습니다.
+        </p>
+      </div>
 
-      <!-- 탭 버튼 -->
-      <div class="lm-tab-bar">
-        <div class="lm-tab active" id="tab-worker"   onclick="switchTab('worker')">
-          👤 나홀로 노동위 — 근로자
+      <h3 style="font-family:var(--ff-serif);font-size:1.5rem;font-weight:400;color:#fff;margin-bottom:24px">왜 엘마스터인가요?</h3>
+      <div class="lm-reasons">
+        <div class="lm-reason">
+          <div class="lm-reason-icon">📋</div>
+          <h4>판례·취업규칙 기반 서면</h4>
+          <p>단순한 비위사실 나열이 아닌, 취업규칙 및 최신 판례에 근거하여 사건을 승소로 이끕니다.</p>
         </div>
-        <div class="lm-tab"        id="tab-employer" onclick="switchTab('employer')">
-          🏢 나홀로 노동위 — 회사
+        <div class="lm-reason">
+          <div class="lm-reason-icon">🛡</div>
+          <h4>1차부터 2차까지 책임</h4>
+          <p>근로자는 모든 사실관계를 끌어와 공격할 것입니다. 엘마스터는 재반박 보충 서면까지 회사 편에서 끝까지 싸웁니다.</p>
+        </div>
+        <div class="lm-reason">
+          <div class="lm-reason-icon">💰</div>
+          <h4>핵심만, 합리적 비용으로</h4>
+          <p>비싼 대리인 선임이 힘드시다면, 승소의 핵심인 서면만이라도 전문가의 도움을 받으세요.</p>
         </div>
       </div>
 
-      <!-- ── 근로자 탭 ── -->
-      <div class="lm-tab-content active" id="content-worker">
-
-        <div class="lm-hero-content" style="padding:0 0 48px">
-          <div class="lm-tag-worker">FOR WORKERS</div>
-          <h2 class="lm-section-title">
-            부당해고 · 부당징계 · 부당인사발령<br/>
-            <em style="font-style:italic;color:var(--gold)">근로자의 권리,<br/>엘마스터가 지킵니다</em>
-          </h2>
+      <div class="lm-detail-grid" style="margin-top:48px">
+        <div class="lm-detail-item">
+          <div class="lm-detail-num">01</div>
+          <h3>회사의 인사권을<br/>AI에 내버리지 마세요</h3>
+          <p>정보왜곡·할루시네이션 투성이인 AI에게 회사의 인사권을 내버리지 마세요. 엘마스터는 공인노무사가 직접 서면을 작성합니다.</p>
         </div>
-
-        <!-- 왜 엘마스터인가 -->
-        <h3 class="lm-why-heading">왜 엘마스터인가요?</h3>
-        <div class="lm-reasons">
-          <div class="lm-reason">
-            <div class="lm-reason-icon">🚫</div>
-            <h4>AI 할루시네이션 NO</h4>
-            <p>
-              존재하지 않는 판례를 인용하거나<br/>
-              사실관계를 엉뚱하게 해석하는<br/>
-              할루시네이션(정보 왜곡) 때문에<br/>
-              사건을 망치는 경우가 허다합니다.<br/>
-              엘마스터는 공인노무사가 직접 작성합니다.
-            </p>
-          </div>
-          <div class="lm-reason">
-            <div class="lm-reason-icon">🛡</div>
-            <h4>공격과 방어까지 책임</h4>
-            <p>
-              1차 이유서·답변서가 가장 중요하지만,<br/>
-              그것만으로는 부족할 수 있습니다.<br/>
-              회사는 대형 로펌이나 노무법인을 선임해<br/>
-              당신의 주장을 조목조목 반박해 올 것입니다.<br/>
-              엘마스터는 보충 서면까지 끝까지 함께합니다.
-            </p>
-          </div>
-          <div class="lm-reason">
-            <div class="lm-reason-icon">💰</div>
-            <h4>합리적인 비용</h4>
-            <p>
-              고액 선임료 없이,<br/>
-              승소의 핵심인 서면만<br/>
-              전문가 수준으로 갖출 수 있습니다.<br/>
-              말은 서툴러도 괜찮습니다.<br/>
-              서면만 제대로라면 충분히 이길 수 있습니다.
-            </p>
-          </div>
+        <div class="lm-detail-item">
+          <div class="lm-detail-num">02</div>
+          <h3>공격하는 근로자의 서면,<br/>조목조목 재반박합니다</h3>
+          <p>상대방의 이유서·답변서 내용을 분석해 재반박하는 보충 서면까지 저렴한 금액에 제공하여 끝까지 회사의 편에서 싸웁니다.</p>
         </div>
-
-        <!-- 상세 설명 -->
-        <div class="lm-detail-grid" style="margin-top:48px">
-          <div class="lm-detail-item">
-            <div class="lm-detail-num">01</div>
-            <h3>생계가 달린 절박한 서면,<br/>출처 모를 AI에 던져둘 수 없습니다</h3>
-            <p>
-              부당해고, 부당징계, 부당인사발령...<br/>
-              근로자에게 노동위원회는 마지막 희망입니다.<br/>
-              최근 AI에게 서면 작성을 맡겼다가<br/>
-              할루시네이션 때문에 사건을 망치는<br/>
-              경우가 허다합니다.<br/>
-              엘마스터는 노동법 전문가인<br/>
-              공인노무사가 직접 작성합니다.
-            </p>
-          </div>
-          <div class="lm-detail-item">
-            <div class="lm-detail-num">02</div>
-            <h3>공격과 방어까지<br/>책임집니다</h3>
-            <p>
-              1차 이유서·답변서가 가장 중요하지만,<br/>
-              그것만으로는 부족할 수 있습니다.<br/>
-              사용자는 대형 로펌이나 노무법인을 선임해<br/>
-              당신의 주장을 조목조목 반박해 올 것입니다.<br/>
-              엘마스터는 상대방의 답변서를 분석해<br/>
-              재반박하는 보충 서면까지 제공하여<br/>
-              끝까지 당신의 편에서 싸웁니다.
-            </p>
-          </div>
-          <div class="lm-detail-item">
-            <div class="lm-detail-num">03</div>
-            <h3>선임료의 벽은 낮추고,<br/>서면의 품격은 높였습니다</h3>
-            <p>
-              변호사나 노무사를 선임할 여유가 없어<br/>
-              혼자 싸우기로 결심하셨나요?<br/>
-              말은 서툴러도 괜찮습니다.<br/>
-              서면만 전문가 수준으로 갖춰져 있다면<br/>
-              충분히 이길 수 있습니다.<br/>
-              엘마스터는 고액 수임료 부담은 덜어내고,<br/>
-              오직 '승소하는 서면'에만 집중합니다.
-            </p>
-          </div>
-        </div>
-
-        <!-- 요금 -->
-        <div style="margin-top:64px">
-          <h3 class="lm-why-heading">서비스 요금</h3>
-          <div class="lm-plan-grid">
-            <div class="lm-plan featured">
-              <div class="lm-plan-top-badge">가장 많이 선택</div>
-              <h3>1차 서면 작성</h3>
-              <div class="lm-price"><span class="lm-won">₩</span>490,000</div>
-              <ul class="lm-features">
-                <li>✓ 이유서 또는 답변서 작성</li>
-                <li>✓ 동일 서면 수정 횟수 무제한</li>
-                <li>✓ 구제신청서 제출 대행 포함</li>
-                <li>✓ 공인노무사 직접 작성</li>
-              </ul>
-              <button class="lm-cta" onclick="openPayment('근로자 1차 서면 작성', 490000)">카드 결제하기 💳</button>
-            </div>
-            <div class="lm-plan">
-              <h3>2차 서면 작성</h3>
-              <div class="lm-price"><span class="lm-won">₩</span>290,000</div>
-              <ul class="lm-features">
-                <li>✓ 1차 구매 고객 한정</li>
-                <li>✓ 보충 서면 1회 제공</li>
-                <li>✓ 동일 서면 수정 횟수 무제한</li>
-                <li>✓ 동일 사건에 한함</li>
-              </ul>
-              <button class="lm-cta outline" onclick="openPayment('근로자 2차 서면 작성', 290000)">카드 결제하기 💳</button>
-            </div>
-            <div class="lm-plan">
-              <h3>3차 이후 서면</h3>
-              <div class="lm-price"><span class="lm-won">₩</span>190,000</div>
-              <ul class="lm-features">
-                <li>✓ 1·2차 구매 고객 한정</li>
-                <li>✓ 추가 서면 1회 제공</li>
-                <li>✓ 동일 서면 수정 횟수 무제한</li>
-                <li>✓ 동일 사건에 한함</li>
-              </ul>
-              <button class="lm-cta outline" onclick="openPayment('근로자 3차 이후 서면', 190000)">카드 결제하기 💳</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- CTA -->
-        <div class="lm-cta-inner">
-          <p class="lm-cta-quote">
-            "노동위원회 싸움은<br/>
-            서면에서 시작해 서면에서 끝납니다."
-          </p>
-          <p class="lm-cta-sub">
-            AI의 무책임한 문장에 당신의 운명을 걸지 마십시오.<br/>
-            근로자의 정당한 권리,<br/>
-            엘마스터가 실력으로 되찾아 드리겠습니다.
-          </p>
-          <a href="index.html#contact" class="btn-primary">엘마스터 상담 신청</a>
+        <div class="lm-detail-item">
+          <div class="lm-detail-num">03</div>
+          <h3>정당한 인사권·경영권,<br/>엘마스터가 되찾아 드립니다</h3>
+          <p>서면만 전문가 수준으로 갖춰져 있다면 충분히 이길 수 있습니다. 정당한 인사권·경영권의 행사, 엘마스터가 실력으로 되찾아 드리겠습니다.</p>
         </div>
       </div>
 
-      <!-- ── 회사 탭 ── -->
-      <div class="lm-tab-content" id="content-employer">
-
-        <div class="lm-hero-content" style="padding:0 0 48px">
-          <div class="lm-tag-employer">FOR EMPLOYERS</div>
-          <h2 class="lm-section-title">
-            AI만 믿고 회사의 인사권을<br/>
-            <em style="font-style:italic;color:var(--gold)">무너뜨리게 두시겠습니까?</em>
-          </h2>
-          <p style="color:rgba(255,255,255,0.55);font-size:16px;line-height:1.9;margin-top:12px;max-width:640px">
-            노동위원회 싸움은 서면에서 시작해 서면에서 끝납니다.<br/>
-            회사의 정당한 인사권을 입증하기 위한 싸움에<br/>
-            정보왜곡·할루시네이션 투성이인 AI에게 맡길 수는 없습니다.<br/>
-            엘마스터는 공인노무사가 직접 서면을 작성합니다.
-          </p>
+      <h3 style="font-family:var(--ff-serif);font-size:1.5rem;font-weight:400;color:#fff;margin:56px 0 24px">서비스 요금</h3>
+      <div class="lm-plan-grid">
+        <div class="lm-plan featured">
+          <div class="lm-plan-badge">가장 많이 선택</div>
+          <h3>1차 서면 작성</h3>
+          <div class="lm-price"><span class="lm-won">₩</span>490,000</div>
+          <ul class="lm-features">
+            <li>✓ 이유서 또는 답변서 작성</li>
+            <li>✓ 동일 서면 수정 횟수 무제한</li>
+            <li>✓ 구제신청서 제출 대행 포함</li>
+            <li>✓ 공인노무사 직접 작성</li>
+          </ul>
+          <button class="lm-plan-cta" onclick="openPayment('회사 1차 서면 작성',490000)">카드 결제하기 💳</button>
         </div>
-
-        <!-- 회사측 핵심 포인트 -->
-        <h3 class="lm-why-heading">왜 엘마스터인가요?</h3>
-        <div class="lm-reasons">
-          <div class="lm-reason">
-            <div class="lm-reason-icon">📋</div>
-            <h4>판례·취업규칙 기반 서면</h4>
-            <p>
-              단순한 비위사실 나열이 아닌,<br/>
-              취업규칙 및 최신 판례에 근거하여<br/>
-              사건을 승소로 이끕니다.<br/>
-              회사의 정당한 인사권 행사를<br/>
-              법리적으로 완벽하게 입증합니다.
-            </p>
-          </div>
-          <div class="lm-reason">
-            <div class="lm-reason-icon">🛡</div>
-            <h4>1차부터 2차까지 책임</h4>
-            <p>
-              사건 진행 상황과 상대방의 반박에 맞춰<br/>
-              1차 서면부터 2차 서면까지<br/>
-              책임지고 작성합니다.<br/>
-              근로자는 모든 사실관계를 끌어와<br/>
-              회사를 공격할 것입니다.<br/>
-              엘마스터가 끝까지 회사 편에서 싸웁니다.
-            </p>
-          </div>
-          <div class="lm-reason">
-            <div class="lm-reason-icon">💰</div>
-            <h4>핵심만, 합리적 비용으로</h4>
-            <p>
-              비싼 대리인 선임이 힘드시다면,<br/>
-              승소의 핵심인 서면만이라도<br/>
-              전문가의 도움을 받으세요.<br/>
-              엘마스터는 고액 수임료 부담은 덜어내고,<br/>
-              오직 '승소하는 서면'에만 집중합니다.
-            </p>
-          </div>
+        <div class="lm-plan">
+          <h3>2차 서면 작성</h3>
+          <div class="lm-price"><span class="lm-won">₩</span>290,000</div>
+          <ul class="lm-features">
+            <li>✓ 1차 구매 고객 한정</li>
+            <li>✓ 보충 서면 1회 제공</li>
+            <li>✓ 동일 서면 수정 횟수 무제한</li>
+            <li>✓ 동일 사건에 한함</li>
+          </ul>
+          <button class="lm-plan-cta outline" onclick="openPayment('회사 2차 서면 작성',290000)">카드 결제하기 💳</button>
         </div>
-
-        <!-- 상세 설명 -->
-        <div class="lm-detail-grid" style="margin-top:48px">
-          <div class="lm-detail-item">
-            <div class="lm-detail-num">01</div>
-            <h3>회사의 인사권을<br/>AI에 내버리지 마세요</h3>
-            <p>
-              정보왜곡, 할루시네이션 투성이인 AI에게<br/>
-              회사의 인사권을 내버리지 마세요.<br/>
-              존재하지 않는 판례를 인용하거나<br/>
-              사실관계를 왜곡하는 AI 서면은<br/>
-              오히려 사건을 불리하게 만듭니다.<br/>
-              엘마스터는 공인노무사가 직접 작성합니다.
-            </p>
-          </div>
-          <div class="lm-detail-item">
-            <div class="lm-detail-num">02</div>
-            <h3>공격하는 근로자의 서면,<br/>조목조목 재반박합니다</h3>
-            <p>
-              근로자는 모든 사실관계를 끌어와<br/>
-              회사를 공격할 것입니다.<br/>
-              엘마스터는 상대방의 이유서·답변서 내용을<br/>
-              분석해 재반박하는 보충 서면까지<br/>
-              저렴한 금액에 제공하여<br/>
-              끝까지 회사의 편에서 싸웁니다.
-            </p>
-          </div>
-          <div class="lm-detail-item">
-            <div class="lm-detail-num">03</div>
-            <h3>정당한 인사권·경영권,<br/>엘마스터가 되찾아 드립니다</h3>
-            <p>
-              비용 문제로 변호사나 노무사를<br/>
-              선임하지 않기로 결심하셨나요?<br/>
-              서면만 전문가 수준으로 갖춰져 있다면<br/>
-              충분히 이길 수 있습니다.<br/>
-              정당한 인사권·경영권의 행사,<br/>
-              엘마스터가 실력으로 되찾아 드리겠습니다.
-            </p>
-          </div>
-        </div>
-
-        <!-- 요금 -->
-        <div style="margin-top:64px">
-          <h3 class="lm-why-heading">서비스 요금</h3>
-          <div class="lm-plan-grid">
-            <div class="lm-plan featured">
-              <div class="lm-plan-top-badge">가장 많이 선택</div>
-              <h3>1차 서면 작성</h3>
-              <div class="lm-price"><span class="lm-won">₩</span>490,000</div>
-              <ul class="lm-features">
-                <li>✓ 이유서 또는 답변서 작성</li>
-                <li>✓ 동일 서면 수정 횟수 무제한</li>
-                <li>✓ 구제신청서 제출 대행 포함</li>
-                <li>✓ 공인노무사 직접 작성</li>
-              </ul>
-              <button class="lm-cta" onclick="openPayment('회사 1차 서면 작성', 490000)">카드 결제하기 💳</button>
-            </div>
-            <div class="lm-plan">
-              <h3>2차 서면 작성</h3>
-              <div class="lm-price"><span class="lm-won">₩</span>290,000</div>
-              <ul class="lm-features">
-                <li>✓ 1차 구매 고객 한정</li>
-                <li>✓ 보충 서면 1회 제공</li>
-                <li>✓ 동일 서면 수정 횟수 무제한</li>
-                <li>✓ 동일 사건에 한함</li>
-              </ul>
-              <button class="lm-cta outline" onclick="openPayment('회사 2차 서면 작성', 290000)">카드 결제하기 💳</button>
-            </div>
-            <div class="lm-plan">
-              <h3>3차 이후 서면</h3>
-              <div class="lm-price"><span class="lm-won">₩</span>190,000</div>
-              <ul class="lm-features">
-                <li>✓ 1·2차 구매 고객 한정</li>
-                <li>✓ 추가 서면 1회 제공</li>
-                <li>✓ 동일 서면 수정 횟수 무제한</li>
-                <li>✓ 동일 사건에 한함</li>
-              </ul>
-              <button class="lm-cta outline" onclick="openPayment('회사 3차 이후 서면', 190000)">카드 결제하기 💳</button>
-            </div>
-          </div>
-          <p style="text-align:center;color:rgba(255,255,255,0.3);font-size:12px;margin-top:16px;line-height:1.7">
-            카드 결제는 국내외 모든 신용·체크카드를 지원합니다.<br/>
-            결제 후 담당 노무사가 영업일 기준 1일 이내 연락드립니다.
-          </p>
-        </div>
-
-        <!-- CTA -->
-        <div class="lm-cta-inner">
-          <p class="lm-cta-quote">
-            "AI의 무책임한 문장에<br/>
-            회사의 인사권을 내버리지 마세요."
-          </p>
-          <p class="lm-cta-sub">
-            정당한 인사권·경영권의 행사,<br/>
-            엘마스터가 실력으로 되찾아 드리겠습니다.
-          </p>
-          <a href="index.html#contact" class="btn-primary">엘마스터 상담 신청</a>
+        <div class="lm-plan">
+          <h3>3차 이후 서면</h3>
+          <div class="lm-price"><span class="lm-won">₩</span>190,000</div>
+          <ul class="lm-features">
+            <li>✓ 1·2차 구매 고객 한정</li>
+            <li>✓ 추가 서면 1회 제공</li>
+            <li>✓ 동일 서면 수정 횟수 무제한</li>
+            <li>✓ 동일 사건에 한함</li>
+          </ul>
+          <button class="lm-plan-cta outline" onclick="openPayment('회사 3차 이후 서면',190000)">카드 결제하기 💳</button>
         </div>
       </div>
 
+      <div class="lm-cta-inner">
+        <p class="lm-cta-quote">"AI의 무책임한 문장에<br/>회사의 인사권을 내버리지 마세요."</p>
+        <p class="lm-cta-sub">정당한 인사권·경영권의 행사,<br/>엘마스터가 실력으로 되찾아 드리겠습니다.</p>
+        <a href="contact.html" class="btn-primary">엘마스터 상담 신청</a>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 결제 모달 -->
-  <div class="pay-overlay" id="payOverlay">
-    <div class="pay-modal">
-      <button class="pay-close" onclick="closePayment()">×</button>
-      <div class="pay-header">
-        <div class="pay-logo">⚖ L-Master</div>
-        <div class="pay-product" id="payProduct"></div>
-        <div class="pay-amount"  id="payAmount"></div>
+<!-- ────────────────────────────────────
+     사건 관리 포털
+──────────────────────────────────── -->
+<section class="lm-portal" id="portal">
+  <div class="container">
+    <div class="lm-section-label">Client Portal</div>
+    <h2 class="lm-section-title">사건 관리 포털</h2>
+    <p style="color:var(--lm-muted,rgba(255,255,255,.45));font-size:14.5px;line-height:1.85;max-width:580px;margin-bottom:0">
+      의뢰인은 포털에 로그인하여 자신의 사건 진행 상황을 확인하고,<br/>
+      관련 자료를 업로드할 수 있습니다.<br/>
+      본인 사건 외 다른 의뢰인의 정보에는 접근할 수 없습니다.
+    </p>
+
+    <div class="portal-intro">
+      <div class="portal-card">
+        <div class="portal-card-icon">🔐</div>
+        <h3>의뢰인 로그인</h3>
+        <p>사건 번호와 비밀번호로 로그인하여<br/>나의 사건 진행 상황을 확인하세요.</p>
+        <button class="portal-btn" onclick="openPortalLogin()">포털 로그인</button>
       </div>
-      <div class="pay-body">
-        <div id="payStep1">
-          <div class="pay-field"><label>이름</label><input type="text" id="payName" placeholder="홍길동"/></div>
-          <div class="pay-field"><label>이메일</label><input type="email" id="payEmail" placeholder="example@email.com"/></div>
-          <div class="pay-field"><label>연락처</label><input type="tel" id="payPhone" placeholder="010-0000-0000"/></div>
-          <div class="pay-field">
-            <label>사건 유형</label>
-            <select id="payCaseType">
-              <option value="">선택해주세요</option>
-              <option>부당해고</option><option>부당징계</option>
-              <option>부당인사발령</option><option>차별 시정</option><option>기타</option>
-            </select>
-          </div>
-          <button class="pay-next-btn" onclick="goPayStep2()">다음 — 결제 정보 입력 →</button>
+      <div class="portal-card">
+        <div class="portal-card-icon">⚙️</div>
+        <h3>관리자 (노무사)</h3>
+        <p>모든 사건을 관리하고 의뢰인 계정을<br/>생성하거나 사건 상태를 업데이트합니다.</p>
+        <button class="portal-btn outline" onclick="openAdminLogin()">관리자 로그인</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     모달들
+════════════════════════════════════ -->
+
+<!-- 1. 의뢰인 로그인 -->
+<div class="lm-overlay" id="mo-clientLogin">
+  <div class="lm-mbox">
+    <div class="lm-mhead">
+      <h2>의뢰인 로그인</h2>
+      <p>사건 번호와 등록된 비밀번호를 입력해주세요</p>
+    </div>
+    <div class="lm-mbody">
+      <div class="lm-err" id="clientLoginErr">사건 번호 또는 비밀번호가 올바르지 않습니다.</div>
+      <div class="lm-field"><label>사건 번호</label><input type="text" id="clientCaseNo" placeholder="예: LM-2024-001"/></div>
+      <div class="lm-field"><label>비밀번호</label><input type="password" id="clientPw" onkeydown="if(event.key==='Enter')doClientLogin()"/></div>
+      <div class="lm-mactions">
+        <button class="lm-mbtn line" onclick="closeModal('mo-clientLogin')">취소</button>
+        <button class="lm-mbtn" onclick="doClientLogin()">로그인</button>
+      </div>
+    </div>
+    <button class="lm-mclose" onclick="closeModal('mo-clientLogin')">×</button>
+  </div>
+</div>
+
+<!-- 2. 관리자 로그인 -->
+<div class="lm-overlay" id="mo-adminLogin">
+  <div class="lm-mbox">
+    <div class="lm-mhead">
+      <h2>관리자 로그인</h2>
+      <p>노무사 관리자 계정으로 로그인합니다</p>
+    </div>
+    <div class="lm-mbody">
+      <div class="lm-err" id="adminLoginErr">아이디 또는 비밀번호가 올바르지 않습니다.</div>
+      <div class="lm-field"><label>아이디</label><input type="text" id="adminId" placeholder="admin"/></div>
+      <div class="lm-field"><label>비밀번호</label><input type="password" id="adminPw" onkeydown="if(event.key==='Enter')doAdminLogin()"/></div>
+      <div class="lm-mactions">
+        <button class="lm-mbtn line" onclick="closeModal('mo-adminLogin')">취소</button>
+        <button class="lm-mbtn" onclick="doAdminLogin()">로그인</button>
+      </div>
+    </div>
+    <button class="lm-mclose" onclick="closeModal('mo-adminLogin')">×</button>
+  </div>
+</div>
+
+<!-- 3. 의뢰인 사건 대시보드 -->
+<div class="lm-overlay" id="mo-clientDash">
+  <div class="lm-mbox wide">
+    <div class="lm-mhead">
+      <h2 id="clientDashTitle">나의 사건</h2>
+      <p id="clientDashMeta"></p>
+    </div>
+    <div class="lm-mbody">
+      <div id="clientCaseDetail"></div>
+
+      <!-- 자료 업로드 -->
+      <div style="margin-top:24px;border-top:1px solid rgba(255,255,255,.08);padding-top:20px">
+        <h4 style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(201,168,76,.8);margin-bottom:14px">자료 업로드</h4>
+        <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+          <p>📎 클릭하여 파일 선택<br/><strong>또는 여기에 파일을 드래그&amp;드롭</strong><br/>
+          <small style="color:rgba(255,255,255,.25);font-size:11px">PDF, 이미지, Word, 최대 10MB</small></p>
         </div>
-        <div id="payStep2" style="display:none">
-          <div class="pay-field"><label>카드 번호</label><input type="text" id="cardNum" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatCard(this)"/></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-            <div class="pay-field"><label>유효기간</label><input type="text" id="cardExp" placeholder="MM / YY" maxlength="7" oninput="formatExp(this)"/></div>
-            <div class="pay-field"><label>CVC</label><input type="text" id="cardCvc" placeholder="000" maxlength="3"/></div>
-          </div>
-          <div class="pay-field"><label>카드 소유자 이름</label><input type="text" id="cardName" placeholder="카드에 표시된 이름"/></div>
-          <div class="pay-secure">🔒 SSL 암호화로 안전하게 처리됩니다</div>
-          <button class="pay-next-btn" onclick="submitPayment()"><span id="payBtnText">결제하기</span></button>
-          <button class="pay-back-btn" onclick="goPayStep1()">← 이전으로</button>
+        <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display:none" onchange="handleFileSelect(this)"/>
+        <div class="file-list" id="clientFileList"></div>
+        <div class="lm-ok" id="uploadOk">파일이 업로드되었습니다. 담당 노무사에게 전달됩니다.</div>
+        <button class="lm-mbtn full" id="uploadBtn" onclick="submitFiles()" style="display:none">파일 전송하기</button>
+      </div>
+    </div>
+    <div style="padding:0 28px 20px;display:flex;justify-content:flex-end;gap:10px">
+      <button class="lm-mbtn line" onclick="closeModal('mo-clientDash')">닫기</button>
+      <button class="lm-mbtn line" onclick="doClientLogout()">로그아웃</button>
+    </div>
+    <button class="lm-mclose" onclick="closeModal('mo-clientDash')">×</button>
+  </div>
+</div>
+
+<!-- 4. 관리자 대시보드 -->
+<div class="lm-overlay" id="mo-adminDash">
+  <div class="lm-mbox wide">
+    <div class="lm-mhead">
+      <h2>관리자 — 사건 관리</h2>
+      <p>모든 사건을 확인하고 의뢰인 계정을 관리합니다</p>
+    </div>
+    <div class="lm-mbody">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+        <span style="font-size:13px;color:rgba(255,255,255,.5)">전체 사건: <strong style="color:#fff" id="adminCaseCount">0</strong>건</span>
+        <button class="lm-mbtn" onclick="openNewCaseModal()">+ 새 사건 등록</button>
+      </div>
+      <div class="case-list" id="adminCaseList"></div>
+    </div>
+    <div style="padding:0 28px 20px;display:flex;justify-content:flex-end;gap:10px">
+      <button class="lm-mbtn line" onclick="closeModal('mo-adminDash')">닫기</button>
+      <button class="lm-mbtn line" onclick="doAdminLogout()">로그아웃</button>
+    </div>
+    <button class="lm-mclose" onclick="closeModal('mo-adminDash')">×</button>
+  </div>
+</div>
+
+<!-- 5. 새 사건 등록 (관리자) -->
+<div class="lm-overlay" id="mo-newCase">
+  <div class="lm-mbox">
+    <div class="lm-mhead">
+      <h2>새 사건 등록</h2>
+      <p>의뢰인 계정과 사건 정보를 등록합니다</p>
+    </div>
+    <div class="lm-mbody">
+      <div class="lm-err" id="newCaseErr"></div>
+      <div class="lm-2col">
+        <div class="lm-field"><label>사건 번호 (자동생성)</label><input type="text" id="nc-caseNo" readonly style="opacity:.5"/></div>
+        <div class="lm-field">
+          <label>의뢰 유형</label>
+          <select id="nc-type">
+            <option>근로자 — 부당해고</option><option>근로자 — 부당징계</option>
+            <option>근로자 — 부당인사발령</option><option>근로자 — 차별 시정</option>
+            <option>회사 — 해고 정당성</option><option>회사 — 징계 정당성</option>
+            <option>회사 — 기타 인사권</option>
+          </select>
         </div>
-        <div id="payStep3" style="display:none">
-          <div class="pay-success">
-            <div class="pay-success-icon">✓</div>
-            <h3>결제가 완료되었습니다</h3>
-            <p id="paySuccessMsg"></p>
-            <p style="color:rgba(255,255,255,0.4);font-size:13px;margin-top:12px;line-height:1.7">
-              담당 노무사가 영업일 기준 1일 이내<br/>
-              입력하신 연락처로 연락드립니다.
-            </p>
-            <button class="pay-next-btn" onclick="closePayment()" style="margin-top:24px">확인</button>
-          </div>
+      </div>
+      <div class="lm-field"><label>의뢰인 이름</label><input type="text" id="nc-name" placeholder="홍길동"/></div>
+      <div class="lm-2col">
+        <div class="lm-field"><label>연락처</label><input type="tel" id="nc-tel" placeholder="010-0000-0000"/></div>
+        <div class="lm-field"><label>의뢰인 비밀번호</label><input type="text" id="nc-pw" placeholder="초기 비밀번호 설정"/></div>
+      </div>
+      <div class="lm-field">
+        <label>상태</label>
+        <select id="nc-status">
+          <option value="open">진행중</option>
+          <option value="review">검토중</option>
+          <option value="done">완료</option>
+        </select>
+      </div>
+      <div class="lm-field"><label>사건 내용 메모</label><textarea id="nc-memo" rows="4" placeholder="사건 개요 메모 (의뢰인이 볼 수 없음)"></textarea></div>
+      <div class="lm-field"><label>의뢰인 안내 메시지</label><textarea id="nc-msg" rows="3" placeholder="의뢰인이 포털에서 확인할 메시지"></textarea></div>
+      <div class="lm-mactions">
+        <button class="lm-mbtn line" onclick="closeModal('mo-newCase')">취소</button>
+        <button class="lm-mbtn" onclick="saveNewCase()">등록하기</button>
+      </div>
+    </div>
+    <button class="lm-mclose" onclick="closeModal('mo-newCase')">×</button>
+  </div>
+</div>
+
+<!-- 6. 사건 상세 (관리자) -->
+<div class="lm-overlay" id="mo-caseDetail">
+  <div class="lm-mbox wide">
+    <div class="lm-mhead">
+      <h2 id="cd-title">사건 상세</h2>
+      <p id="cd-meta"></p>
+    </div>
+    <div class="lm-mbody" id="cd-body"></div>
+    <div style="padding:0 28px 20px;display:flex;justify-content:flex-end;gap:10px">
+      <button class="lm-mbtn line" onclick="closeModal('mo-caseDetail')">닫기</button>
+    </div>
+    <button class="lm-mclose" onclick="closeModal('mo-caseDetail')">×</button>
+  </div>
+</div>
+
+<!-- 결제 모달 -->
+<div class="pay-overlay" id="payOverlay">
+  <div class="pay-modal">
+    <button class="pay-close" onclick="closePayment()">×</button>
+    <div class="pay-head">
+      <div class="pay-head-logo">⚖ L-Master</div>
+      <div class="pay-head-prod" id="payProd"></div>
+      <div class="pay-head-amt"  id="payAmt"></div>
+    </div>
+    <div class="pay-body">
+      <div id="payS1">
+        <div class="p-field"><label>이름</label><input type="text" id="p-name" placeholder="홍길동"/></div>
+        <div class="p-field"><label>이메일</label><input type="email" id="p-email" placeholder="example@email.com"/></div>
+        <div class="p-field"><label>연락처</label><input type="tel" id="p-tel" placeholder="010-0000-0000"/></div>
+        <div class="p-field">
+          <label>사건 유형</label>
+          <select id="p-case">
+            <option value="">선택</option>
+            <option>부당해고</option><option>부당징계</option>
+            <option>부당인사발령</option><option>차별 시정</option><option>기타</option>
+          </select>
+        </div>
+        <button class="p-btn" onclick="payGoS2()">다음 — 결제 정보 입력 →</button>
+      </div>
+      <div id="payS2" style="display:none">
+        <div class="p-field"><label>카드 번호</label><input type="text" id="p-cardno" placeholder="0000 0000 0000 0000" maxlength="19" oninput="fmtCard(this)"/></div>
+        <div class="p-2col">
+          <div class="p-field"><label>유효기간</label><input type="text" id="p-exp" placeholder="MM / YY" maxlength="7" oninput="fmtExp(this)"/></div>
+          <div class="p-field"><label>CVC</label><input type="text" id="p-cvc" placeholder="000" maxlength="3"/></div>
+        </div>
+        <div class="p-field"><label>카드 소유자</label><input type="text" id="p-cname" placeholder="카드에 표시된 이름"/></div>
+        <div class="p-secure">🔒 SSL 암호화로 안전하게 처리됩니다</div>
+        <button class="p-btn" onclick="paySubmit()"><span id="payBtnTxt">결제하기</span></button>
+        <button class="p-back" onclick="payGoS1()">← 이전으로</button>
+      </div>
+      <div id="payS3" style="display:none">
+        <div class="pay-success">
+          <div class="pay-ok-icon">✓</div>
+          <h3>결제가 완료되었습니다</h3>
+          <p id="paySuccessMsg"></p>
+          <p style="color:rgba(255,255,255,.35);font-size:12.5px;margin-top:12px;line-height:1.7">
+            담당 노무사가 영업일 기준 1일 이내<br/>입력하신 연락처로 연락드립니다.
+          </p>
+          <button class="p-btn" onclick="closePayment()" style="margin-top:20px">확인</button>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- 푸터 -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <svg class="footer-logo-svg" viewBox="0 0 148 40" fill="none">
-            <path d="M19 7 C9 7 3 13 3 20 C3 27 9 33 19 33 L19 28 C12 28 8.5 24.5 8.5 20 C8.5 15.5 12 12 19 12 Z" fill="#c9a84c"/>
-            <rect x="24" y="16.5" width="5" height="5" rx="0.8" fill="#c9a84c" transform="rotate(45 26.5 19)"/>
-            <path d="M34 7 L34 33 L49 33 L49 28 L39 28 L39 7 Z" fill="#c9a84c"/>
-            <line x1="57" y1="9" x2="57" y2="31" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
-            <text x="64" y="17" font-family="'Noto Sans KR',sans-serif" font-size="8.5" fill="rgba(255,255,255,0.5)" letter-spacing="1.5">노무법인</text>
-            <text x="64" y="31" font-family="'Cormorant Garamond',serif" font-size="17" fill="rgba(255,255,255,0.8)" letter-spacing="1.5">C&amp;L</text>
-          </svg>
-          <p>노동의 가치를 법으로 증명합니다.</p>
-          <p class="footer-copy">©2024 노무법인 C&amp;L. ALL RIGHTS RESERVED.</p>
-        </div>
-        <div class="footer-links"><h4>서비스</h4>
-          <a href="index.html#service">HR 컨설팅</a>
-          <a href="index.html#service">노무 컨설팅</a>
-          <a href="lmaster.html">L-Master</a>
-        </div>
-        <div class="footer-links"><h4>정보</h4>
-          <a href="index.html#about">About Us</a>
-          <a href="column.html">Column</a>
-          <a href="index.html#contact">Contact</a>
-        </div>
-        <div class="footer-links"><h4>법적 고지</h4>
-          <a href="#">개인정보처리방침</a>
-          <a href="#">이용약관</a>
-        </div>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg class="footer-logo-svg" viewBox="0 0 148 40" fill="none">
+          <path d="M19 7 C9 7 3 13 3 20 C3 27 9 33 19 33 L19 28 C12 28 8.5 24.5 8.5 20 C8.5 15.5 12 12 19 12 Z" fill="#c9a84c"/>
+          <rect x="24" y="16.5" width="5" height="5" rx="0.8" fill="#c9a84c" transform="rotate(45 26.5 19)"/>
+          <path d="M34 7 L34 33 L49 33 L49 28 L39 28 L39 7 Z" fill="#c9a84c"/>
+          <line x1="57" y1="9" x2="57" y2="31" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+          <text x="64" y="17" font-family="'Noto Sans KR',sans-serif" font-size="8.5" fill="rgba(255,255,255,0.5)" letter-spacing="1.5">노무법인</text>
+          <text x="64" y="31" font-family="'Cormorant Garamond',serif" font-size="17" fill="rgba(255,255,255,0.8)" letter-spacing="1.5">C&amp;L</text>
+        </svg>
+        <p>노동의 가치를 법으로 증명합니다.</p>
+        <p class="footer-copy">©2018 노무법인 C&amp;L. ALL RIGHTS RESERVED.</p>
       </div>
+      <div class="footer-links"><h4>서비스</h4><a href="service.html">HR 컨설팅</a><a href="service.html">노무 컨설팅</a><a href="lmaster.html">L-Master</a></div>
+      <div class="footer-links"><h4>정보</h4><a href="about.html">About Us</a><a href="column.html">Column</a><a href="clients.html">Clients</a><a href="contact.html">Contact</a></div>
+      <div class="footer-links"><h4>법적 고지</h4><a href="#">개인정보처리방침</a><a href="#">이용약관</a></div>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <style>
-  .lm-why-heading {
-    font-family: var(--ff-serif); font-size: 1.6rem; font-weight: 400;
-    color: var(--white); margin-bottom: 28px;
+<script src="script.js"></script>
+<script>
+/* ── 관리자 계정 ── */
+const ADMIN_ID = 'lmaster', ADMIN_PW = 'cnl2024!';
+const PORTAL_KEY = 'lm_cases';
+
+/* ── 탭 전환 ── */
+function switchTab(name){
+  ['worker','employer'].forEach(t=>{
+    document.getElementById('tab-'+t).classList.toggle('active',t===name);
+    document.getElementById('content-'+t).classList.toggle('active',t===name);
+  });
+  document.getElementById('lmContent').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ── 모달 열기/닫기 ── */
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.lm-overlay,.pay-overlay').forEach(el=>{
+  el.addEventListener('click', e=>{ if(e.target===el) el.classList.remove('open'); });
+});
+
+/* ── 사건 데이터 ── */
+function getCases(){ return JSON.parse(localStorage.getItem(PORTAL_KEY)||'[]'); }
+function saveCases(arr){ localStorage.setItem(PORTAL_KEY, JSON.stringify(arr)); }
+function genCaseNo(){
+  const n = getCases().length + 1;
+  return 'LM-' + new Date().getFullYear() + '-' + String(n).padStart(3,'0');
+}
+
+/* ── 의뢰인 로그인 ── */
+function openPortalLogin(){ 
+  document.getElementById('clientLoginErr').style.display='none';
+  document.getElementById('clientCaseNo').value='';
+  document.getElementById('clientPw').value='';
+  openModal('mo-clientLogin'); 
+}
+function doClientLogin(){
+  const cno = document.getElementById('clientCaseNo').value.trim().toUpperCase();
+  const pw  = document.getElementById('clientPw').value;
+  const cases = getCases();
+  const c = cases.find(x=>x.caseNo===cno && x.pw===pw);
+  if(!c){ document.getElementById('clientLoginErr').style.display='block'; return; }
+  closeModal('mo-clientLogin');
+  sessionStorage.setItem('lm_client', cno);
+  showClientDash(c);
+}
+function doClientLogout(){
+  sessionStorage.removeItem('lm_client');
+  closeModal('mo-clientDash');
+}
+
+function showClientDash(c){
+  document.getElementById('clientDashTitle').textContent = '나의 사건 — ' + c.caseNo;
+  document.getElementById('clientDashMeta').textContent  = c.name + ' · ' + c.caseType + ' · ' + c.date;
+  const statusMap = {open:'🟡 진행중', review:'🔵 검토중', done:'✅ 완료'};
+  document.getElementById('clientCaseDetail').innerHTML = `
+    <div class="case-detail-panel">
+      <div class="cdp-title">${c.caseType}</div>
+      <div class="cdp-meta">${c.caseNo} · ${c.date}</div>
+      <div class="cdp-section">
+        <h4>사건 상태</h4>
+        <p>${statusMap[c.status]||'진행중'}</p>
+      </div>
+      ${c.msg?`<div class="cdp-section"><h4>담당 노무사 메시지</h4><p>${c.msg.replace(/\n/g,'<br/>')}</p></div>`:''}
+      ${c.files&&c.files.length?`<div class="cdp-section"><h4>업로드된 파일</h4><p>${c.files.map(f=>'📄 '+f).join('<br/>')}</p></div>`:''}
+    </div>`;
+  document.getElementById('clientFileList').innerHTML = '';
+  document.getElementById('uploadBtn').style.display='none';
+  document.getElementById('uploadOk').style.display='none';
+  openModal('mo-clientDash');
+}
+
+/* ── 파일 업로드 ── */
+let _pendingFiles = [];
+function handleFileSelect(input){
+  _pendingFiles = Array.from(input.files);
+  const list = document.getElementById('clientFileList');
+  list.innerHTML = _pendingFiles.map((f,i)=>`
+    <div class="file-item">
+      <span>📄 ${f.name} <small style="color:rgba(255,255,255,.3)">(${(f.size/1024).toFixed(0)}KB)</small></span>
+      <button class="file-rm" onclick="removeFile(${i})">×</button>
+    </div>`).join('');
+  document.getElementById('uploadBtn').style.display = _pendingFiles.length ? 'block' : 'none';
+}
+function removeFile(i){
+  _pendingFiles.splice(i,1);
+  const list = document.getElementById('clientFileList');
+  list.innerHTML = _pendingFiles.map((f,j)=>`
+    <div class="file-item">
+      <span>📄 ${f.name}</span>
+      <button class="file-rm" onclick="removeFile(${j})">×</button>
+    </div>`).join('');
+  document.getElementById('uploadBtn').style.display = _pendingFiles.length ? 'block' : 'none';
+}
+function submitFiles(){
+  const cno = sessionStorage.getItem('lm_client');
+  const cases = getCases();
+  const idx = cases.findIndex(x=>x.caseNo===cno);
+  if(idx<0) return;
+  if(!cases[idx].files) cases[idx].files=[];
+  _pendingFiles.forEach(f=> cases[idx].files.push(f.name));
+  saveCases(cases);
+  document.getElementById('clientFileList').innerHTML='';
+  document.getElementById('uploadBtn').style.display='none';
+  document.getElementById('uploadOk').style.display='block';
+  _pendingFiles=[];
+  setTimeout(()=>document.getElementById('uploadOk').style.display='none',3000);
+}
+
+/* ── 관리자 로그인 ── */
+function openAdminLogin(){
+  document.getElementById('adminLoginErr').style.display='none';
+  document.getElementById('adminId').value='';
+  document.getElementById('adminPw').value='';
+  openModal('mo-adminLogin');
+}
+function doAdminLogin(){
+  if(document.getElementById('adminId').value===ADMIN_ID &&
+     document.getElementById('adminPw').value===ADMIN_PW){
+    closeModal('mo-adminLogin');
+    sessionStorage.setItem('lm_admin','ok');
+    renderAdminDash();
+    openModal('mo-adminDash');
+  } else {
+    document.getElementById('adminLoginErr').style.display='block';
   }
-  .lm-cta-inner {
-    text-align: center; padding: 80px 0 20px; border-top: 1px solid rgba(201,168,76,0.12); margin-top: 64px;
+}
+function doAdminLogout(){
+  sessionStorage.removeItem('lm_admin');
+  closeModal('mo-adminDash');
+}
+
+function renderAdminDash(){
+  const cases = getCases();
+  document.getElementById('adminCaseCount').textContent = cases.length;
+  const statusMap = {open:'badge-open',review:'badge-review',done:'badge-done'};
+  const statusLabel = {open:'진행중',review:'검토중',done:'완료'};
+  document.getElementById('adminCaseList').innerHTML = cases.length
+    ? cases.slice().reverse().map(c=>`
+        <div class="case-row" onclick="showAdminCaseDetail('${c.caseNo}')">
+          <div>
+            <div class="case-row-title">${c.name} — ${c.caseType}</div>
+            <div class="case-row-meta">${c.caseNo} · ${c.date} · 연락처: ${c.tel}</div>
+          </div>
+          <span class="case-badge ${statusMap[c.status]||'badge-open'}">${statusLabel[c.status]||'진행중'}</span>
+        </div>`).join('')
+    : '<p style="color:rgba(255,255,255,.3);font-size:13px;padding:20px 0">등록된 사건이 없습니다.</p>';
+}
+
+/* ── 새 사건 등록 ── */
+function openNewCaseModal(){
+  document.getElementById('nc-caseNo').value = genCaseNo();
+  document.getElementById('nc-name').value='';
+  document.getElementById('nc-tel').value='';
+  document.getElementById('nc-pw').value='';
+  document.getElementById('nc-memo').value='';
+  document.getElementById('nc-msg').value='';
+  document.getElementById('newCaseErr').style.display='none';
+  openModal('mo-newCase');
+}
+function saveNewCase(){
+  const name = document.getElementById('nc-name').value.trim();
+  const pw   = document.getElementById('nc-pw').value.trim();
+  const tel  = document.getElementById('nc-tel').value.trim();
+  if(!name||!pw||!tel){
+    document.getElementById('newCaseErr').textContent='이름, 연락처, 비밀번호를 모두 입력해주세요.';
+    document.getElementById('newCaseErr').style.display='block'; return;
   }
-  .lm-cta-quote {
-    font-family: var(--ff-serif); font-size: clamp(1.3rem,3vw,2rem);
-    font-style: italic; color: rgba(255,255,255,0.7); line-height:1.6; margin-bottom:20px;
-  }
-  .lm-cta-sub {
-    color: rgba(255,255,255,0.4); font-size:15px; line-height:1.9; margin-bottom:36px;
-  }
-  /* 결제 모달 */
-  .pay-overlay { display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:9999;align-items:center;justify-content:center;padding:20px; }
-  .pay-overlay.open { display:flex; }
-  .pay-modal { background:#141e2d;border:1px solid rgba(201,168,76,.2);width:100%;max-width:480px;max-height:90vh;overflow-y:auto;position:relative; }
-  .pay-close { position:absolute;top:14px;right:18px;background:none;border:none;color:rgba(255,255,255,.5);font-size:22px;cursor:pointer;z-index:2;line-height:1; }
-  .pay-close:hover { color:#fff; }
-  .pay-header { background:linear-gradient(135deg,#0d1b2a,#1b2e45);border-bottom:1px solid rgba(201,168,76,.15);padding:28px 32px 22px; }
-  .pay-logo { font-family:var(--ff-serif);font-size:15px;color:var(--gold);margin-bottom:10px; }
-  .pay-product { font-size:17px;font-weight:500;color:#fff;margin-bottom:6px; }
-  .pay-amount { font-family:var(--ff-serif);font-size:2rem;color:var(--gold); }
-  .pay-body { padding:28px 32px 32px; }
-  .pay-field { margin-bottom:14px; }
-  .pay-field label { display:block;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:5px; }
-  .pay-field input,.pay-field select { width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:var(--ff-sans);font-size:14px;padding:10px 13px;outline:none;box-sizing:border-box;transition:border-color .2s; }
-  .pay-field input:focus,.pay-field select:focus { border-color:var(--gold); }
-  .pay-field input::placeholder { color:rgba(255,255,255,.25); }
-  .pay-field select option { background:#141e2d; }
-  .pay-secure { font-size:12px;color:rgba(255,255,255,.3);text-align:center;margin:8px 0 14px;padding:7px;border:1px solid rgba(255,255,255,.07); }
-  .pay-next-btn { width:100%;background:var(--gold);color:var(--navy);border:none;font-family:var(--ff-sans);font-weight:700;font-size:14px;padding:14px;cursor:pointer;transition:background .2s;margin-top:4px; }
-  .pay-next-btn:hover { background:#e8c96a; }
-  .pay-back-btn { width:100%;background:transparent;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);font-family:var(--ff-sans);font-size:13px;padding:10px;cursor:pointer;margin-top:8px;transition:all .2s; }
-  .pay-back-btn:hover { border-color:rgba(255,255,255,.3);color:#fff; }
-  .pay-success { text-align:center;padding:16px 0; }
-  .pay-success-icon { width:52px;height:52px;border-radius:50%;background:rgba(39,174,96,.15);border:2px solid #27ae60;display:flex;align-items:center;justify-content:center;font-size:22px;color:#27ae60;margin:0 auto 18px; }
-  .pay-success h3 { font-family:var(--ff-serif);font-size:20px;color:#fff;margin-bottom:10px; }
-  .pay-success p { color:rgba(255,255,255,.55);font-size:14px;line-height:1.7; }
-  </style>
+  const newCase = {
+    caseNo:   document.getElementById('nc-caseNo').value,
+    caseType: document.getElementById('nc-type').value,
+    name, pw, tel,
+    status:   document.getElementById('nc-status').value,
+    memo:     document.getElementById('nc-memo').value,
+    msg:      document.getElementById('nc-msg').value,
+    date:     new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'2-digit',day:'2-digit'}),
+    files: []
+  };
+  const cases = getCases();
+  cases.push(newCase);
+  saveCases(cases);
+  closeModal('mo-newCase');
+  renderAdminDash();
+  alert(`사건 등록 완료\n사건번호: ${newCase.caseNo}\n의뢰인 비밀번호: ${newCase.pw}`);
+}
 
-  <script src="script.js"></script>
-  <script>
-    document.getElementById('navbar').classList.add('scrolled');
+/* ── 사건 상세 (관리자) ── */
+function showAdminCaseDetail(cno){
+  const c = getCases().find(x=>x.caseNo===cno);
+  if(!c) return;
+  document.getElementById('cd-title').textContent = c.name + ' — ' + c.caseType;
+  document.getElementById('cd-meta').textContent  = c.caseNo + ' · ' + c.date;
+  const statusOpts = ['open','review','done'].map(s=>`<option value="${s}"${c.status===s?' selected':''}>${{open:'진행중',review:'검토중',done:'완료'}[s]}</option>`).join('');
+  document.getElementById('cd-body').innerHTML = `
+    <div class="case-detail-panel">
+      <div class="cdp-section">
+        <h4>기본 정보</h4>
+        <p>이름: ${c.name}<br/>연락처: ${c.tel}<br/>사건번호: ${c.caseNo}<br/>등록일: ${c.date}</p>
+      </div>
+      <div class="cdp-section">
+        <h4>상태 변경</h4>
+        <select id="statusSelect" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;padding:8px 12px;font-size:13px;font-family:var(--ff-sans);outline:none;">
+          ${statusOpts}
+        </select>
+        <button onclick="updateStatus('${cno}')" style="background:var(--lm-gold);color:#0d1b2a;border:none;font-weight:700;font-size:12px;padding:9px 16px;cursor:pointer;font-family:var(--ff-sans);margin-left:10px">변경 저장</button>
+      </div>
+      <div class="cdp-section">
+        <h4>의뢰인 안내 메시지 수정</h4>
+        <textarea id="msgEdit" rows="3" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:var(--ff-sans);font-size:13px;padding:10px;box-sizing:border-box;resize:vertical;outline:none;">${c.msg||''}</textarea>
+        <button onclick="updateMsg('${cno}')" style="background:var(--lm-gold);color:#0d1b2a;border:none;font-weight:700;font-size:12px;padding:9px 16px;cursor:pointer;font-family:var(--ff-sans);margin-top:8px">메시지 저장</button>
+      </div>
+      ${c.files&&c.files.length?`<div class="cdp-section"><h4>업로드된 파일 (${c.files.length}개)</h4><p>${c.files.map(f=>'📄 '+f).join('<br/>')}</p></div>`:'<div class="cdp-section"><h4>업로드된 파일</h4><p style="color:rgba(255,255,255,.35)">아직 업로드된 파일이 없습니다.</p></div>'}
+      ${c.memo?`<div class="cdp-section"><h4>내부 메모</h4><p>${c.memo.replace(/\n/g,'<br/>')}</p></div>`:''}
+    </div>`;
+  openModal('mo-caseDetail');
+}
+function updateStatus(cno){
+  const cases = getCases();
+  const idx = cases.findIndex(x=>x.caseNo===cno);
+  if(idx<0) return;
+  cases[idx].status = document.getElementById('statusSelect').value;
+  saveCases(cases);
+  renderAdminDash();
+  alert('상태가 업데이트되었습니다.');
+}
+function updateMsg(cno){
+  const cases = getCases();
+  const idx = cases.findIndex(x=>x.caseNo===cno);
+  if(idx<0) return;
+  cases[idx].msg = document.getElementById('msgEdit').value;
+  saveCases(cases);
+  alert('메시지가 저장되었습니다.');
+}
 
-    function switchTab(name) {
-      ['worker','employer'].forEach(t => {
-        document.getElementById('tab-'+t).classList.toggle('active', t===name);
-        document.getElementById('content-'+t).classList.toggle('active', t===name);
-      });
-      document.getElementById('lmContent').scrollIntoView({behavior:'smooth', block:'start'});
-    }
+/* ── 결제 ── */
+let _pProd='',_pAmt=0;
+function openPayment(prod,amt){
+  _pProd=prod; _pAmt=amt;
+  document.getElementById('payProd').textContent=prod;
+  document.getElementById('payAmt').textContent='₩'+amt.toLocaleString();
+  ['payS1','payS2','payS3'].forEach((id,i)=>document.getElementById(id).style.display=i===0?'':'none');
+  document.getElementById('payOverlay').classList.add('open');
+}
+function closePayment(){ document.getElementById('payOverlay').classList.remove('open'); }
+function payGoS1(){ document.getElementById('payS1').style.display=''; document.getElementById('payS2').style.display='none'; }
+function payGoS2(){
+  const n=document.getElementById('p-name').value.trim(),
+        e=document.getElementById('p-email').value.trim(),
+        t=document.getElementById('p-tel').value.trim(),
+        c=document.getElementById('p-case').value;
+  if(!n||!e||!t||!c){alert('모든 항목을 입력해주세요.');return;}
+  document.getElementById('payS1').style.display='none';
+  document.getElementById('payS2').style.display='';
+}
+function fmtCard(el){let v=el.value.replace(/\D/g,'').slice(0,16);el.value=v.replace(/(.{4})/g,'$1 ').trim();}
+function fmtExp(el){let v=el.value.replace(/\D/g,'').slice(0,4);if(v.length>=2)v=v.slice(0,2)+' / '+v.slice(2);el.value=v;}
+function paySubmit(){
+  const no=document.getElementById('p-cardno').value.replace(/\s/g,''),
+        ex=document.getElementById('p-exp').value,
+        cv=document.getElementById('p-cvc').value,
+        cn=document.getElementById('p-cname').value.trim();
+  if(no.length<15||!ex||cv.length<3||!cn){alert('카드 정보를 모두 입력해주세요.');return;}
+  document.getElementById('payBtnTxt').textContent='처리 중...';
+  setTimeout(()=>{
+    document.getElementById('payS2').style.display='none';
+    document.getElementById('payS3').style.display='';
+    document.getElementById('paySuccessMsg').textContent=
+      `${document.getElementById('p-name').value}님의 "${_pProd}" 결제가 완료되었습니다. (₩${_pAmt.toLocaleString()})`;
+    document.getElementById('payBtnTxt').textContent='결제하기';
+  },1500);
+}
 
-    let _prod='', _amt=0;
-    function openPayment(product, amount) {
-      _prod=product; _amt=amount;
-      document.getElementById('payProduct').textContent = product;
-      document.getElementById('payAmount').textContent  = '₩'+amount.toLocaleString();
-      ['payStep1','payStep2','payStep3'].forEach((id,i)=>
-        document.getElementById(id).style.display = i===0?'':'none');
-      document.getElementById('payOverlay').classList.add('open');
-    }
-    function closePayment() { document.getElementById('payOverlay').classList.remove('open'); }
-    function goPayStep1() { document.getElementById('payStep1').style.display=''; document.getElementById('payStep2').style.display='none'; }
-    function goPayStep2() {
-      if (!document.getElementById('payName').value.trim() ||
-          !document.getElementById('payEmail').value.trim() ||
-          !document.getElementById('payPhone').value.trim() ||
-          !document.getElementById('payCaseType').value) {
-        alert('모든 항목을 입력해주세요.'); return;
-      }
-      document.getElementById('payStep1').style.display='none';
-      document.getElementById('payStep2').style.display='';
-    }
-    function formatCard(el) { let v=el.value.replace(/\D/g,'').slice(0,16); el.value=v.replace(/(.{4})/g,'$1 ').trim(); }
-    function formatExp(el)  { let v=el.value.replace(/\D/g,'').slice(0,4); if(v.length>=2)v=v.slice(0,2)+' / '+v.slice(2); el.value=v; }
-    function submitPayment() {
-      const num=document.getElementById('cardNum').value.replace(/\s/g,'');
-      const exp=document.getElementById('cardExp').value;
-      const cvc=document.getElementById('cardCvc').value;
-      const nm =document.getElementById('cardName').value.trim();
-      if(num.length<15||!exp||cvc.length<3||!nm){alert('카드 정보를 모두 입력해주세요.');return;}
-      document.getElementById('payBtnText').textContent='처리 중...';
-      setTimeout(()=>{
-        document.getElementById('payStep2').style.display='none';
-        document.getElementById('payStep3').style.display='';
-        document.getElementById('paySuccessMsg').textContent=
-          `${document.getElementById('payName').value}님의 "${_prod}" 결제가 완료되었습니다. (₩${_amt.toLocaleString()})`;
-        document.getElementById('payBtnText').textContent='결제하기';
-      },1500);
-    }
-    document.getElementById('payOverlay').addEventListener('click',e=>{
-      if(e.target===document.getElementById('payOverlay'))closePayment();
-    });
+/* ── 초기화 ── */
+document.getElementById('navbar').classList.add('scrolled');
+const qt=new URLSearchParams(location.search).get('tab');
+if(qt==='employer') switchTab('employer');
 
-    // URL ?tab=employer 로 직접 진입
-    const qt = new URLSearchParams(location.search).get('tab');
-    if (qt === 'employer') switchTab('employer');
-  </script>
+// 세션 복원
+if(sessionStorage.getItem('lm_admin')==='ok'){
+  // 관리자 세션 유지만, 자동 오픈 안 함
+}
+</script>
 </body>
 </html>

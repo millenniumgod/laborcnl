@@ -1,354 +1,205 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>노무법인 C&amp;L | Labor &amp; HR Consulting</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500&display=swap" rel="stylesheet">
 </head>
 <body>
+<!-- NAV -->
+<header class="nav-header" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <svg class="logo-svg" viewBox="0 0 148 40" fill="none">
+        <path d="M19 7 C9 7 3 13 3 20 C3 27 9 33 19 33 L19 28 C12 28 8.5 24.5 8.5 20 C8.5 15.5 12 12 19 12 Z" fill="#c9a84c"/>
+        <rect x="24" y="16.5" width="5" height="5" rx="0.8" fill="#c9a84c" transform="rotate(45 26.5 19)"/>
+        <path d="M34 7 L34 33 L49 33 L49 28 L39 28 L39 7 Z" fill="#c9a84c"/>
+        <line x1="57" y1="9" x2="57" y2="31" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <text x="64" y="17" font-family="'Noto Sans KR',sans-serif" font-size="8.5" font-weight="500" fill="rgba(255,255,255,0.65)" letter-spacing="1.5">노무법인</text>
+        <text x="64" y="31" font-family="'Cormorant Garamond',serif" font-size="17" font-weight="500" fill="#ffffff" letter-spacing="1.5">C&amp;L</text>
+      </svg>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html"   class="nav-link active">Home</a>
+      <a href="about.html"   class="nav-link">About Us</a>
+      <a href="service.html" class="nav-link">Service</a>
+      <a href="lmaster.html" class="nav-link lmaster-link">L-Master</a>
+      <a href="column.html"  class="nav-link">Column</a>
+      <a href="clients.html" class="nav-link">Clients</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html"   class="mob-link">Home</a>
+    <a href="about.html"   class="mob-link">About Us</a>
+    <a href="service.html" class="mob-link">Service</a>
+    <a href="lmaster.html" class="mob-link">L-Master</a>
+    <a href="column.html"  class="mob-link">Column</a>
+    <a href="clients.html" class="mob-link">Clients</a>
+    <a href="contact.html" class="mob-link">Contact</a>
+  </div>
+</header>
 
-  <!-- NAV -->
-  <header class="nav-header" id="navbar">
-    <div class="nav-inner">
-      <a href="#home" class="logo">
-        <svg class="logo-svg" viewBox="0 0 148 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-firm animate-up">노무법인 C&amp;L</p>
+    <p class="hero-sub animate-up delay-1">노동법의 최고 전문가 집단</p>
+    <h1 class="hero-title animate-up delay-2">노동의 가치를<br/><em>법으로 증명합니다</em></h1>
+    <p class="hero-desc animate-up delay-3">
+      기업 인사노무 컨설팅부터<br/>노동위원회 서면 대리까지<br/>실력과 신뢰로 함께합니다
+    </p>
+    <div class="hero-cta animate-up delay-4">
+      <a href="service.html" class="btn-primary">전문 서비스 보기</a>
+      <a href="contact.html" class="btn-outline">상담 문의</a>
+    </div>
+  </div>
+  <div class="hero-scroll-indicator"><span>SCROLL</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- 전문 서비스 안내 -->
+<section class="section service-section" id="service">
+  <div class="container">
+    <div class="section-label">Service</div>
+    <h2 class="section-title centered">전문 서비스</h2>
+    <p class="section-sub centered">
+      공인노무사(CPLA)가 직접 담당하는<br/>노무법인 C&amp;L의 전문 서비스
+    </p>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3>HR 컨설팅</h3>
+        <p>채용부터 퇴직까지 전 인사 사이클에 걸친<br/>체계적인 HR 시스템 구축</p>
+        <a href="service.html#hr" class="service-link">자세히 보기 →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3>노무 컨설팅</h3>
+        <p>취업규칙·근로계약서 검토,<br/>법률 위반 리스크 예방</p>
+        <a href="service.html#labor" class="service-link">자세히 보기 →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3>조직 컨설팅</h3>
+        <p>조직 구조 최적화 및<br/>업무 프로세스 개선</p>
+        <a href="service.html#org" class="service-link">자세히 보기 →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <h3>임금 관리 컨설팅</h3>
+        <p>통상임금 진단,<br/>합리적 임금체계 설계</p>
+        <a href="service.html#salary" class="service-link">자세히 보기 →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <h3>ESG 컨설팅</h3>
+        <p>ESG 노동 기준 충족 및<br/>사회적 책임 경영 체계 구축</p>
+        <a href="service.html#esg" class="service-link">자세히 보기 →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">06</div>
+        <h3>강의 / 교육</h3>
+        <p>기업 맞춤형 노동법 교육 및<br/>관리자 역량 강화 과정</p>
+        <a href="service.html#lecture" class="service-link">자세히 보기 →</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <a href="service.html" class="btn-outline dark">전체 서비스 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 상담 문의 -->
+<section class="section contact-section" id="contact">
+  <div class="container">
+    <div class="section-label">Contact</div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2 class="section-title">상담 문의</h2>
+        <p class="contact-desc">
+          노무 관련 궁금한 사항이 있으시면<br/>언제든지 연락주세요.<br/>
+          공인노무사가 직접 상담해 드립니다.
+        </p>
+        <div class="contact-details">
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <div><strong>주소</strong>
+              <p>서울시 송파구 법원로 11길25<br/>(문정동, 에이치비즈니스파크) A동 417호</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📞</span>
+            <div><strong>전화</strong><p>02-2135-9391</p></div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">✉️</span>
+            <div><strong>이메일</strong><p>cnlcg@cnlcg.co.kr</p></div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">🕐</span>
+            <div><strong>운영시간</strong><p>평일 09:00 – 18:00<br/>(주말·공휴일 휴무)</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-wrap">
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group"><label>성함</label><input type="text" placeholder="홍길동" required/></div>
+            <div class="form-group"><label>연락처</label><input type="tel" placeholder="010-0000-0000" required/></div>
+          </div>
+          <div class="form-group"><label>이메일</label><input type="email" placeholder="example@email.com"/></div>
+          <div class="form-group">
+            <label>문의 유형</label>
+            <select>
+              <option value="">서비스를 선택해주세요</option>
+              <option>HR 컨설팅</option><option>노무 컨설팅</option><option>조직 컨설팅</option>
+              <option>임금 관리 컨설팅</option><option>ESG 컨설팅</option><option>강의 / 교육</option>
+              <option>L-Master (노동위원회 서면)</option><option>기타</option>
+            </select>
+          </div>
+          <div class="form-group"><label>문의 내용</label><textarea placeholder="문의하실 내용을 자세히 작성해주세요" rows="5" required></textarea></div>
+          <button type="submit" class="btn-primary full-width">문의 보내기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg class="footer-logo-svg" viewBox="0 0 148 40" fill="none">
           <path d="M19 7 C9 7 3 13 3 20 C3 27 9 33 19 33 L19 28 C12 28 8.5 24.5 8.5 20 C8.5 15.5 12 12 19 12 Z" fill="#c9a84c"/>
           <rect x="24" y="16.5" width="5" height="5" rx="0.8" fill="#c9a84c" transform="rotate(45 26.5 19)"/>
           <path d="M34 7 L34 33 L49 33 L49 28 L39 28 L39 7 Z" fill="#c9a84c"/>
           <line x1="57" y1="9" x2="57" y2="31" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
-          <text x="64" y="17" font-family="'Noto Sans KR',sans-serif" font-size="8.5" font-weight="500" fill="rgba(255,255,255,0.65)" letter-spacing="1.5">노무법인</text>
-          <text x="64" y="31" font-family="'Cormorant Garamond',serif" font-size="17" font-weight="500" fill="#ffffff" letter-spacing="1.5">C&amp;L</text>
+          <text x="64" y="17" font-family="'Noto Sans KR',sans-serif" font-size="8.5" fill="rgba(255,255,255,0.5)" letter-spacing="1.5">노무법인</text>
+          <text x="64" y="31" font-family="'Cormorant Garamond',serif" font-size="17" fill="rgba(255,255,255,0.8)" letter-spacing="1.5">C&amp;L</text>
         </svg>
-      </a>
-      <nav class="nav-links">
-        <a href="#home"        class="nav-link active">Home</a>
-        <a href="#about"       class="nav-link">About Us</a>
-        <a href="#service"     class="nav-link">Service</a>
-        <a href="lmaster.html" class="nav-link lmaster-link">L-Master</a>
-        <a href="#column"      class="nav-link">Column</a>
-        <a href="#clients"     class="nav-link">Clients</a>
-        <a href="#contact"     class="nav-link">Contact</a>
-      </nav>
-      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
-    </div>
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="#home"        class="mob-link">Home</a>
-      <a href="#about"       class="mob-link">About Us</a>
-      <a href="#service"     class="mob-link">Service</a>
-      <a href="lmaster.html" class="mob-link">L-Master</a>
-      <a href="#column"      class="mob-link">Column</a>
-      <a href="#clients"     class="mob-link">Clients</a>
-      <a href="#contact"     class="mob-link">Contact</a>
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <p class="hero-firm animate-up">노무법인 C&amp;L</p>
-      <p class="hero-sub animate-up delay-1">노동법의 최고 전문가 집단</p>
-      <h1 class="hero-title animate-up delay-2">
-        노동의 가치를<br/>
-        <em>법으로 증명합니다</em>
-      </h1>
-      <p class="hero-desc animate-up delay-3">
-        기업 인사노무 컨설팅부터<br/>
-        노동위원회 서면 대리까지<br/>
-        실력과 신뢰로 함께합니다
-      </p>
-      <div class="hero-cta animate-up delay-4">
-        <a href="#service" class="btn-primary">서비스 알아보기</a>
-        <a href="#contact" class="btn-outline">상담 문의</a>
+        <p>노동의 가치를 법으로 증명합니다.</p>
+        <p class="footer-copy">©2018 노무법인 C&amp;L. ALL RIGHTS RESERVED.</p>
+      </div>
+      <div class="footer-links"><h4>서비스</h4>
+        <a href="service.html">HR 컨설팅</a><a href="service.html">노무 컨설팅</a>
+        <a href="service.html">조직 컨설팅</a><a href="lmaster.html">L-Master</a>
+      </div>
+      <div class="footer-links"><h4>정보</h4>
+        <a href="about.html">About Us</a><a href="column.html">Column</a>
+        <a href="clients.html">Clients</a><a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-links"><h4>법적 고지</h4>
+        <a href="#">개인정보처리방침</a><a href="#">이용약관</a>
       </div>
     </div>
-    <div class="hero-scroll-indicator">
-      <span>SCROLL</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="section about-section" id="about">
-    <div class="container">
-      <div class="section-label">About Us</div>
-      <div class="about-grid">
-        <div class="about-text">
-          <h2 class="section-title">
-            Why<br/>
-            노무법인 C&amp;L?
-          </h2>
-
-          <div class="about-why-item">
-            <div class="about-why-num">01</div>
-            <div>
-              <h4 class="about-why-title">
-                HR, 노무, 조직에 대한 고민은<br/>
-                기업경영에 있어 필수적입니다
-              </h4>
-              <p class="about-desc">
-                조직의 성장 및 원활한 운영을 위하여는<br/>
-                HR, 노무, 조직에 대한 전반적인 Control이 필요합니다.<br/>
-                그러나, 현실적으로 같은 회사 내에서는<br/>
-                아무리 계획을 잘 세운다고 하더라도<br/>
-                객관적이고 합리적인 안을 제시하는 것이 어렵습니다.
-              </p>
-            </div>
-          </div>
-
-          <div class="about-why-item">
-            <div class="about-why-num">02</div>
-            <div>
-              <h4 class="about-why-title">
-                제대로 된 컨설팅 회사를<br/>
-                만나는 것도 어렵습니다
-              </h4>
-              <p class="about-desc">
-                다수의 HR 컨설팅 회사들은 기존의 정해진 보고서 Tool을 기본으로<br/>
-                회사 이름만 달리하여 정해진 안만을 제시할 뿐,<br/>
-                우리 회사에 적합한 안을 제시하지 않는 경우가 상당합니다.<br/>
-                또, 오랜 기간과 많은 비용을 투자하였지만<br/>
-                한국의 노동관계법률에 대한 이해가 부족하여<br/>
-                법률에 위반될 가능성이 높은 컨설팅 결과를<br/>
-                제공받는 경우도 상당합니다.<br/>
-                이러한 컨설팅은 제대로 된 성과도 없이<br/>
-                시간과 비용만 낭비할 뿐입니다.
-              </p>
-            </div>
-          </div>
-
-          <div class="about-why-item">
-            <div class="about-why-num">03</div>
-            <div>
-              <h4 class="about-why-title">
-                노무법인 C&amp;L은 다릅니다
-              </h4>
-              <p class="about-desc">
-                노무법인 C&amp;L은 기업들의 어려움을 충분히 이해하고 있습니다.<br/>
-                대기업, 중견기업, 중소기업, 공공기관 등<br/>
-                다수의 기업들에 대한 컨설팅 경험을 바탕으로<br/>
-                실행 가능한 합리적인 대안을 제시드립니다.<br/><br/>
-                노무법인 C&amp;L은 다수의 공인노무사(CPLA) 자격을 보유한<br/>
-                컨설턴트들로 구성되어 있어,<br/>
-                노동관계법률을 비롯한 법률 위반 리스크까지 고려합니다.<br/><br/>
-                국내·외 대기업 출신, 공인노무사(CPLA) 자격을 보유한<br/>
-                전문 컨설턴트들의 수준 높은 인사, 노무, 조직 컨설팅을 통해<br/>
-                여러분의 기업이 한 단계 더 나아갈 수 있습니다.
-              </p>
-            </div>
-          </div>
-
-          <div class="about-stats">
-            <div class="stat"><span class="stat-num">500+</span><span class="stat-label">자문 기업</span></div>
-            <div class="stat"><span class="stat-num">15+</span><span class="stat-label">전문 노무사</span></div>
-            <div class="stat"><span class="stat-num">20+</span><span class="stat-label">업력(년)</span></div>
-          </div>
-        </div>
-        <div class="about-visual">
-          <div class="about-card"><div class="about-card-icon">⚖</div><h3>전문성</h3><p>공인노무사(CPLA)가 직접 담당하는<br/>모든 사건</p></div>
-          <div class="about-card"><div class="about-card-icon">🤝</div><h3>신뢰</h3><p>고객과 함께 성장하는<br/>장기적 파트너십</p></div>
-          <div class="about-card"><div class="about-card-icon">🏆</div><h3>성과</h3><p>실행 가능한 합리적 대안으로<br/>증명하는 실력</p></div>
-          <div class="about-card"><div class="about-card-icon">📋</div><h3>법률 준수</h3><p>노동관계법률 위반 리스크까지<br/>고려한 컨설팅</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICE : L-Master 배너 없음 -->
-  <section class="section service-section" id="service">
-    <div class="container">
-      <div class="section-label">Service</div>
-      <h2 class="section-title centered">전문 서비스</h2>
-      <p class="section-sub centered">노무법인 C&amp;L의 다양한 전문 서비스를 안내합니다</p>
-      <div class="service-grid">
-        <div class="service-card">
-          <div class="service-num">01</div><h3>HR 컨설팅</h3>
-          <p>채용부터 퇴직까지<br/>전 인사 사이클에 걸친 체계적인<br/>HR 시스템 구축 및 운영을 지원합니다.</p>
-          <a href="#contact" class="service-link">자세히 보기 →</a>
-        </div>
-        <div class="service-card">
-          <div class="service-num">02</div><h3>노무 컨설팅</h3>
-          <p>취업규칙 작성, 근로계약서 검토,<br/>노동관계법령 준수 여부 진단 및<br/>개선방안을 제시합니다.</p>
-          <a href="#contact" class="service-link">자세히 보기 →</a>
-        </div>
-        <div class="service-card">
-          <div class="service-num">03</div><h3>조직 컨설팅</h3>
-          <p>조직 구조 최적화, 업무 프로세스 개선,<br/>조직문화 혁신을 통한<br/>경영 효율화를 지원합니다.</p>
-          <a href="#contact" class="service-link">자세히 보기 →</a>
-        </div>
-        <div class="service-card">
-          <div class="service-num">04</div><h3>임금 관리 컨설팅</h3>
-          <p>임금체계 설계, 통상임금 진단,<br/>성과급 제도 구축 등<br/>합리적인 보상 체계를 설계합니다.</p>
-          <a href="#contact" class="service-link">자세히 보기 →</a>
-        </div>
-        <div class="service-card">
-          <div class="service-num">05</div><h3>ESG 컨설팅</h3>
-          <p>지속 가능한 경영을 위한<br/>ESG 노동 기준 충족 및<br/>사회적 책임 경영 체계 구축을 지원합니다.</p>
-          <a href="#contact" class="service-link">자세히 보기 →</a>
-        </div>
-        <div class="service-card">
-          <div class="service-num">06</div><h3>강의 / 교육</h3>
-          <p>기업 맞춤형 노동법 교육,<br/>관리자 역량 강화 교육,<br/>HR 실무 과정을 운영합니다.</p>
-          <a href="#contact" class="service-link">자세히 보기 →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COLUMN : 게시판 미리보기 -->
-  <section class="section column-section" id="column">
-    <div class="container">
-      <div class="section-label">Column</div>
-      <div class="column-header-row">
-        <div>
-          <h2 class="section-title">노무 칼럼</h2>
-          <p class="section-sub">노동법 최신 동향과<br/>실무 인사이트를 공유합니다</p>
-        </div>
-        <a href="column.html" class="btn-outline dark">전체 게시판 →</a>
-      </div>
-      <div class="column-grid" id="columnPreview">
-        <div class="column-card featured-card">
-          <div>
-            <div class="col-category">노동법 이슈</div>
-            <h3>2024년 최저임금 인상과<br/>기업 대응 전략</h3>
-            <p>최저임금 인상이 기업의 임금 체계에<br/>미치는 영향과 합리적인 대응 방안을<br/>살펴봅니다.</p>
-          </div>
-          <div class="col-meta"><span>2024.11.15</span><a href="column.html?id=1" class="col-read">읽기 →</a></div>
-        </div>
-        <div class="column-card">
-          <div class="col-category">HR 실무</div>
-          <h3>포괄임금제,<br/>여전히 유효한가</h3>
-          <p>최근 판례 동향과<br/>포괄임금제 운용 시<br/>주의사항을 정리했습니다.</p>
-          <div class="col-meta"><span>2024.10.22</span><a href="column.html?id=2" class="col-read">읽기 →</a></div>
-        </div>
-        <div class="column-card">
-          <div class="col-category">노동위원회</div>
-          <h3>부당해고 구제신청,<br/>핵심 쟁점 정리</h3>
-          <p>노동위원회 부당해고 사건에서<br/>승소를 위해 반드시 확인해야 할<br/>핵심 법리를 설명합니다.</p>
-          <div class="col-meta"><span>2024.09.30</span><a href="column.html?id=3" class="col-read">읽기 →</a></div>
-        </div>
-        <div class="column-card">
-          <div class="col-category">ESG</div>
-          <h3>ESG 경영과 노동 기준:<br/>기업의 준비 체크리스트</h3>
-          <p>ESG 평가에서 노동 기준이 차지하는<br/>비중과 기업이 준비해야 할<br/>항목들을 안내합니다.</p>
-          <div class="col-meta"><span>2024.09.05</span><a href="column.html?id=4" class="col-read">읽기 →</a></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CLIENTS -->
-  <section class="section clients-section" id="clients">
-    <div class="container">
-      <div class="section-label">Clients</div>
-      <h2 class="section-title centered">주요 고객사</h2>
-      <p class="section-sub centered">다양한 산업 분야의 기업들과<br/>함께하고 있습니다</p>
-      <div class="clients-grid">
-        <div class="client-logo">제조업 A사</div>
-        <div class="client-logo">IT 스타트업 B사</div>
-        <div class="client-logo">유통업 C그룹</div>
-        <div class="client-logo">의료법인 D재단</div>
-        <div class="client-logo">건설업 E사</div>
-        <div class="client-logo">금융업 F사</div>
-        <div class="client-logo">서비스업 G사</div>
-        <div class="client-logo">교육기관 H</div>
-      </div>
-      <div class="testimonial">
-        <blockquote>
-          "복잡한 노동 분쟁을 신속하게 해결해 주셨습니다.<br/>
-          단순한 법률 서비스가 아니라<br/>
-          진정한 파트너를 만났습니다."
-        </blockquote>
-        <cite>— 제조업 A사 인사팀장</cite>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="section contact-section" id="contact">
-    <div class="container">
-      <div class="section-label">Contact</div>
-      <div class="contact-grid">
-        <div class="contact-info">
-          <h2 class="section-title">상담 문의</h2>
-          <p class="contact-desc">
-            노무 관련 궁금한 사항이 있으시면<br/>
-            언제든지 연락주세요.<br/>
-            전문 노무사가 직접 상담해 드립니다.
-          </p>
-          <div class="contact-details">
-            <div class="contact-item">
-              <span class="contact-icon">📍</span>
-              <div><strong>주소</strong><p>서울특별시 강남구 테헤란로 123,<br/>00빌딩 10층</p></div>
-            </div>
-            <div class="contact-item">
-              <span class="contact-icon">📞</span>
-              <div><strong>전화</strong><p>02-000-0000</p></div>
-            </div>
-            <div class="contact-item">
-              <span class="contact-icon">✉️</span>
-              <div><strong>이메일</strong><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="50393e363f103c31323f223639223d7e333f7e3b22">[email&#160;protected]</a></p></div>
-            </div>
-            <div class="contact-item">
-              <span class="contact-icon">🕐</span>
-              <div><strong>운영시간</strong><p>평일 09:00 – 18:00<br/>(주말·공휴일 휴무)</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="contact-form-wrap">
-          <form class="contact-form" onsubmit="handleSubmit(event)">
-            <div class="form-row">
-              <div class="form-group"><label>성함</label><input type="text" placeholder="홍길동" required /></div>
-              <div class="form-group"><label>연락처</label><input type="tel" placeholder="010-0000-0000" required /></div>
-            </div>
-            <div class="form-group"><label>이메일</label><input type="email" placeholder="example@email.com" /></div>
-            <div class="form-group">
-              <label>문의 유형</label>
-              <select>
-                <option value="">서비스를 선택해주세요</option>
-                <option>HR 컨설팅</option><option>노무 컨설팅</option>
-                <option>L-Master (노동위원회 서면)</option>
-                <option>조직 컨설팅</option><option>기타</option>
-              </select>
-            </div>
-            <div class="form-group"><label>문의 내용</label><textarea placeholder="문의하실 내용을 자세히 작성해주세요" rows="5" required></textarea></div>
-            <button type="submit" class="btn-primary full-width">문의 보내기</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <svg class="footer-logo-svg" viewBox="0 0 148 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 7 C9 7 3 13 3 20 C3 27 9 33 19 33 L19 28 C12 28 8.5 24.5 8.5 20 C8.5 15.5 12 12 19 12 Z" fill="#c9a84c"/>
-            <rect x="24" y="16.5" width="5" height="5" rx="0.8" fill="#c9a84c" transform="rotate(45 26.5 19)"/>
-            <path d="M34 7 L34 33 L49 33 L49 28 L39 28 L39 7 Z" fill="#c9a84c"/>
-            <line x1="57" y1="9" x2="57" y2="31" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
-            <text x="64" y="17" font-family="'Noto Sans KR',sans-serif" font-size="8.5" font-weight="500" fill="rgba(255,255,255,0.5)" letter-spacing="1.5">노무법인</text>
-            <text x="64" y="31" font-family="'Cormorant Garamond',serif" font-size="17" font-weight="500" fill="rgba(255,255,255,0.8)" letter-spacing="1.5">C&amp;L</text>
-          </svg>
-          <p>노동의 가치를 법으로 증명합니다.</p>
-          <p class="footer-copy">©2024 노무법인 C&amp;L. ALL RIGHTS RESERVED.</p>
-        </div>
-        <div class="footer-links">
-          <h4>서비스</h4>
-          <a href="#service">HR 컨설팅</a><a href="#service">노무 컨설팅</a>
-          <a href="#service">조직 컨설팅</a><a href="lmaster.html">L-Master</a>
-        </div>
-        <div class="footer-links">
-          <h4>정보</h4>
-          <a href="#about">About Us</a><a href="column.html">Column</a>
-          <a href="#clients">Clients</a><a href="#contact">Contact</a>
-        </div>
-        <div class="footer-links">
-          <h4>법적 고지</h4>
-          <a href="#">개인정보처리방침</a><a href="#
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

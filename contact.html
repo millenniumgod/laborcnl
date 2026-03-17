@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Contact | 노무법인 C&amp;L</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500&display=swap" rel="stylesheet">
+  <style>
+    .contact-page-body{background:#fff}
+    .contact-page-body .contact-section{background:#fff}
+    .contact-page-body .section-title{color:var(--navy)}
+    .contact-page-body .contact-desc{color:#374151}
+  </style>
+</head>
+<body class="contact-page-body">
+<header class="nav-header scrolled" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <svg class="logo-svg" viewBox="0 0 148 40" fill="none">
+        <path d="M19 7 C9 7 3 13 3 20 C3 27 9 33 19 33 L19 28 C12 28 8.5 24.5 8.5 20 C8.5 15.5 12 12 19 12 Z" fill="#c9a84c"/>
+        <rect x="24" y="16.5" width="5" height="5" rx="0.8" fill="#c9a84c" transform="rotate(45 26.5 19)"/>
+        <path d="M34 7 L34 33 L49 33 L49 28 L39 28 L39 7 Z" fill="#c9a84c"/>
+        <line x1="57" y1="9" x2="57" y2="31" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+        <text x="64" y="17" font-family="'Noto Sans KR',sans-serif" font-size="8.5" fill="rgba(255,255,255,0.65)" letter-spacing="1.5">노무법인</text>
+        <text x="64" y="31" font-family="'Cormorant Garamond',serif" font-size="17" fill="#fff" letter-spacing="1.5">C&amp;L</text>
+      </svg>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link">Home</a><a href="about.html" class="nav-link">About Us</a>
+      <a href="service.html" class="nav-link">Service</a><a href="lmaster.html" class="nav-link lmaster-link">L-Master</a>
+      <a href="column.html" class="nav-link">Column</a><a href="clients.html" class="nav-link">Clients</a>
+      <a href="contact.html" class="nav-link active">Contact</a>
+    </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="mob-link">Home</a><a href="about.html" class="mob-link">About Us</a>
+    <a href="service.html" class="mob-link">Service</a><a href="lmaster.html" class="mob-link">L-Master</a>
+    <a href="column.html" class="mob-link">Column</a><a href="clients.html" class="mob-link">Clients</a>
+    <a href="contact.html" class="mob-link">Contact</a>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="section-label">Contact</div>
+    <h1>상담 문의</h1>
+    <p>공인노무사가 직접 상담해 드립니다</p>
+  </div>
+</div>
+
+<section class="section contact-section" style="background:#fff">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2 class="section-title" style="color:var(--navy)">연락처 안내</h2>
+        <p class="contact-desc" style="color:#374151">
+          노무 관련 궁금한 사항이 있으시면 언제든지 연락주세요.<br/>
+          공인노무사가 직접 상담해 드립니다.
+        </p>
+        <div class="contact-details">
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <div><strong>주소</strong>
+              <p>서울시 송파구 법원로 11길25<br/>(문정동, 에이치비즈니스파크) A동 417호</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📞</span>
+            <div><strong>전화</strong><p>02-2135-9391</p></div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">✉️</span>
+            <div><strong>이메일</strong><p>cnlcg@cnlcg.co.kr</p></div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">🕐</span>
+            <div><strong>운영시간</strong><p>평일 09:00 – 18:00<br/>(주말·공휴일 휴무)</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-wrap">
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group"><label>성함</label><input type="text" placeholder="홍길동" required/></div>
+            <div class="form-group"><label>연락처</label><input type="tel" placeholder="010-0000-0000" required/></div>
+          </div>
+          <div class="form-group"><label>이메일</label><input type="email" placeholder="example@email.com"/></div>
+          <div class="form-group">
+            <label>문의 유형</label>
+            <select>
+              <option value="">서비스를 선택해주세요</option>
+              <option>HR 컨설팅</option><option>노무 컨설팅</option><option>조직 컨설팅</option>
+              <option>임금 관리 컨설팅</option><option>ESG 컨설팅</option><option>강의 / 교육</option>
+              <option>L-Master (노동위원회 서면)</option><option>기타</option>
+            </select>
+          </div>
+          <div class="form-group"><label>문의 내용</label><textarea placeholder="문의하실 내용을 자세히 작성해주세요" rows="6" required></textarea></div>
+          <button type="submit" class="btn-primary full-width">문의 보내기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg class="footer-logo-svg" viewBox="0 0 148 40" fill="none">
+          <path d="M19 7 C9 7 3 13 3 20 C3 27 9 33 19 33 L19 28 C12 28 8.5 24.5 8.5 20 C8.5 15.5 12 12 19 12 Z" fill="#c9a84c"/>
+          <rect x="24" y="16.5" width="5" height="5" rx="0.8" fill="#c9a84c" transform="rotate(45 26.5 19)"/>
+          <path d="M34 7 L34 33 L49 33 L49 28 L39 28 L39 7 Z" fill="#c9a84c"/>
+          <line x1="57" y1="9" x2="57" y2="31" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+          <text x="64" y="17" font-family="'Noto Sans KR',sans-serif" font-size="8.5" fill="rgba(255,255,255,0.5)" letter-spacing="1.5">노무법인</text>
+          <text x="64" y="31" font-family="'Cormorant Garamond',serif" font-size="17" fill="rgba(255,255,255,0.8)" letter-spacing="1.5">C&amp;L</text>
+        </svg>
+        <p>노동의 가치를 법으로 증명합니다.</p>
+        <p class="footer-copy">©2018 노무법인 C&amp;L. ALL RIGHTS RESERVED.</p>
+      </div>
+      <div class="footer-links"><h4>서비스</h4><a href="service.html">HR 컨설팅</a><a href="service.html">노무 컨설팅</a><a href="lmaster.html">L-Master</a></div>
+      <div class="footer-links"><h4>정보</h4><a href="about.html">About Us</a><a href="column.html">Column</a><a href="clients.html">Clients</a><a href="contact.html">Contact</a></div>
+      <div class="footer-links"><h4>법적 고지</h4><a href="#">개인정보처리방침</a><a href="#">이용약관</a></div>
+    </div>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
