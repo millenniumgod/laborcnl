@@ -355,11 +355,15 @@
       <!-- 자료 업로드 -->
       <div style="margin-top:24px;border-top:1px solid rgba(255,255,255,.08);padding-top:20px">
         <h4 style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(201,168,76,.8);margin-bottom:14px">자료 업로드</h4>
-        <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+        <div class="upload-zone" id="uploadZone"
+             onclick="document.getElementById('fileInput').click()"
+             ondragover="handleDragOver(event)"
+             ondragleave="handleDragLeave(event)"
+             ondrop="handleDrop(event)">
           <p>📎 클릭하여 파일 선택<br/><strong>또는 여기에 파일을 드래그&amp;드롭</strong><br/>
-          <small style="color:rgba(255,255,255,.25);font-size:11px">PDF, 이미지, Word, 최대 10MB</small></p>
+          <small style="color:rgba(255,255,255,.25);font-size:11px">PDF, 이미지, Word / 파일당 최대 100MB</small></p>
         </div>
-        <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display:none" onchange="handleFileSelect(this)"/>
+        <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.hwp,.xlsx,.zip" style="display:none" onchange="handleFileSelect(this)"/>
         <div class="file-list" id="clientFileList"></div>
         <div class="lm-ok" id="uploadOk">파일이 업로드되었습니다. 담당 노무사에게 전달됩니다.</div>
         <button class="lm-mbtn full" id="uploadBtn" onclick="submitFiles()" style="display:none">파일 전송하기</button>
@@ -405,7 +409,7 @@
     <div class="lm-mbody">
       <div class="lm-err" id="newCaseErr"></div>
       <div class="lm-2col">
-        <div class="lm-field"><label>사건 번호 (자동생성)</label><input type="text" id="nc-caseNo" readonly style="opacity:.5"/></div>
+        <div class="lm-field"><label>사건 번호 <span style="color:rgba(255,255,255,.3);font-size:9px;font-weight:400;letter-spacing:0">(노동위원회 부여 번호 또는 직접 입력)</span></label><input type="text" id="nc-caseNo" placeholder="예: 2024부해1234 또는 LM-2024-001"/></div>
         <div class="lm-field">
           <label>의뢰 유형</label>
           <select id="nc-type">
@@ -601,27 +605,59 @@ function showClientDash(c){
   openModal('mo-clientDash');
 }
 
-/* ── 파일 업로드 ── */
+/* ── 파일 업로드 & 드래그앤드롭 ── */
 let _pendingFiles = [];
+const MAX_MB = 100;
+
+function handleDragOver(e){
+  e.preventDefault(); e.stopPropagation();
+  document.getElementById('uploadZone').style.borderColor = 'var(--lm-gold)';
+  document.getElementById('uploadZone').style.background  = 'rgba(201,168,76,.06)';
+}
+function handleDragLeave(e){
+  e.preventDefault();
+  document.getElementById('uploadZone').style.borderColor = '';
+  document.getElementById('uploadZone').style.background  = '';
+}
+function handleDrop(e){
+  e.preventDefault(); e.stopPropagation();
+  document.getElementById('uploadZone').style.borderColor = '';
+  document.getElementById('uploadZone').style.background  = '';
+  const files = Array.from(e.dataTransfer.files);
+  addFiles(files);
+}
 function handleFileSelect(input){
-  _pendingFiles = Array.from(input.files);
+  addFiles(Array.from(input.files));
+  input.value = ''; // 같은 파일 재선택 허용
+}
+function addFiles(newFiles){
+  const oversized = newFiles.filter(f => f.size > MAX_MB * 1024 * 1024);
+  if(oversized.length){
+    alert(`다음 파일은 ${MAX_MB}MB를 초과하여 추가되지 않았습니다:\n` + oversized.map(f=>f.name).join('\n'));
+  }
+  const valid = newFiles.filter(f => f.size <= MAX_MB * 1024 * 1024);
+  // 중복 제거
+  valid.forEach(f => {
+    if(!_pendingFiles.find(x => x.name===f.name && x.size===f.size)) _pendingFiles.push(f);
+  });
+  renderFileList();
+}
+function renderFileList(){
   const list = document.getElementById('clientFileList');
   list.innerHTML = _pendingFiles.map((f,i)=>`
     <div class="file-item">
-      <span>📄 ${f.name} <small style="color:rgba(255,255,255,.3)">(${(f.size/1024).toFixed(0)}KB)</small></span>
+      <span>📄 ${f.name} <small style="color:rgba(255,255,255,.3)">${formatSize(f.size)}</small></span>
       <button class="file-rm" onclick="removeFile(${i})">×</button>
     </div>`).join('');
   document.getElementById('uploadBtn').style.display = _pendingFiles.length ? 'block' : 'none';
 }
+function formatSize(bytes){
+  if(bytes >= 1024*1024) return (bytes/1024/1024).toFixed(1)+'MB';
+  return (bytes/1024).toFixed(0)+'KB';
+}
 function removeFile(i){
   _pendingFiles.splice(i,1);
-  const list = document.getElementById('clientFileList');
-  list.innerHTML = _pendingFiles.map((f,j)=>`
-    <div class="file-item">
-      <span>📄 ${f.name}</span>
-      <button class="file-rm" onclick="removeFile(${j})">×</button>
-    </div>`).join('');
-  document.getElementById('uploadBtn').style.display = _pendingFiles.length ? 'block' : 'none';
+  renderFileList();
 }
 function submitFiles(){
   const cno = sessionStorage.getItem('lm_client');
@@ -680,7 +716,7 @@ function renderAdminDash(){
 
 /* ── 새 사건 등록 ── */
 function openNewCaseModal(){
-  document.getElementById('nc-caseNo').value = genCaseNo();
+  document.getElementById('nc-caseNo').value = '';
   document.getElementById('nc-name').value='';
   document.getElementById('nc-tel').value='';
   document.getElementById('nc-pw').value='';
@@ -693,12 +729,18 @@ function saveNewCase(){
   const name = document.getElementById('nc-name').value.trim();
   const pw   = document.getElementById('nc-pw').value.trim();
   const tel  = document.getElementById('nc-tel').value.trim();
-  if(!name||!pw||!tel){
-    document.getElementById('newCaseErr').textContent='이름, 연락처, 비밀번호를 모두 입력해주세요.';
+  const cno  = document.getElementById('nc-caseNo').value.trim();
+  if(!cno||!name||!pw||!tel){
+    document.getElementById('newCaseErr').textContent='사건번호, 이름, 연락처, 비밀번호를 모두 입력해주세요.';
+    document.getElementById('newCaseErr').style.display='block'; return;
+  }
+  // 중복 사건번호 체크
+  if(getCases().find(x=>x.caseNo===cno)){
+    document.getElementById('newCaseErr').textContent='이미 등록된 사건번호입니다.';
     document.getElementById('newCaseErr').style.display='block'; return;
   }
   const newCase = {
-    caseNo:   document.getElementById('nc-caseNo').value,
+    caseNo:   cno,
     caseType: document.getElementById('nc-type').value,
     name, pw, tel,
     status:   document.getElementById('nc-status').value,
