@@ -6,6 +6,18 @@
   <link rel="stylesheet" href="style.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500&display=swap" rel="stylesheet">
+  <style>
+    .svc-detail{padding:72px 0}
+    .svc-detail:nth-child(odd){background:#fff}
+    .svc-detail:nth-child(even){background:#f5f0e8}
+    .svc-inner{max-width:900px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:120px 1fr;gap:48px;align-items:start}
+    .svc-num-big{font-family:var(--ff-serif);font-size:5rem;font-weight:300;color:rgba(201,168,76,.22);line-height:1;text-align:right}
+    .svc-title{font-family:var(--ff-serif);font-size:1.9rem;font-weight:500;color:var(--navy);margin-bottom:16px}
+    .svc-body p{font-size:15px;line-height:1.95;color:#374151;margin-bottom:12px}
+    .svc-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+    .svc-tag{font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--gold);background:rgba(201,168,76,.1);padding:4px 12px;border:1px solid rgba(201,168,76,.25)}
+    @media(max-width:700px){.svc-inner{grid-template-columns:1fr;gap:12px}.svc-num-big{font-size:2.8rem;text-align:left}}
+  </style>
 </head>
 <body>
 <header class="nav-header scrolled" id="navbar">
@@ -21,12 +33,9 @@
       </svg>
     </a>
     <nav class="nav-links">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="about.html" class="nav-link">About Us</a>
-      <a href="service.html" class="nav-link active">Service</a>
-      <a href="lmaster.html" class="nav-link lmaster-link">L-Master</a>
-      <a href="column.html" class="nav-link">Column</a>
-      <a href="clients.html" class="nav-link">Clients</a>
+      <a href="index.html" class="nav-link">Home</a><a href="about.html" class="nav-link">About Us</a>
+      <a href="service.html" class="nav-link active">Service</a><a href="lmaster.html" class="nav-link lmaster-link">L-Master</a>
+      <a href="column.html" class="nav-link">Column</a><a href="clients.html" class="nav-link">Clients</a>
       <a href="contact.html" class="nav-link">Contact</a>
     </nav>
     <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
@@ -43,98 +52,164 @@
   <div class="container">
     <div class="section-label">Service</div>
     <h1>전문 서비스</h1>
-    <p>공인노무사(CPLA)가 직접 담당하는 노무법인 C&amp;L의 6대 핵심 서비스</p>
+    <p>공인노무사(CPLA)가 직접 담당하는 노무법인 C&amp;L의 8대 핵심 서비스</p>
   </div>
 </div>
 
-<div id="hr" class="svc-detail">
+<!-- 01 노동위원회 대응 -->
+<div id="labor-committee" class="svc-detail">
   <div class="svc-inner">
     <div class="svc-num-big">01</div>
+    <div class="svc-body">
+      <h2 class="svc-title">노동위원회 대응</h2>
+      <p>부당해고·부당징계·부당인사발령·부당노동행위 등 노동위원회에 제기되는 모든 사건에서 공인노무사가 직접 대리합니다. 노동위원회 절차는 법원 소송과 달리 신속하게 진행되므로, 처음부터 탄탄한 서면과 전략이 승패를 좌우합니다.</p>
+      <p>단순한 서면 작성을 넘어, 상대방의 주장을 분석하고 재반박 보충 서면까지 끝까지 함께합니다. 근로자와 사용자 양측 모두를 대리한 풍부한 경험을 바탕으로, 사건의 쟁점을 정확히 파악하여 최선의 결과를 이끌어냅니다.</p>
+      <div class="svc-tags">
+        <span class="svc-tag">부당해고 구제신청</span>
+        <span class="svc-tag">부당징계 구제신청</span>
+        <span class="svc-tag">부당인사발령</span>
+        <span class="svc-tag">부당노동행위</span>
+        <span class="svc-tag">차별 시정</span>
+        <span class="svc-tag">이유서·답변서 작성</span>
+        <span class="svc-tag">심문 준비</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 노동청 대응 -->
+<div id="labor-office" class="svc-detail">
+  <div class="svc-inner">
+    <div class="svc-num-big">02</div>
+    <div class="svc-body">
+      <h2 class="svc-title">노동청 대응</h2>
+      <p>임금체불, 근로시간 위반, 퇴직금 미지급, 직장 내 괴롭힘 등 고용노동부(노동청) 진정·고소 사건에서 공인노무사가 직접 대리합니다. 근로감독관 조사에서 사실관계를 명확히 정리하고, 법령에 부합하는 답변을 준비하여 불필요한 처벌과 시정명령을 최소화합니다.</p>
+      <p>사용자의 경우, 진정 접수 사실을 인지한 즉시 대응 전략을 수립하는 것이 중요합니다. 노무법인 C&amp;L은 신속한 사실관계 파악과 선제적 대응으로 기업의 리스크를 최소화합니다.</p>
+      <div class="svc-tags">
+        <span class="svc-tag">임금체불 대응</span>
+        <span class="svc-tag">퇴직금 분쟁</span>
+        <span class="svc-tag">근로시간 위반</span>
+        <span class="svc-tag">직장 내 괴롭힘</span>
+        <span class="svc-tag">근로감독 대응</span>
+        <span class="svc-tag">진정·고소 대리</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 HR 컨설팅 -->
+<div id="hr" class="svc-detail">
+  <div class="svc-inner">
+    <div class="svc-num-big">03</div>
     <div class="svc-body">
       <h2 class="svc-title">HR 컨설팅</h2>
       <p>채용부터 퇴직까지 전 인사 사이클에 걸친 체계적인 HR 시스템 구축 및 운영을 지원합니다.</p>
       <p>인사평가 제도 설계, 역량 모델 개발, 성과관리 체계 구축, 인사 규정 정비 등 기업의 인사관리 전반에 걸친 실행 가능한 솔루션을 제공합니다. 국내·외 대기업 출신 전문 컨설턴트가 직접 담당하여 현장에서 실제로 작동하는 제도를 설계합니다.</p>
       <div class="svc-tags">
-        <span class="svc-tag">인사평가 설계</span><span class="svc-tag">역량 모델 개발</span>
-        <span class="svc-tag">성과관리 체계</span><span class="svc-tag">인사 규정 정비</span>
+        <span class="svc-tag">인사평가 설계</span>
+        <span class="svc-tag">역량 모델 개발</span>
+        <span class="svc-tag">성과관리 체계</span>
+        <span class="svc-tag">인사 규정 정비</span>
         <span class="svc-tag">채용 프로세스</span>
       </div>
     </div>
   </div>
 </div>
 
-<div id="labor" class="svc-detail">
+<!-- 04 노무 컨설팅 -->
+<div id="labor-consulting" class="svc-detail">
   <div class="svc-inner">
-    <div class="svc-num-big">02</div>
+    <div class="svc-num-big">04</div>
     <div class="svc-body">
       <h2 class="svc-title">노무 컨설팅</h2>
       <p>취업규칙 작성·개정, 근로계약서 검토, 노동관계법령 준수 여부 진단 및 법률 위반 리스크 예방을 지원합니다.</p>
       <p>공인노무사(CPLA)가 직접 법령 위반 여부를 진단하고 실행 가능한 개선방안을 제시합니다. 부당해고·부당징계 예방을 위한 징계 절차 정비, 근로시간 관리, 각종 노동부 신고·조사 대응까지 노무 관리 전반을 아우릅니다.</p>
       <div class="svc-tags">
-        <span class="svc-tag">취업규칙 작성</span><span class="svc-tag">근로계약서 검토</span>
-        <span class="svc-tag">법령 준수 진단</span><span class="svc-tag">징계 절차 정비</span>
+        <span class="svc-tag">취업규칙 작성</span>
+        <span class="svc-tag">근로계약서 검토</span>
+        <span class="svc-tag">법령 준수 진단</span>
+        <span class="svc-tag">징계 절차 정비</span>
         <span class="svc-tag">노동부 대응</span>
       </div>
     </div>
   </div>
 </div>
 
-<div id="org" class="svc-detail">
-  <div class="svc-inner">
-    <div class="svc-num-big">03</div>
-    <div class="svc-body">
-      <h2 class="svc-title">조직 컨설팅</h2>
-      <p>조직 구조 최적화, 업무 프로세스 개선, 조직문화 혁신을 통한 경영 효율화를 지원합니다.</p>
-      <p>회사 내부에서는 객관적인 시각으로 조직의 문제를 파악하기 어렵습니다. 외부 전문가의 시각으로 조직의 비효율을 진단하고, 법률 위반 리스크까지 고려한 합리적인 조직 재설계안을 제시합니다.</p>
-      <div class="svc-tags">
-        <span class="svc-tag">조직 구조 설계</span><span class="svc-tag">직무 분석</span>
-        <span class="svc-tag">업무 프로세스</span><span class="svc-tag">조직문화 진단</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="salary" class="svc-detail">
-  <div class="svc-inner">
-    <div class="svc-num-big">04</div>
-    <div class="svc-body">
-      <h2 class="svc-title">임금 관리 컨설팅</h2>
-      <p>임금체계 설계, 통상임금 진단, 성과급 제도 구축 등 합리적인 보상 체계를 설계합니다.</p>
-      <p>최저임금 인상, 통상임금 범위 확대 등 변화하는 임금 법령 환경 속에서 법률 위반 없이 기업에 최적화된 임금 체계를 구축합니다. 포괄임금제 운용 적법성 검토, 각종 수당 체계 정비, 퇴직금 산정 기준 명확화를 지원합니다.</p>
-      <div class="svc-tags">
-        <span class="svc-tag">통상임금 진단</span><span class="svc-tag">임금체계 설계</span>
-        <span class="svc-tag">포괄임금제 검토</span><span class="svc-tag">퇴직금 정비</span>
-        <span class="svc-tag">성과급 제도</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="esg" class="svc-detail">
+<!-- 05 산업재해보상 -->
+<div id="industrial-accident" class="svc-detail">
   <div class="svc-inner">
     <div class="svc-num-big">05</div>
+    <div class="svc-body">
+      <h2 class="svc-title">산업재해보상</h2>
+      <p>업무상 재해·질병으로 산업재해 승인을 받지 못하거나 어려움을 겪고 있는 근로자를 위해 공인노무사가 직접 산재 승인 신청 및 불복 절차를 대리합니다. 과로·스트레스로 인한 뇌심혈관계 질환, 직업성 암, 근골격계 질환 등 복잡한 업무상 질병 사건도 의학적 근거와 법적 논리를 결합하여 승인을 이끌어냅니다.</p>
+      <p>근로복지공단의 불승인 처분에 대한 심사청구·재심사청구, 행정소송까지 산재 절차 전반에 걸쳐 끝까지 함께합니다.</p>
+      <div class="svc-tags">
+        <span class="svc-tag">산재 요양급여 신청</span>
+        <span class="svc-tag">업무상 질병 승인</span>
+        <span class="svc-tag">뇌심혈관계 질환</span>
+        <span class="svc-tag">직업성 암</span>
+        <span class="svc-tag">근골격계 질환</span>
+        <span class="svc-tag">심사·재심사 청구</span>
+        <span class="svc-tag">행정소송 지원</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 06 산업안전보건 대응 -->
+<div id="safety" class="svc-detail">
+  <div class="svc-inner">
+    <div class="svc-num-big">06</div>
+    <div class="svc-body">
+      <h2 class="svc-title">산업안전보건 대응</h2>
+      <p>산업안전보건법 위반 리스크 검토부터 안전보건관리체계 구축, 위험성 평가, 중대재해처벌법 대응까지 사업장의 안전을 법적으로 보호합니다. 중대재해처벌법 시행 이후 경영책임자의 법적 의무가 크게 강화되었으며, 사전 준비 없이는 예상치 못한 형사·행정 처벌에 노출될 수 있습니다.</p>
+      <p>노무법인 C&amp;L은 산업안전보건법령 전반을 검토하여 위반 사항을 사전에 파악하고, 실질적으로 작동하는 안전보건관리체계를 구축합니다. 중대재해 발생 시 초동 대응 및 수사 단계 지원도 함께 제공합니다.</p>
+      <div class="svc-tags">
+        <span class="svc-tag">산업안전보건법 검토</span>
+        <span class="svc-tag">안전보건관리체계 구축</span>
+        <span class="svc-tag">위험성 평가</span>
+        <span class="svc-tag">중대재해처벌법 대응</span>
+        <span class="svc-tag">안전보건 규정 정비</span>
+        <span class="svc-tag">중대재해 초동 대응</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 07 ESG 컨설팅 -->
+<div id="esg" class="svc-detail">
+  <div class="svc-inner">
+    <div class="svc-num-big">07</div>
     <div class="svc-body">
       <h2 class="svc-title">ESG 컨설팅</h2>
       <p>지속 가능한 경영을 위한 ESG 노동 기준 충족 및 사회적 책임 경영 체계 구축을 지원합니다.</p>
       <p>ESG 평가에서 S(사회) 항목 중 노동 기준은 핵심 평가 요소입니다. 결사의 자유·단체교섭권 보장, 강제·아동 노동 방지, 직장 내 괴롭힘 방지 정책, 안전 근무 환경 확보 등 ESG 노동 기준 전반을 점검하고 개선방안을 제시합니다.</p>
       <div class="svc-tags">
-        <span class="svc-tag">ESG 노동 기준</span><span class="svc-tag">직장 내 괴롭힘</span>
-        <span class="svc-tag">사회적 책임</span><span class="svc-tag">지속가능경영</span>
+        <span class="svc-tag">ESG 노동 기준</span>
+        <span class="svc-tag">직장 내 괴롭힘 방지</span>
+        <span class="svc-tag">사회적 책임</span>
+        <span class="svc-tag">지속가능경영</span>
+        <span class="svc-tag">ISO 37001</span>
+        <span class="svc-tag">ISO 37301</span>
       </div>
     </div>
   </div>
 </div>
 
+<!-- 08 교육/강의 -->
 <div id="lecture" class="svc-detail">
   <div class="svc-inner">
-    <div class="svc-num-big">06</div>
+    <div class="svc-num-big">08</div>
     <div class="svc-body">
-      <h2 class="svc-title">강의 / 교육</h2>
+      <h2 class="svc-title">교육 / 강의</h2>
       <p>기업 맞춤형 노동법 교육, 관리자 역량 강화 교육, HR 실무 과정을 운영합니다.</p>
-      <p>공인노무사가 직접 진행하는 기업 맞춤형 노동법 교육으로 관리자와 HR 담당자의 실무 역량을 향상시킵니다. 직장 내 괴롭힘 예방 교육, 채용·해고 절차 교육, 임금 관리 실무 교육 등 현장에서 바로 활용 가능한 내용으로 구성합니다.</p>
+      <p>공인노무사가 직접 진행하는 기업 맞춤형 노동법 교육으로 관리자와 HR 담당자의 실무 역량을 향상시킵니다. 직장 내 괴롭힘 예방 교육, 채용·해고 절차 교육, 임금 관리 실무 교육, 중대재해처벌법 임원 교육 등 현장에서 바로 활용 가능한 내용으로 구성합니다.</p>
       <div class="svc-tags">
-        <span class="svc-tag">노동법 실무</span><span class="svc-tag">관리자 역량 강화</span>
-        <span class="svc-tag">괴롭힘 예방</span><span class="svc-tag">HR 실무 과정</span>
+        <span class="svc-tag">노동법 실무 교육</span>
+        <span class="svc-tag">관리자 역량 강화</span>
+        <span class="svc-tag">괴롭힘 예방 교육</span>
+        <span class="svc-tag">HR 실무 과정</span>
+        <span class="svc-tag">중대재해 임원 교육</span>
       </div>
     </div>
   </div>
@@ -163,7 +238,12 @@
         <p>노동의 가치를 법으로 증명합니다.</p>
         <p class="footer-copy">©2018 노무법인 C&amp;L. ALL RIGHTS RESERVED.</p>
       </div>
-      <div class="footer-links"><h4>서비스</h4><a href="service.html">HR 컨설팅</a><a href="service.html">노무 컨설팅</a><a href="lmaster.html">L-Master</a></div>
+      <div class="footer-links"><h4>서비스</h4>
+        <a href="service.html#labor-committee">노동위원회 대응</a>
+        <a href="service.html#labor-office">노동청 대응</a>
+        <a href="service.html#hr">HR 컨설팅</a>
+        <a href="lmaster.html">L-Master</a>
+      </div>
       <div class="footer-links"><h4>정보</h4><a href="about.html">About Us</a><a href="column.html">Column</a><a href="clients.html">Clients</a><a href="contact.html">Contact</a></div>
       <div class="footer-links"><h4>법적 고지</h4><a href="#">개인정보처리방침</a><a href="#">이용약관</a></div>
     </div>

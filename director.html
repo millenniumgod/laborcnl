@@ -7,88 +7,43 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500&display=swap" rel="stylesheet">
   <style>
-    /* ─ 프로필 카드 ─ */
-    .director-wrap { background: #fff; padding: 80px 0 100px; }
-    .director-block {
-      max-width: 900px; margin: 0 auto; padding: 0 32px;
-      display: grid; grid-template-columns: 260px 1fr;
-      gap: 64px; align-items: start;
-      padding-bottom: 80px;
-      border-bottom: 1px solid rgba(13,27,42,.08);
-      margin-bottom: 80px;
+    .director-wrap{background:#fff;padding:72px 0 100px}
+    .director-block{
+      max-width:920px;margin:0 auto 88px;padding:0 32px 88px;
+      display:grid;grid-template-columns:240px 1fr;
+      gap:60px;align-items:start;
+      border-bottom:1px solid rgba(13,27,42,.08);
     }
-    .director-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-
-    /* 사진 영역 */
-    .director-photo-wrap { position: sticky; top: 88px; }
-    .director-photo {
-      width: 100%; aspect-ratio: 3/4;
-      background: #e9e4d8;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden; margin-bottom: 20px;
-    }
-    .director-photo-placeholder {
-      font-size: 80px; opacity: .25;
-    }
-    .director-photo-upload {
-      display: block; text-align: center; font-size: 11px;
-      color: #9ca3af; letter-spacing: .05em;
-      border: 1px dashed rgba(13,27,42,.15); padding: 8px;
-      cursor: pointer; transition: border-color .2s, color .2s;
-    }
-    .director-photo-upload:hover { border-color: var(--gold); color: var(--gold); }
-    .director-name-en { font-family: var(--ff-serif); font-size: 13px; color: var(--gold); letter-spacing: .15em; margin-bottom: 4px; }
-    .director-name-kr { font-family: var(--ff-serif); font-size: 26px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
-    .director-title { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(13,27,42,.4); margin-bottom: 16px; }
-    .director-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .director-tag { font-size: 10px; font-weight: 700; letter-spacing: .08em; color: var(--gold); background: rgba(201,168,76,.1); border: 1px solid rgba(201,168,76,.25); padding: 3px 10px; }
-
-    /* 본문 */
-    .director-content {}
-    .director-summary { font-size: 15px; color: #374151; line-height: 1.95; margin-bottom: 40px; }
-
-    /* 학력/경력 테이블 */
-    .dir-section { margin-bottom: 36px; }
-    .dir-section-title {
-      font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
-      color: var(--gold); border-bottom: 1px solid rgba(201,168,76,.2);
-      padding-bottom: 8px; margin-bottom: 18px;
-    }
-    .dir-rows { display: flex; flex-direction: column; gap: 0; }
-    .dir-row {
-      display: grid; grid-template-columns: 200px 1fr;
-      gap: 16px; padding: 12px 0;
-      border-bottom: 1px solid rgba(13,27,42,.05);
-      align-items: baseline;
-    }
-    .dir-row:last-child { border-bottom: none; }
-    .dir-org { font-size: 13px; color: #9ca3af; line-height: 1.5; }
-    .dir-org em { display: block; font-style: normal; font-size: 11px; color: #c4b89a; }
-    .dir-role { font-size: 14px; color: var(--navy); font-weight: 500; line-height: 1.5; }
-    .dir-role em { display: block; font-style: normal; font-size: 11.5px; color: #6b7280; font-weight: 400; }
-
-    /* 자격증 뱃지 */
-    .dir-certs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-    .dir-cert { font-size: 11px; font-weight: 600; color: var(--navy); background: #f5f0e8; padding: 5px 14px; border: 1px solid rgba(13,27,42,.08); letter-spacing: .03em; }
-
-    /* 사진 업로드 안내 배너 */
-    .photo-guide {
-      background: rgba(201,168,76,.08); border: 1px solid rgba(201,168,76,.2);
-      padding: 14px 20px; font-size: 13px; color: #6b7280; line-height: 1.7;
-      margin-bottom: 24px; max-width: 900px; margin-left: auto; margin-right: auto;
-    }
-    .photo-guide strong { color: var(--gold); }
-
+    .director-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+    .director-photo-wrap{position:sticky;top:90px}
+    .director-photo{width:100%;aspect-ratio:3/4;background:#e9e4d8;overflow:hidden;margin-bottom:20px}
+    .director-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+    .director-name-en{font-family:var(--ff-serif);font-size:12px;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;margin-bottom:4px}
+    .director-name-kr{font-family:var(--ff-serif);font-size:28px;font-weight:600;color:var(--navy);margin-bottom:5px;line-height:1.2}
+    .director-position{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(13,27,42,.38);margin-bottom:14px}
+    .director-tags{display:flex;flex-wrap:wrap;gap:5px}
+    .director-tag{font-size:10px;font-weight:700;letter-spacing:.07em;color:var(--gold);background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);padding:3px 10px}
+    .director-summary{font-size:15px;color:#374151;line-height:2;margin-bottom:44px}
+    .dir-section{margin-bottom:36px}
+    .dir-section-title{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(201,168,76,.2);padding-bottom:8px;margin-bottom:0}
+    .dir-rows{display:flex;flex-direction:column}
+    .dir-row{padding:14px 0;border-bottom:1px solid rgba(13,27,42,.05)}
+    .dir-row:last-child{border-bottom:none}
+    /* 학교·회사 이름 — 크게 강조 */
+    .dir-main{font-family:var(--ff-serif);font-size:17px;font-weight:600;color:var(--navy);margin-bottom:3px;line-height:1.4}
+    /* 전공·직책 — 작게 */
+    .dir-sub{font-size:13px;color:#6b7280;line-height:1.6}
+    .dir-sub em{font-style:normal;color:#9ca3af;font-size:11.5px}
+    .dir-certs{display:flex;flex-wrap:wrap;gap:8px;padding-top:14px}
+    .dir-cert{font-size:12px;font-weight:600;color:var(--navy);background:#f5f0e8;padding:6px 16px;border:1px solid rgba(13,27,42,.1);letter-spacing:.02em}
     @media(max-width:760px){
-      .director-block { grid-template-columns: 1fr; gap: 32px; }
-      .director-photo-wrap { position: static; }
-      .dir-row { grid-template-columns: 1fr; gap: 2px; }
-      .dir-org { font-size: 12px; }
+      .director-block{grid-template-columns:1fr;gap:28px}
+      .director-photo-wrap{position:static}
+      .director-photo{max-width:200px}
     }
   </style>
 </head>
 <body>
-
 <header class="nav-header scrolled" id="navbar">
   <div class="nav-inner">
     <a href="index.html" class="logo">
@@ -102,72 +57,49 @@
       </svg>
     </a>
     <nav class="nav-links">
-      <a href="index.html"   class="nav-link">Home</a>
-      <a href="about.html"   class="nav-link active">About Us</a>
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link active">About Us</a>
       <a href="service.html" class="nav-link">Service</a>
       <a href="lmaster.html" class="nav-link lmaster-link">L-Master</a>
-      <a href="column.html"  class="nav-link">Column</a>
+      <a href="column.html" class="nav-link">Column</a>
       <a href="clients.html" class="nav-link">Clients</a>
       <a href="contact.html" class="nav-link">Contact</a>
     </nav>
     <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html" class="mob-link">Home</a>
-    <a href="about.html" class="mob-link">About Us</a>
-    <a href="service.html" class="mob-link">Service</a>
-    <a href="lmaster.html" class="mob-link">L-Master</a>
-    <a href="column.html" class="mob-link">Column</a>
-    <a href="clients.html" class="mob-link">Clients</a>
+    <a href="index.html" class="mob-link">Home</a><a href="about.html" class="mob-link">About Us</a>
+    <a href="service.html" class="mob-link">Service</a><a href="lmaster.html" class="mob-link">L-Master</a>
+    <a href="column.html" class="mob-link">Column</a><a href="clients.html" class="mob-link">Clients</a>
     <a href="contact.html" class="mob-link">Contact</a>
   </div>
 </header>
 
-<!-- HERO -->
 <div class="page-hero">
   <div class="container">
     <div class="section-label">Director</div>
     <h1>대표 소개</h1>
-    <p>노무법인 C&amp;L을 이끄는<br/>두 전문가를 소개합니다</p>
+    <p>노무법인 C&amp;L을 이끄는 두 전문가를 소개합니다</p>
   </div>
 </div>
 
-<!-- 사진 안내 -->
-<div style="background:#fff; padding:20px 0 0">
-  <div class="container">
-    <div class="photo-guide">
-      💡 <strong>사진 안내</strong> — 아래 프로필 사진 영역에 실제 사진 파일(JPG/PNG)을 넣으시려면<br/>
-      각 이미지 태그의 <code>src</code>를 실제 파일 경로로 교체해 주세요.
-      GitHub에 이미지 파일을 함께 업로드한 뒤 <code>src="lee.jpg"</code> 형식으로 지정하면 됩니다.
-    </div>
-  </div>
-</div>
-
-<!-- ── 프로필 ── -->
 <div class="director-wrap">
   <div class="container">
 
-    <!-- ════ 1. 이상호 대표 ════ -->
+    <!-- ══ 이상호 대표 ══ -->
     <div class="director-block">
       <div class="director-photo-wrap">
-        <!-- 실제 사진으로 교체 시 아래 img 태그의 src를 변경하세요 -->
-        <div class="director-photo" id="photo1">
-          <span class="director-photo-placeholder">👤</span>
-          <!-- <img src="lee_sangho.jpg" alt="이상호 대표" style="width:100%;height:100%;object-fit:cover"/> -->
+        <div class="director-photo">
+          <img src="lee_sangho.jpg" alt="이상호 대표 공인노무사"/>
         </div>
-        <label class="director-photo-upload" onclick="alert('GitHub에 사진 파일을 업로드한 뒤\ndirector.html 의 img src를 수정해 주세요.')">
-          📷 사진 교체 안내
-        </label>
-        <div style="margin-top:18px">
-          <div class="director-name-en">Sangho Lee</div>
-          <div class="director-name-kr">이상호</div>
-          <div class="director-title">대표 · 공인노무사(CPLA)</div>
-          <div class="director-tags">
-            <span class="director-tag">공인노무사</span>
-            <span class="director-tag">HR 컨설팅</span>
-            <span class="director-tag">ESG</span>
-            <span class="director-tag">조직 개편</span>
-          </div>
+        <div class="director-name-en">Sangho Lee</div>
+        <div class="director-name-kr">이상호</div>
+        <div class="director-position">대표 · 공인노무사(CPLA)</div>
+        <div class="director-tags">
+          <span class="director-tag">공인노무사</span>
+          <span class="director-tag">HR 컨설팅</span>
+          <span class="director-tag">ESG</span>
+          <span class="director-tag">조직 개편</span>
         </div>
       </div>
 
@@ -176,121 +108,79 @@
           이상호 대표는 인사·조직 전문가로 현재 노무법인 C&amp;L을 이끌고 있습니다.
           특히 HR 제도 변경, 조직 개편과 관련한 국내외 대기업들의 다수 컨설팅 경험을 보유하고 있으며,
           조직 구성원을 대상으로 한 리더십·동기부여에 있어서도 다수의 컨설팅 및 강의를 진행하고 있습니다.
-          최근에는 ESG에 대한 전문적인 경험을 바탕으로 현대, SK, GS, POSCO 등 다양한 대기업들과
-          ESG 컨설팅을 진행하였습니다.
+          최근에는 ESG에 대한 전문적인 경험을 바탕으로 현대, SK, GS, POSCO 등
+          다양한 대기업들과 ESG 컨설팅을 진행하였습니다.
         </p>
 
-        <!-- 학력 -->
         <div class="dir-section">
           <div class="dir-section-title">Education · 학력</div>
           <div class="dir-rows">
             <div class="dir-row">
-              <div class="dir-org">
-                서울대학교<br/>
-                <em>Seoul National University</em>
-              </div>
-              <div class="dir-role">
-                학사 — 환경재료과학<br/>
-                <em>Bachelor · Environmental Material Science</em>
-              </div>
+              <div class="dir-main">서울대학교 <span style="font-size:14px;font-weight:400;color:#9ca3af">(학사)</span></div>
+              <div class="dir-sub">환경재료과학전공 <em>· Seoul National University</em></div>
             </div>
             <div class="dir-row">
-              <div class="dir-org">
-                고려대학교<br/>
-                <em>Korea University</em>
-              </div>
-              <div class="dir-role">
-                경영전문대학원 석사 — 인사조직<br/>
-                <em>MBA · Organization Management</em>
-              </div>
+              <div class="dir-main">고려대학교 <span style="font-size:14px;font-weight:400;color:#9ca3af">(석사)</span></div>
+              <div class="dir-sub">경영전문대학원 인사조직전공 <em>· Korea University MBA</em></div>
             </div>
             <div class="dir-row">
-              <div class="dir-org">
-                성균관대학교<br/>
-                <em>Sungkyunkwan University</em>
-              </div>
-              <div class="dir-role">
-                법학전문대학원 박사과정<br/>
-                <em>S.J.D. (Law School)</em>
-              </div>
+              <div class="dir-main">성균관대학교 <span style="font-size:14px;font-weight:400;color:#9ca3af">(박사과정)</span></div>
+              <div class="dir-sub">법학전문대학원 노동법전공 <em>· Sungkyunkwan University Law School</em></div>
             </div>
           </div>
         </div>
 
-        <!-- 경력 -->
         <div class="dir-section">
           <div class="dir-section-title">Career · 경력</div>
           <div class="dir-rows">
             <div class="dir-row">
-              <div class="dir-org">
-                삼성정밀화학(주)<br/>
-                <em>Samsung Fine Chemical Co., Ltd.</em>
-              </div>
-              <div class="dir-role">사업기술팀<br/><em>Business Technology Team</em></div>
+              <div class="dir-main">삼성정밀화학 주식회사</div>
+              <div class="dir-sub">사업기술팀 <em>· Samsung Fine Chemical Co., Ltd.</em></div>
             </div>
             <div class="dir-row">
-              <div class="dir-org">
-                한국공인노무사회<br/>
-                <em>Korea Certified Public Labor Attorneys Association</em>
-              </div>
-              <div class="dir-role">노사협의회 컨설턴트 1기<br/><em>Consultant of Labor-Management Council (1st)</em></div>
+              <div class="dir-main">한국공인노무사회</div>
+              <div class="dir-sub">노사협의회 컨설턴트 1기 <em>· Korea Certified Public Labor Attorneys Association</em></div>
             </div>
             <div class="dir-row">
-              <div class="dir-org">
-                중소벤처기업부<br/>
-                <em>Ministry of SMEs and Startups</em>
-              </div>
-              <div class="dir-role">비즈니스지원단 전문위원<br/><em>Business Support Group Expert Member</em></div>
+              <div class="dir-main">중소벤처기업부</div>
+              <div class="dir-sub">비즈니스지원단 전문위원 <em>· Ministry of SMEs and Startups</em></div>
             </div>
             <div class="dir-row">
-              <div class="dir-org">
-                고용노동부<br/>
-                <em>Ministry of Employment and Labor</em>
-              </div>
-              <div class="dir-role">청소년권익센터 보호위원<br/><em>Youth Labor Center Expert Member</em></div>
+              <div class="dir-main">고용노동부</div>
+              <div class="dir-sub">청소년권익센터 보호위원 <em>· Ministry of Employment and Labor</em></div>
             </div>
             <div class="dir-row">
-              <div class="dir-org">
-                한국고용노동교육원<br/>
-                <em>Korea Employment and Labor Education Center</em>
-              </div>
-              <div class="dir-role">외래 전문강사<br/><em>External Professional Instructor</em></div>
+              <div class="dir-main">한국고용노동교육원</div>
+              <div class="dir-sub">외래 전문강사 <em>· Korea Employment and Labor Education Center</em></div>
             </div>
           </div>
         </div>
 
-        <!-- 자격 -->
         <div class="dir-section">
           <div class="dir-section-title">Qualification · 자격</div>
           <div class="dir-certs">
-            <span class="dir-cert">공인노무사(CPLA)</span>
+            <span class="dir-cert">공인노무사 (CPLA)</span>
             <span class="dir-cert">ESG 전문가</span>
           </div>
         </div>
       </div>
-    </div><!-- /block 1 -->
+    </div>
 
-    <!-- ════ 2. 채형석 부대표 ════ -->
+    <!-- ══ 채형석 부대표 ══ -->
     <div class="director-block">
       <div class="director-photo-wrap">
-        <div class="director-photo" id="photo2">
-          <span class="director-photo-placeholder">👤</span>
-          <!-- <img src="chai_hyungseok.jpg" alt="채형석 부대표" style="width:100%;height:100%;object-fit:cover"/> -->
+        <div class="director-photo">
+          <img src="chai_hyungseok.jpg" alt="채형석 부대표 공인노무사"/>
         </div>
-        <label class="director-photo-upload" onclick="alert('GitHub에 사진 파일을 업로드한 뒤\ndirector.html 의 img src를 수정해 주세요.')">
-          📷 사진 교체 안내
-        </label>
-        <div style="margin-top:18px">
-          <div class="director-name-en">Hyungseok Chai</div>
-          <div class="director-name-kr">채형석</div>
-          <div class="director-title">부대표 · 공인노무사(CPLA)</div>
-          <div class="director-tags">
-            <span class="director-tag">공인노무사</span>
-            <span class="director-tag">노무 컨설팅</span>
-            <span class="director-tag">직장 내 괴롭힘</span>
-            <span class="director-tag">ISO 37001</span>
-            <span class="director-tag">ISO 37301</span>
-          </div>
+        <div class="director-name-en">Hyungseok Chai</div>
+        <div class="director-name-kr">채형석</div>
+        <div class="director-position">부대표 · 공인노무사(CPLA)</div>
+        <div class="director-tags">
+          <span class="director-tag">공인노무사</span>
+          <span class="director-tag">노무 컨설팅</span>
+          <span class="director-tag">직장 내 괴롭힘</span>
+          <span class="director-tag">ISO 37001</span>
+          <span class="director-tag">ISO 37301</span>
         </div>
       </div>
 
@@ -298,92 +188,67 @@
         <p class="director-summary">
           채형석 부대표는 인사·노무 전문가로 현재 노무법인 C&amp;L을 이끌고 있습니다.
           특히 노동관계법령에 기반한 다수의 인사노무 컨설팅 경험을 보유하고 있으며,
-          한국조정중재협회 협상전문가로서 사업장 내 노사관계에 대한 합리적인 개선방안을 제시하는 활동을 하고 있습니다.
-          최근에는 직장 내 괴롭힘 및 성희롱에 대한 전문적인 경험을 바탕으로 다양한 기업 내 분쟁사건을 대응하고 있으며,
-          부패방지경영시스템 및 준법경영시스템 심사보로서 기업의 준법경영과 관련한 다양한 전략적 자문을 제공하고 있습니다.
+          한국조정중재협회 협상전문가로서 사업장 내 노사관계에 대한 합리적인 개선방안을
+          제시하는 활동을 하고 있습니다. 최근에는 직장 내 괴롭힘 및 성희롱에 대한
+          전문적인 경험을 바탕으로 다양한 기업 내 분쟁사건을 대응하고 있으며,
+          부패방지경영시스템 및 준법경영시스템 심사보로서 기업의 준법경영과 관련한
+          다양한 전략적 자문을 제공하고 있습니다.
         </p>
 
-        <!-- 학력 -->
         <div class="dir-section">
           <div class="dir-section-title">Education · 학력</div>
           <div class="dir-rows">
             <div class="dir-row">
-              <div class="dir-org">
-                서울시립대학교<br/>
-                <em>University of Seoul</em>
-              </div>
-              <div class="dir-role">
-                학사 — 국제관계학<br/>
-                <em>Bachelor · International Relations</em>
-              </div>
+              <div class="dir-main">서울시립대학교 <span style="font-size:14px;font-weight:400;color:#9ca3af">(학사)</span></div>
+              <div class="dir-sub">국제관계학전공 <em>· University of Seoul</em></div>
             </div>
           </div>
         </div>
 
-        <!-- 경력 -->
         <div class="dir-section">
           <div class="dir-section-title">Career · 경력</div>
           <div class="dir-rows">
             <div class="dir-row">
-              <div class="dir-org">
-                노무법인 정상<br/>
-                <em>Labor Lawfirm Jungsang</em>
-              </div>
-              <div class="dir-role">공인노무사<br/><em>Certified Public Labor Attorney</em></div>
+              <div class="dir-main">노무법인 정상</div>
+              <div class="dir-sub">공인노무사 <em>· Labor Lawfirm Jungsang</em></div>
             </div>
             <div class="dir-row">
-              <div class="dir-org">
-                위드 노무법인<br/>
-                <em>With Labor Lawfirm</em>
-              </div>
-              <div class="dir-role">공인노무사<br/><em>Certified Public Labor Attorney</em></div>
+              <div class="dir-main">위드 노무법인</div>
+              <div class="dir-sub">공인노무사 <em>· With Labor Lawfirm</em></div>
             </div>
             <div class="dir-row">
-              <div class="dir-org">
-                세종파트너즈<br/>
-                <em>Sejong Partners</em>
-              </div>
-              <div class="dir-role">공인노무사<br/><em>Certified Public Labor Attorney</em></div>
+              <div class="dir-main">세종파트너즈</div>
+              <div class="dir-sub">공인노무사 <em>· Sejong Partners</em></div>
             </div>
             <div class="dir-row">
-              <div class="dir-org">
-                한국수상레저협회<br/>
-                <em>Korea Aqua Leisure Safety Association</em>
-              </div>
-              <div class="dir-role">인사노무 고문<br/><em>HR and Labor Adviser</em></div>
+              <div class="dir-main">한국수상레저협회</div>
+              <div class="dir-sub">인사노무 고문 <em>· Korea Aqua Leisure Safety Association</em></div>
             </div>
             <div class="dir-row">
-              <div class="dir-org">
-                한국고용노동교육원<br/>
-                <em>Korea Employment and Labor Education Center</em>
-              </div>
-              <div class="dir-role">청렴시민감사관<br/><em>Civil Inspector of Integrity</em></div>
+              <div class="dir-main">한국고용노동교육원</div>
+              <div class="dir-sub">청렴시민감사관 <em>· Korea Employment and Labor Education Center</em></div>
             </div>
             <div class="dir-row">
-              <div class="dir-org">
-                한국조정중재협회<br/>
-                <em>Korea Association of Mediation and Arbitration</em>
-              </div>
-              <div class="dir-role">협상전문가<br/><em>Negotiating Expert</em></div>
+              <div class="dir-main">한국조정중재협회</div>
+              <div class="dir-sub">협상전문가 <em>· Korea Association of Mediation and Arbitration</em></div>
             </div>
           </div>
         </div>
 
-        <!-- 자격 -->
         <div class="dir-section">
           <div class="dir-section-title">Qualification · 자격</div>
           <div class="dir-certs">
-            <span class="dir-cert">공인노무사(CPLA)</span>
-            <span class="dir-cert">ISO 37001 심사보<br/>(부패방지경영시스템)</span>
-            <span class="dir-cert">ISO 37301 심사보<br/>(준법경영시스템)</span>
+            <span class="dir-cert">공인노무사 (CPLA)</span>
+            <span class="dir-cert">ISO 37001 심사보 (부패방지경영시스템)</span>
+            <span class="dir-cert">ISO 37301 심사보 (준법경영시스템)</span>
             <span class="dir-cert">협상전문가</span>
           </div>
         </div>
       </div>
-    </div><!-- /block 2 -->
+    </div>
 
-  </div><!-- /container -->
-</div><!-- /director-wrap -->
+  </div>
+</div>
 
 <footer class="footer">
   <div class="container">
@@ -400,7 +265,7 @@
         <p>노동의 가치를 법으로 증명합니다.</p>
         <p class="footer-copy">©2018 노무법인 C&amp;L. ALL RIGHTS RESERVED.</p>
       </div>
-      <div class="footer-links"><h4>서비스</h4><a href="service.html">HR 컨설팅</a><a href="service.html">노무 컨설팅</a><a href="lmaster.html">L-Master</a></div>
+      <div class="footer-links"><h4>서비스</h4><a href="service.html">노동위원회 대응</a><a href="service.html">HR 컨설팅</a><a href="lmaster.html">L-Master</a></div>
       <div class="footer-links"><h4>정보</h4><a href="about.html">About Us</a><a href="director.html">Director</a><a href="column.html">Column</a><a href="contact.html">Contact</a></div>
       <div class="footer-links"><h4>법적 고지</h4><a href="#">개인정보처리방침</a><a href="#">이용약관</a></div>
     </div>
