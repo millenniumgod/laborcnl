@@ -520,55 +520,197 @@
   </div>
 </div>
 
-<!-- 결제 모달 -->
+<!-- 결제 모달 — PG 심사 대응 버전 -->
 <div class="pay-overlay" id="payOverlay">
-  <div class="pay-modal">
+  <div class="pay-modal" style="max-width:540px">
     <button class="pay-close" onclick="closePayment()">×</button>
+
+    <!-- 헤더 -->
     <div class="pay-head">
-      <div class="pay-head-logo">⚖ L-Master</div>
+      <div class="pay-head-logo">⚖ L-Master · 노무법인 C&amp;L</div>
       <div class="pay-head-prod" id="payProd"></div>
-      <div class="pay-head-amt"  id="payAmt"></div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin-top:4px">
+        <div class="pay-head-amt" id="payAmt"></div>
+        <span style="font-size:11px;color:rgba(255,255,255,.35)">(VAT 포함)</span>
+      </div>
     </div>
+
     <div class="pay-body">
+
+      <!-- STEP 1: 신청자 정보 -->
       <div id="payS1">
-        <div class="p-field"><label>이름</label><input type="text" id="p-name" placeholder="홍길동"/></div>
-        <div class="p-field"><label>이메일</label><input type="email" id="p-email" placeholder="example@email.com"/></div>
-        <div class="p-field"><label>연락처</label><input type="tel" id="p-tel" placeholder="010-0000-0000"/></div>
+        <p style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px;line-height:1.6">
+          서비스 신청 후 담당 공인노무사가 영업일 1일 이내 연락드립니다.<br/>
+          결제는 상담 확인 후 진행됩니다.
+        </p>
+        <div class="p-field"><label>이름 <span style="color:#c0392b">*</span></label><input type="text" id="p-name" placeholder="홍길동"/></div>
+        <div class="p-field"><label>이메일 <span style="color:#c0392b">*</span></label><input type="email" id="p-email" placeholder="example@email.com"/></div>
+        <div class="p-field"><label>연락처 <span style="color:#c0392b">*</span></label><input type="tel" id="p-tel" placeholder="010-0000-0000"/></div>
         <div class="p-field">
-          <label>사건 유형</label>
+          <label>사건 유형 <span style="color:#c0392b">*</span></label>
           <select id="p-case">
-            <option value="">선택</option>
-            <option>부당해고</option><option>부당징계</option>
-            <option>부당인사발령</option><option>차별 시정</option><option>기타</option>
+            <option value="">선택해주세요</option>
+            <option>근로자 — 부당해고</option>
+            <option>근로자 — 부당징계</option>
+            <option>근로자 — 부당인사발령</option>
+            <option>근로자 — 차별 시정</option>
+            <option>근로자 — 기타</option>
+            <option>회사 — 해고 정당성</option>
+            <option>회사 — 징계 정당성</option>
+            <option>회사 — 기타 인사권</option>
           </select>
         </div>
-        <button class="p-btn" onclick="payGoS2()">다음 — 결제 정보 입력 →</button>
-      </div>
-      <div id="payS2" style="display:none">
-        <div class="p-field"><label>카드 번호</label><input type="text" id="p-cardno" placeholder="0000 0000 0000 0000" maxlength="19" oninput="fmtCard(this)"/></div>
-        <div class="p-2col">
-          <div class="p-field"><label>유효기간</label><input type="text" id="p-exp" placeholder="MM / YY" maxlength="7" oninput="fmtExp(this)"/></div>
-          <div class="p-field"><label>CVC</label><input type="text" id="p-cvc" placeholder="000" maxlength="3"/></div>
+        <div class="p-field"><label>사건 개요 (선택)</label><textarea id="p-summary" rows="3" placeholder="사건 경위를 간략히 적어주시면 더 빠른 안내가 가능합니다" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:var(--ff-sans);font-size:13px;padding:10px;box-sizing:border-box;outline:none;resize:vertical;"></textarea></div>
+
+        <!-- 서비스 명세 -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);padding:14px 16px;margin-bottom:14px;font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.75">
+          <strong style="color:rgba(255,255,255,.75);display:block;margin-bottom:6px">📋 서비스 명세</strong>
+          공급자: 노무법인 C&amp;L (사업자등록번호: 별도 확인)<br/>
+          서비스: <span id="payProdDetail"></span><br/>
+          서비스 제공 방식: 공인노무사 직접 작성 후 이메일·포털 전달<br/>
+          제공 기간: 신청일로부터 영업일 기준 2~5일 이내 초안 제공
         </div>
-        <div class="p-field"><label>카드 소유자</label><input type="text" id="p-cname" placeholder="카드에 표시된 이름"/></div>
-        <div class="p-secure">🔒 SSL 암호화로 안전하게 처리됩니다</div>
-        <button class="p-btn" onclick="paySubmit()"><span id="payBtnTxt">결제하기</span></button>
+
+        <!-- 환불 정책 -->
+        <div style="background:rgba(192,57,43,.07);border:1px solid rgba(192,57,43,.2);padding:14px 16px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.5);line-height:1.8">
+          <strong style="color:rgba(255,100,80,.8);display:block;margin-bottom:6px">📌 환불 규정 (전자상거래법 제17조 준용)</strong>
+          · 서면 초안 제공 전: 전액 환불<br/>
+          · 서면 초안 제공 후 ~ 1차 수정 전: 50% 환불<br/>
+          · 1차 수정 완료 후: 환불 불가<br/>
+          · 단, 서비스 하자 시 전액 환불 (사건 내용과 무관한 오류)
+        </div>
+
+        <!-- 약관 동의 -->
+        <div style="margin-bottom:16px">
+          <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:12.5px;color:rgba(255,255,255,.6);line-height:1.6">
+            <input type="checkbox" id="chk-terms" style="margin-top:2px;accent-color:var(--lm-gold);width:14px;height:14px;flex-shrink:0"/>
+            <span><strong style="color:rgba(255,255,255,.8)">[필수]</strong> 서비스 이용약관 및 환불 규정에 동의합니다. 본 서비스는 공인노무사가 제공하는 서면 작성 서비스로, 법률 자문이나 소송 대리가 아닙니다.</span>
+          </label>
+        </div>
+        <div style="margin-bottom:16px">
+          <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:12.5px;color:rgba(255,255,255,.6);line-height:1.6">
+            <input type="checkbox" id="chk-privacy" style="margin-top:2px;accent-color:var(--lm-gold);width:14px;height:14px;flex-shrink:0"/>
+            <span><strong style="color:rgba(255,255,255,.8)">[필수]</strong> 개인정보 수집·이용에 동의합니다. 수집 항목: 이름, 연락처, 이메일, 사건 내용 / 보유 기간: 서비스 종료 후 3년</span>
+          </label>
+        </div>
+        <div style="margin-bottom:20px">
+          <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.6">
+            <input type="checkbox" id="chk-marketing" style="margin-top:2px;accent-color:var(--lm-gold);width:14px;height:14px;flex-shrink:0"/>
+            <span><strong style="color:rgba(255,255,255,.65)">[선택]</strong> 마케팅 정보 수신에 동의합니다. (노무법인 C&amp;L 뉴스레터, 노동법 업데이트 안내)</span>
+          </label>
+        </div>
+
+        <button class="p-btn" onclick="payGoS2()">다음 — 결제 수단 선택 →</button>
+      </div>
+
+      <!-- STEP 2: 결제 수단 선택 -->
+      <div id="payS2" style="display:none">
+        <!-- 주문 요약 -->
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:14px 16px;margin-bottom:18px;border-radius:2px">
+          <div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:4px">결제 상품</div>
+          <div style="font-size:14px;color:#fff;font-weight:500" id="payS2Prod"></div>
+          <div style="font-size:18px;color:var(--lm-gold);font-family:var(--ff-serif);margin-top:4px" id="payS2Amt"></div>
+        </div>
+
+        <div style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:12px;letter-spacing:.08em;text-transform:uppercase">결제 수단 선택</div>
+
+        <!-- 결제 방식 선택 버튼 -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
+          <button class="pay-method-btn active" id="btn-card" onclick="selectMethod('card')">
+            💳 신용·체크카드
+          </button>
+          <button class="pay-method-btn" id="btn-transfer" onclick="selectMethod('transfer')">
+            🏦 무통장 입금
+          </button>
+          <button class="pay-method-btn" id="btn-kakao" onclick="selectMethod('kakao')">
+            <span style="color:#3A1D1D">💛</span> 카카오페이
+          </button>
+          <button class="pay-method-btn" id="btn-toss" onclick="selectMethod('toss')">
+            💙 토스페이
+          </button>
+        </div>
+
+        <!-- 카드 입력 -->
+        <div id="method-card">
+          <div class="p-field"><label>카드 번호</label><input type="text" id="p-cardno" placeholder="0000 0000 0000 0000" maxlength="19" oninput="fmtCard(this)"/></div>
+          <div class="p-2col">
+            <div class="p-field"><label>유효기간</label><input type="text" id="p-exp" placeholder="MM / YY" maxlength="7" oninput="fmtExp(this)"/></div>
+            <div class="p-field"><label>CVC</label><input type="text" id="p-cvc" placeholder="000" maxlength="3"/></div>
+          </div>
+          <div class="p-field"><label>카드 소유자</label><input type="text" id="p-cname" placeholder="카드에 표시된 이름"/></div>
+        </div>
+
+        <!-- 무통장 입금 안내 -->
+        <div id="method-transfer" style="display:none">
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:18px;font-size:13px;color:rgba(255,255,255,.65);line-height:2;">
+            <strong style="color:var(--lm-gold);display:block;margin-bottom:8px">입금 계좌 안내</strong>
+            은행: 국민은행<br/>
+            계좌번호: 추후 담당 노무사가 안내드립니다<br/>
+            예금주: 노무법인 씨앤엘<br/>
+            <span style="color:rgba(255,255,255,.4);font-size:11.5px">신청 후 영업일 1일 이내 계좌번호를 문자로 안내드립니다. 3영업일 이내 미입금 시 신청이 자동 취소됩니다.</span>
+          </div>
+        </div>
+
+        <!-- 카카오페이 안내 -->
+        <div id="method-kakao" style="display:none">
+          <div style="background:rgba(255,230,0,.05);border:1px solid rgba(255,230,0,.15);padding:18px;font-size:13px;color:rgba(255,255,255,.65);line-height:1.85;text-align:center;">
+            <div style="font-size:28px;margin-bottom:8px">💛</div>
+            <strong style="color:#ffe000">카카오페이 결제</strong><br/>
+            <span style="font-size:12px;color:rgba(255,255,255,.4)">신청 완료 후 담당 노무사가 카카오페이 결제 링크를 안내드립니다.</span>
+          </div>
+        </div>
+
+        <!-- 토스페이 안내 -->
+        <div id="method-toss" style="display:none">
+          <div style="background:rgba(0,100,255,.05);border:1px solid rgba(0,100,255,.15);padding:18px;font-size:13px;color:rgba(255,255,255,.65);line-height:1.85;text-align:center;">
+            <div style="font-size:28px;margin-bottom:8px">💙</div>
+            <strong style="color:#4d9fff">토스페이 결제</strong><br/>
+            <span style="font-size:12px;color:rgba(255,255,255,.4)">신청 완료 후 담당 노무사가 토스 결제 링크를 안내드립니다.</span>
+          </div>
+        </div>
+
+        <div class="p-secure" style="margin-top:14px">🔒 본 페이지는 SSL 암호화로 보호됩니다 · 노무법인 C&amp;L</div>
+        <button class="p-btn" onclick="paySubmit()" style="margin-top:8px"><span id="payBtnTxt">신청하기</span></button>
         <button class="p-back" onclick="payGoS1()">← 이전으로</button>
       </div>
+
+      <!-- STEP 3: 완료 -->
       <div id="payS3" style="display:none">
         <div class="pay-success">
           <div class="pay-ok-icon">✓</div>
-          <h3>결제가 완료되었습니다</h3>
+          <h3>서비스 신청이 완료되었습니다</h3>
           <p id="paySuccessMsg"></p>
-          <p style="color:rgba(255,255,255,.35);font-size:12.5px;margin-top:12px;line-height:1.7">
-            담당 노무사가 영업일 기준 1일 이내<br/>입력하신 연락처로 연락드립니다.
-          </p>
-          <button class="p-btn" onclick="closePayment()" style="margin-top:20px">확인</button>
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:14px 16px;margin:16px 0;font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.85;text-align:left">
+            <strong style="color:rgba(255,255,255,.7);display:block;margin-bottom:6px">📌 다음 단계 안내</strong>
+            · 담당 공인노무사가 영업일 1일 이내 연락드립니다<br/>
+            · 결제 방법 및 자료 제출 안내를 드립니다<br/>
+            · 포털 로그인 정보(사건번호·비밀번호)를 문자로 발송드립니다<br/>
+            · 문의: cnlcg@cnlcg.co.kr / 02-2135-9391
+          </div>
+          <button class="p-btn" onclick="closePayment()" style="margin-top:8px">확인</button>
         </div>
       </div>
+
     </div>
   </div>
 </div>
+
+<!-- 결제 수단 버튼 스타일 -->
+<style>
+.pay-method-btn {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.12);
+  color: rgba(255,255,255,.6);
+  font-family: var(--ff-sans);
+  font-size: 13px;
+  padding: 12px 10px;
+  cursor: pointer;
+  transition: all .2s;
+  text-align: center;
+}
+.pay-method-btn:hover { border-color: rgba(201,168,76,.4); color: #fff; }
+.pay-method-btn.active { border-color: var(--lm-gold); color: var(--lm-gold); background: rgba(201,168,76,.07); }
+</style>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -918,41 +1060,74 @@ function addMessage(cno){
 }
 
 /* ── 결제 ── */
-let _pProd='',_pAmt=0;
-function openPayment(prod,amt){
-  _pProd=prod; _pAmt=amt;
-  document.getElementById('payProd').textContent=prod;
-  document.getElementById('payAmt').textContent='₩'+amt.toLocaleString();
+let _pProd='', _pAmt=0, _payMethod='card';
+function openPayment(prod, amt){
+  _pProd=prod; _pAmt=amt; _payMethod='card';
+  document.getElementById('payProd').textContent = prod;
+  document.getElementById('payAmt').textContent  = '₩'+amt.toLocaleString();
+  document.getElementById('payProdDetail').textContent = prod;
   ['payS1','payS2','payS3'].forEach((id,i)=>document.getElementById(id).style.display=i===0?'':'none');
+  // 체크박스 초기화
+  ['chk-terms','chk-privacy','chk-marketing'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.checked=false;
+  });
   document.getElementById('payOverlay').classList.add('open');
 }
 function closePayment(){ document.getElementById('payOverlay').classList.remove('open'); }
-function payGoS1(){ document.getElementById('payS1').style.display=''; document.getElementById('payS2').style.display='none'; }
+
+function payGoS1(){
+  document.getElementById('payS1').style.display='';
+  document.getElementById('payS2').style.display='none';
+}
 function payGoS2(){
-  const n=document.getElementById('p-name').value.trim(),
-        e=document.getElementById('p-email').value.trim(),
-        t=document.getElementById('p-tel').value.trim(),
-        c=document.getElementById('p-case').value;
-  if(!n||!e||!t||!c){alert('모든 항목을 입력해주세요.');return;}
+  const n=document.getElementById('p-name').value.trim();
+  const e=document.getElementById('p-email').value.trim();
+  const t=document.getElementById('p-tel').value.trim();
+  const c=document.getElementById('p-case').value;
+  const terms=document.getElementById('chk-terms').checked;
+  const priv=document.getElementById('chk-privacy').checked;
+  if(!n||!e||!t||!c){ alert('이름, 이메일, 연락처, 사건 유형을 모두 입력해주세요.'); return; }
+  if(!terms){ alert('[필수] 서비스 이용약관 및 환불 규정에 동의해주세요.'); return; }
+  if(!priv) { alert('[필수] 개인정보 수집·이용에 동의해주세요.'); return; }
+  document.getElementById('payS2Prod').textContent = _pProd;
+  document.getElementById('payS2Amt').textContent  = '₩'+_pAmt.toLocaleString()+' (VAT 포함)';
   document.getElementById('payS1').style.display='none';
   document.getElementById('payS2').style.display='';
+  selectMethod('card');
 }
-function fmtCard(el){let v=el.value.replace(/\D/g,'').slice(0,16);el.value=v.replace(/(.{4})/g,'$1 ').trim();}
-function fmtExp(el){let v=el.value.replace(/\D/g,'').slice(0,4);if(v.length>=2)v=v.slice(0,2)+' / '+v.slice(2);el.value=v;}
+
+function selectMethod(m){
+  _payMethod = m;
+  ['card','transfer','kakao','toss'].forEach(k=>{
+    document.getElementById('btn-'+k).classList.toggle('active', k===m);
+    document.getElementById('method-'+k).style.display = k===m ? '' : 'none';
+  });
+  document.getElementById('payBtnTxt').textContent =
+    m==='card' ? '결제하기' : '신청 완료하기';
+}
+
+function fmtCard(el){ let v=el.value.replace(/\D/g,'').slice(0,16); el.value=v.replace(/(.{4})/g,'$1 ').trim(); }
+function fmtExp(el){ let v=el.value.replace(/\D/g,'').slice(0,4); if(v.length>=2) v=v.slice(0,2)+' / '+v.slice(2); el.value=v; }
+
 function paySubmit(){
-  const no=document.getElementById('p-cardno').value.replace(/\s/g,''),
-        ex=document.getElementById('p-exp').value,
-        cv=document.getElementById('p-cvc').value,
-        cn=document.getElementById('p-cname').value.trim();
-  if(no.length<15||!ex||cv.length<3||!cn){alert('카드 정보를 모두 입력해주세요.');return;}
-  document.getElementById('payBtnTxt').textContent='처리 중...';
+  if(_payMethod==='card'){
+    const no=document.getElementById('p-cardno').value.replace(/\s/g,'');
+    const ex=document.getElementById('p-exp').value;
+    const cv=document.getElementById('p-cvc').value;
+    const cn=document.getElementById('p-cname').value.trim();
+    if(no.length<15||!ex||cv.length<3||!cn){ alert('카드 정보를 모두 입력해주세요.'); return; }
+  }
+  const btn=document.getElementById('payBtnTxt');
+  const orig=btn.textContent;
+  btn.textContent='처리 중...';
   setTimeout(()=>{
     document.getElementById('payS2').style.display='none';
     document.getElementById('payS3').style.display='';
+    const methodLabel={card:'카드 결제', transfer:'무통장 입금', kakao:'카카오페이', toss:'토스페이'};
     document.getElementById('paySuccessMsg').textContent=
-      `${document.getElementById('p-name').value}님의 "${_pProd}" 결제가 완료되었습니다. (₩${_pAmt.toLocaleString()})`;
-    document.getElementById('payBtnTxt').textContent='결제하기';
-  },1500);
+      `${document.getElementById('p-name').value}님의 "${_pProd}" 서비스 신청이 접수되었습니다. (${methodLabel[_payMethod]}, ₩${_pAmt.toLocaleString()})`;
+    btn.textContent=orig;
+  },1200);
 }
 
 /* ── 초기화 ── */
