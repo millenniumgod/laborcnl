@@ -94,7 +94,7 @@ async function getAccessToken(env) {
       grant_type:  'urn:ietf:params:oauth:grant-type:jwt-bearer',
       client_id:   env.NW_CLIENT_ID,
       client_secret: env.NW_CLIENT_SECRET,
-      scope:       'drive',
+      scope:       'file',
     }),
   });
 
