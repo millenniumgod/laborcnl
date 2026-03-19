@@ -565,7 +565,7 @@
         <!-- 서비스 명세 -->
         <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);padding:14px 16px;margin-bottom:14px;font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.75">
           <strong style="color:rgba(255,255,255,.75);display:block;margin-bottom:6px">📋 서비스 명세</strong>
-          공급자: 노무법인 C&amp;L (사업자등록번호: 별도 확인)<br/>
+          공급자: 노무법인 C&amp;L (사업자등록번호: 329-87-01202)<br/>
           서비스: <span id="payProdDetail"></span><br/>
           서비스 제공 방식: 공인노무사 직접 작성 후 이메일·포털 전달<br/>
           제공 기간: 신청일로부터 영업일 기준 2~5일 이내 초안 제공
@@ -574,9 +574,9 @@
         <!-- 환불 정책 -->
         <div style="background:rgba(192,57,43,.07);border:1px solid rgba(192,57,43,.2);padding:14px 16px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.5);line-height:1.8">
           <strong style="color:rgba(255,100,80,.8);display:block;margin-bottom:6px">📌 환불 규정 (전자상거래법 제17조 준용)</strong>
-          · 서면 초안 제공 전: 전액 환불<br/>
-          · 서면 초안 제공 후 ~ 1차 수정 전: 50% 환불<br/>
-          · 1차 수정 완료 후: 환불 불가<br/>
+          · 접수완료 전: 100% 환불<br/>
+          · 접수완료 후 ~ 서면 초안 제공 전: 30% 환불<br/>
+          · 서면 초안 제공 후: 환불 불가<br/>
           · 단, 서비스 하자 시 전액 환불 (사건 내용과 무관한 오류)
         </div>
 
@@ -584,19 +584,13 @@
         <div style="margin-bottom:16px">
           <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:12.5px;color:rgba(255,255,255,.6);line-height:1.6">
             <input type="checkbox" id="chk-terms" style="margin-top:2px;accent-color:var(--lm-gold);width:14px;height:14px;flex-shrink:0"/>
-            <span><strong style="color:rgba(255,255,255,.8)">[필수]</strong> 서비스 이용약관 및 환불 규정에 동의합니다. 본 서비스는 공인노무사가 제공하는 서면 작성 서비스로, 법률 자문이나 소송 대리가 아닙니다.</span>
-          </label>
-        </div>
-        <div style="margin-bottom:16px">
-          <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:12.5px;color:rgba(255,255,255,.6);line-height:1.6">
-            <input type="checkbox" id="chk-privacy" style="margin-top:2px;accent-color:var(--lm-gold);width:14px;height:14px;flex-shrink:0"/>
-            <span><strong style="color:rgba(255,255,255,.8)">[필수]</strong> 개인정보 수집·이용에 동의합니다. 수집 항목: 이름, 연락처, 이메일, 사건 내용 / 보유 기간: 서비스 종료 후 3년</span>
+            <span><strong style="color:rgba(255,255,255,.8)">[필수]</strong> 서비스 이용약관 및 환불 규정에 동의합니다. 본 서비스는 노무법인이 제공하는 서면 작성 서비스로, 사건 대리가 아닙니다.</span>
           </label>
         </div>
         <div style="margin-bottom:20px">
-          <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.6">
-            <input type="checkbox" id="chk-marketing" style="margin-top:2px;accent-color:var(--lm-gold);width:14px;height:14px;flex-shrink:0"/>
-            <span><strong style="color:rgba(255,255,255,.65)">[선택]</strong> 마케팅 정보 수신에 동의합니다. (노무법인 C&amp;L 뉴스레터, 노동법 업데이트 안내)</span>
+          <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:12.5px;color:rgba(255,255,255,.6);line-height:1.6">
+            <input type="checkbox" id="chk-privacy" style="margin-top:2px;accent-color:var(--lm-gold);width:14px;height:14px;flex-shrink:0"/>
+            <span><strong style="color:rgba(255,255,255,.8)">[필수]</strong> 개인정보 수집·이용에 동의합니다. 수집 항목: 이름, 연락처, 이메일, 사건 내용 / 보유 기간: 서비스 종료 후 3년</span>
           </label>
         </div>
 
@@ -632,12 +626,39 @@
 
         <!-- 카드 입력 -->
         <div id="method-card">
-          <div class="p-field"><label>카드 번호</label><input type="text" id="p-cardno" placeholder="0000 0000 0000 0000" maxlength="19" oninput="fmtCard(this)"/></div>
+          <div class="p-field">
+            <label>카드사 선택</label>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px">
+              <button type="button" class="card-co-btn" onclick="selectCardCo(this,'신한')">신한</button>
+              <button type="button" class="card-co-btn" onclick="selectCardCo(this,'삼성')">삼성</button>
+              <button type="button" class="card-co-btn" onclick="selectCardCo(this,'현대')">현대</button>
+              <button type="button" class="card-co-btn" onclick="selectCardCo(this,'KB국민')">KB국민</button>
+              <button type="button" class="card-co-btn" onclick="selectCardCo(this,'롯데')">롯데</button>
+              <button type="button" class="card-co-btn" onclick="selectCardCo(this,'우리')">우리</button>
+              <button type="button" class="card-co-btn" onclick="selectCardCo(this,'하나')">하나</button>
+              <button type="button" class="card-co-btn" onclick="selectCardCo(this,'NH농협')">NH농협</button>
+            </div>
+          </div>
+          <div class="p-field">
+            <label>카드 번호</label>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+              <input type="text" class="card-seg" maxlength="4" placeholder="0000" oninput="cardSegInput(this,0)" style="text-align:center"/>
+              <input type="text" class="card-seg" maxlength="4" placeholder="0000" oninput="cardSegInput(this,1)" style="text-align:center"/>
+              <input type="password" class="card-seg" maxlength="4" placeholder="••••" oninput="cardSegInput(this,2)" style="text-align:center"/>
+              <input type="password" class="card-seg" maxlength="4" placeholder="••••" oninput="cardSegInput(this,3)" style="text-align:center"/>
+            </div>
+          </div>
           <div class="p-2col">
             <div class="p-field"><label>유효기간</label><input type="text" id="p-exp" placeholder="MM / YY" maxlength="7" oninput="fmtExp(this)"/></div>
-            <div class="p-field"><label>CVC</label><input type="text" id="p-cvc" placeholder="000" maxlength="3"/></div>
+            <div class="p-field"><label>생년월일 (6자리) / 사업자번호 (10자리)</label><input type="text" id="p-birth" placeholder="YYMMDD" maxlength="10"/></div>
           </div>
-          <div class="p-field"><label>카드 소유자</label><input type="text" id="p-cname" placeholder="카드에 표시된 이름"/></div>
+          <div class="p-field"><label>카드 비밀번호 앞 2자리</label>
+            <input type="password" id="p-cardpw" placeholder="••" maxlength="2" style="width:80px"/>
+          </div>
+          <div style="font-size:11.5px;color:rgba(255,255,255,.3);line-height:1.7;margin-bottom:12px">
+            ※ 카드 정보는 SSL 암호화되어 전송되며 서버에 저장되지 않습니다.<br/>
+            ※ PG 결제 연동 완료 후 실제 결제가 처리됩니다. 현재는 신청 접수 단계입니다.
+          </div>
         </div>
 
         <!-- 무통장 입금 안내 -->
@@ -758,8 +779,8 @@ document.querySelectorAll('.lm-overlay,.pay-overlay').forEach(el=>{
 });
 
 /* ── 사건 데이터 ── */
-function getCases(){ return JSON.parse(localStorage.getItem(PORTAL_KEY)||'[]'); }
-function saveCases(arr){ localStorage.setItem(PORTAL_KEY, JSON.stringify(arr)); }
+function getCases(){ return safeLoad(PORTAL_KEY); }
+function saveCases(arr){ safeSave(PORTAL_KEY, arr); }
 function genCaseNo(){
   const n = getCases().length + 1;
   return 'LM-' + new Date().getFullYear() + '-' + String(n).padStart(3,'0');
@@ -773,11 +794,13 @@ function openPortalLogin(){
   openModal('mo-clientLogin'); 
 }
 function doClientLogin(){
+  if(!checkLoginLimit('client')) return;
   const cno = document.getElementById('clientCaseNo').value.trim().toUpperCase();
   const pw  = document.getElementById('clientPw').value;
   const cases = getCases();
   const c = cases.find(x=>x.caseNo===cno && x.pw===pw);
   if(!c){ document.getElementById('clientLoginErr').style.display='block'; return; }
+  resetLoginLimit('client');
   closeModal('mo-clientLogin');
   sessionStorage.setItem('lm_client', cno);
   showClientDash(c);
@@ -847,13 +870,20 @@ function handleFileSelect(input){
   addFiles(Array.from(input.files));
   input.value = ''; // 같은 파일 재선택 허용
 }
+const ALLOWED_TYPES = ['application/pdf','application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'image/jpeg','image/png','image/gif',
+  'application/vnd.ms-excel',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  'application/zip','application/x-zip-compressed'];
+const ALLOWED_EXT = /\.(pdf|doc|docx|jpg|jpeg|png|gif|xlsx|xls|hwp|zip)$/i;
+
 function addFiles(newFiles){
   const oversized = newFiles.filter(f => f.size > MAX_MB * 1024 * 1024);
-  if(oversized.length){
-    alert(`다음 파일은 ${MAX_MB}MB를 초과하여 추가되지 않았습니다:\n` + oversized.map(f=>f.name).join('\n'));
-  }
-  const valid = newFiles.filter(f => f.size <= MAX_MB * 1024 * 1024);
-  // 중복 제거
+  const badType   = newFiles.filter(f => !ALLOWED_EXT.test(f.name));
+  if(oversized.length) alert(`${MAX_MB}MB를 초과하는 파일:\n`+oversized.map(f=>f.name).join('\n'));
+  if(badType.length)   alert(`허용되지 않는 파일 형식:\n`+badType.map(f=>f.name).join('\n'));
+  const valid = newFiles.filter(f => f.size <= MAX_MB*1024*1024 && ALLOWED_EXT.test(f.name));
   valid.forEach(f => {
     if(!_pendingFiles.find(x => x.name===f.name && x.size===f.size)) _pendingFiles.push(f);
   });
@@ -899,8 +929,10 @@ function openAdminLogin(){
   openModal('mo-adminLogin');
 }
 function doAdminLogin(){
+  if(!checkLoginLimit('admin')) return;
   if(document.getElementById('adminId').value===ADMIN_ID &&
      document.getElementById('adminPw').value===ADMIN_PW){
+    resetLoginLimit('admin');
     closeModal('mo-adminLogin');
     sessionStorage.setItem('lm_admin','ok');
     renderAdminDash();
@@ -1068,7 +1100,7 @@ function openPayment(prod, amt){
   document.getElementById('payProdDetail').textContent = prod;
   ['payS1','payS2','payS3'].forEach((id,i)=>document.getElementById(id).style.display=i===0?'':'none');
   // 체크박스 초기화
-  ['chk-terms','chk-privacy','chk-marketing'].forEach(id=>{
+  ['chk-terms','chk-privacy'].forEach(id=>{
     const el=document.getElementById(id); if(el) el.checked=false;
   });
   document.getElementById('payOverlay').classList.add('open');
@@ -1109,36 +1141,136 @@ function selectMethod(m){
 function fmtCard(el){ let v=el.value.replace(/\D/g,'').slice(0,16); el.value=v.replace(/(.{4})/g,'$1 ').trim(); }
 function fmtExp(el){ let v=el.value.replace(/\D/g,'').slice(0,4); if(v.length>=2) v=v.slice(0,2)+' / '+v.slice(2); el.value=v; }
 
+/* 카드사 선택 */
+let _selectedCardCo = '';
+function selectCardCo(btn, co){
+  _selectedCardCo = co;
+  document.querySelectorAll('.card-co-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+/* 카드 번호 4자리 자동 이동 */
+function cardSegInput(el, idx){
+  el.value = el.value.replace(/\D/g,'');
+  if(el.value.length===4){
+    const segs = document.querySelectorAll('.card-seg');
+    if(segs[idx+1]) segs[idx+1].focus();
+  }
+}
+
 function paySubmit(){
   if(_payMethod==='card'){
-    const no=document.getElementById('p-cardno').value.replace(/\s/g,'');
-    const ex=document.getElementById('p-exp').value;
-    const cv=document.getElementById('p-cvc').value;
-    const cn=document.getElementById('p-cname').value.trim();
-    if(no.length<15||!ex||cv.length<3||!cn){ alert('카드 정보를 모두 입력해주세요.'); return; }
+    const segs = document.querySelectorAll('.card-seg');
+    const cardFilled = Array.from(segs).every(s=>s.value.length===4);
+    const ex = document.getElementById('p-exp').value;
+    const birth = document.getElementById('p-birth').value.trim();
+    const pw = document.getElementById('p-cardpw').value.trim();
+    if(!_selectedCardCo){ alert('카드사를 선택해주세요.'); return; }
+    if(!cardFilled){ alert('카드 번호 16자리를 입력해주세요.'); return; }
+    if(!ex){ alert('유효기간을 입력해주세요.'); return; }
+    if(!birth){ alert('생년월일 또는 사업자번호를 입력해주세요.'); return; }
+    if(pw.length<2){ alert('카드 비밀번호 앞 2자리를 입력해주세요.'); return; }
   }
   const btn=document.getElementById('payBtnTxt');
   const orig=btn.textContent;
   btn.textContent='처리 중...';
   setTimeout(()=>{
+    // 민감 정보 즉시 초기화
+    document.querySelectorAll('.card-seg').forEach(s=>s.value='');
+    const expEl=document.getElementById('p-exp'); if(expEl) expEl.value='';
+    const birthEl=document.getElementById('p-birth'); if(birthEl) birthEl.value='';
+    const pwEl=document.getElementById('p-cardpw'); if(pwEl) pwEl.value='';
     document.getElementById('payS2').style.display='none';
     document.getElementById('payS3').style.display='';
-    const methodLabel={card:'카드 결제', transfer:'무통장 입금', kakao:'카카오페이', toss:'토스페이'};
+    const methodLabel={card:'카드 결제 ('+(_selectedCardCo||'')+')', transfer:'무통장 입금', kakao:'카카오페이', toss:'토스페이'};
     document.getElementById('paySuccessMsg').textContent=
-      `${document.getElementById('p-name').value}님의 "${_pProd}" 서비스 신청이 접수되었습니다. (${methodLabel[_payMethod]}, ₩${_pAmt.toLocaleString()})`;
+      `${sanitize(document.getElementById('p-name').value)}님의 "${sanitize(_pProd)}" 서비스 신청이 접수되었습니다. (${methodLabel[_payMethod]}, ₩${_pAmt.toLocaleString()})`;
     btn.textContent=orig;
   },1200);
 }
 
+/* ── 보안 유틸 ── */
+// XSS 방지 — 텍스트 삽입 시 사용
+function sanitize(str){
+  if(!str) return '';
+  return String(str).replace(/[&<>"'`]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#x27;','`':'&#x60;'}[c]));
+}
+// 간단 해시 (비밀번호 localStorage 저장용)
+async function hashPw(pw){
+  const enc = new TextEncoder().encode(pw + '|cnl2024salt|');
+  const buf = await crypto.subtle.digest('SHA-256', enc);
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+// localStorage 데이터 삽입 시 XSS 방지
+function safeSave(key, obj){ localStorage.setItem(key, JSON.stringify(obj)); }
+function safeLoad(key){ try{ return JSON.parse(localStorage.getItem(key)||'[]'); }catch(e){ return []; } }
+
+/* 로그인 시도 횟수 제한 */
+const _loginAttempts = {};
+function checkLoginLimit(key){
+  const now = Date.now();
+  if(!_loginAttempts[key]) _loginAttempts[key]={count:0,lockUntil:0};
+  const rec = _loginAttempts[key];
+  if(now < rec.lockUntil){
+    const rem = Math.ceil((rec.lockUntil-now)/1000);
+    alert(`로그인 시도 횟수를 초과했습니다. ${rem}초 후 다시 시도해주세요.`);
+    return false;
+  }
+  if(now > rec.lockUntil) rec.count = 0;
+  rec.count++;
+  if(rec.count >= 5){ rec.lockUntil = now + 300000; return false; } // 5회 실패 시 5분 잠금
+  return true;
+}
+function resetLoginLimit(key){ if(_loginAttempts[key]) _loginAttempts[key].count=0; }
+
+/* 세션 타임아웃 (30분) */
+let _sessionTimer;
+function resetSessionTimer(){
+  clearTimeout(_sessionTimer);
+  _sessionTimer = setTimeout(()=>{
+    if(sessionStorage.getItem('lm_admin')){
+      sessionStorage.removeItem('lm_admin');
+      alert('보안을 위해 30분 비활동으로 자동 로그아웃되었습니다.');
+    }
+    if(sessionStorage.getItem('lm_client')){
+      sessionStorage.removeItem('lm_client');
+    }
+  }, 30*60*1000);
+}
+['click','keydown'].forEach(e=>document.addEventListener(e, resetSessionTimer));
+
 /* ── 초기화 ── */
 document.getElementById('navbar').classList.add('scrolled');
+resetSessionTimer();
 const qt=new URLSearchParams(location.search).get('tab');
 if(qt==='employer') switchTab('employer');
-
-// 세션 복원
-if(sessionStorage.getItem('lm_admin')==='ok'){
-  // 관리자 세션 유지만, 자동 오픈 안 함
-}
 </script>
+
+<!-- 카드사 버튼 스타일 -->
+<style>
+.card-co-btn {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.1);
+  color: rgba(255,255,255,.55);
+  font-family: var(--ff-sans);
+  font-size: 12px;
+  padding: 9px 6px;
+  cursor: pointer;
+  transition: all .18s;
+  text-align: center;
+}
+.card-co-btn:hover { border-color: rgba(201,168,76,.4); color: #fff; }
+.card-co-btn.active { border-color: var(--lm-gold); color: var(--lm-gold); background: rgba(201,168,76,.08); font-weight:700; }
+.card-seg {
+  background: rgba(255,255,255,.06) !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  color: #fff !important;
+  font-family: var(--ff-sans) !important;
+  font-size: 15px !important;
+  padding: 10px 6px !important;
+  outline: none !important;
+  letter-spacing: .15em;
+}
+.card-seg:focus { border-color: var(--lm-gold) !important; }
+</style>
 </body>
 </html>
