@@ -422,6 +422,7 @@
         <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.hwp,.xlsx,.zip" style="display:none" onchange="handleFileSelect(this)"/>
         <div class="file-list" id="clientFileList"></div>
         <div class="lm-ok" id="uploadOk">파일이 업로드되었습니다. 담당 노무사에게 전달됩니다.</div>
+        <div class="lm-err" id="uploadErrMsg" style="display:none;white-space:pre-line"></div>
         <button class="lm-mbtn full" id="uploadBtn" onclick="submitFiles()" style="display:none">파일 전송하기</button>
       </div>
     </div>
@@ -906,19 +907,73 @@ function removeFile(i){
   _pendingFiles.splice(i,1);
   renderFileList();
 }
-function submitFiles(){
+/* ── WORKER 엔드포인트 ──
+   배포 후 본인의 Worker URL로 교체하세요.
+   예: https://cnl-nworks-upload.your-account.workers.dev
+   ─────────────────────────────────────────────── */
+const WORKER_URL = 'https://cnl-nworks-upload.YOUR-ACCOUNT.workers.dev';
+
+async function submitFiles(){
   const cno = sessionStorage.getItem('lm_client');
   const cases = getCases();
   const idx = cases.findIndex(x=>x.caseNo===cno);
   if(idx<0) return;
-  if(!cases[idx].files) cases[idx].files=[];
-  _pendingFiles.forEach(f=> cases[idx].files.push(f.name));
+
+  const btn = document.getElementById('uploadBtn');
+  const ok  = document.getElementById('uploadOk');
+  const errEl = document.getElementById('uploadErrMsg');
+
+  btn.textContent = '업로드 중...';
+  btn.disabled    = true;
+
+  const results   = [];
+  const failed    = [];
+
+  for(const f of _pendingFiles){
+    try{
+      const fd = new FormData();
+      fd.append('file',     f,   f.name);
+      fd.append('caseNo',   cno);
+      fd.append('uploader', cases[idx].name || '');
+
+      const res = await fetch(WORKER_URL, { method:'POST', body: fd });
+      const data= await res.json();
+
+      if(!res.ok || !data.success){
+        failed.push(`${f.name}: ${data.error || '오류'}`);
+      } else {
+        results.push(f.name);
+        // localStorage에도 기록
+        if(!cases[idx].files) cases[idx].files=[];
+        if(!cases[idx].files.includes(f.name)) cases[idx].files.push(f.name);
+      }
+    } catch(e){
+      failed.push(`${f.name}: 네트워크 오류`);
+    }
+  }
+
   saveCases(cases);
   document.getElementById('clientFileList').innerHTML='';
-  document.getElementById('uploadBtn').style.display='none';
-  document.getElementById('uploadOk').style.display='block';
-  _pendingFiles=[];
-  setTimeout(()=>document.getElementById('uploadOk').style.display='none',3000);
+  btn.textContent = '파일 전송하기';
+  btn.disabled    = false;
+  btn.style.display = 'none';
+  _pendingFiles = [];
+
+  if(failed.length){
+    if(errEl){
+      errEl.textContent = '업로드 실패:\n' + failed.join('\n');
+      errEl.style.display = 'block';
+      setTimeout(()=>errEl.style.display='none', 5000);
+    } else {
+      alert('일부 파일 업로드 실패:\n' + failed.join('\n'));
+    }
+  }
+
+  if(results.length){
+    ok.textContent  = `✓ ${results.length}개 파일이 네이버웍스 드라이브에 전송되었습니다.`;
+    ok.style.display= 'block';
+    setTimeout(()=>ok.style.display='none', 4000);
+  }
 }
 
 /* ── 관리자 로그인 ── */

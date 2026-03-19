@@ -1,0 +1,28 @@
+# ============================================================
+#  노무법인 C&L — Cloudflare Worker 설정 파일 (wrangler.toml)
+# ============================================================
+# 이 파일은 GitHub 레포지토리에 함께 올려도 됩니다.
+# 비밀 키(Secret)는 절대 이 파일에 넣지 마세요.
+# ============================================================
+
+name = "cnl-nworks-upload"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# Workers 무료 플랜으로 충분합니다.
+# CPU 시간: 10ms/요청 (무료), 메모리: 128MB
+
+[limits]
+cpu_ms = 50
+
+# ── 환경변수 (비밀이 아닌 것) ──
+# 비밀값은 아래 명령어로 등록하세요 (터미널에서 한 번만 실행):
+#
+#   npx wrangler secret put NW_CLIENT_ID
+#   npx wrangler secret put NW_CLIENT_SECRET
+#   npx wrangler secret put NW_SERVICE_ACCOUNT
+#   npx wrangler secret put NW_PRIVATE_KEY
+#   npx wrangler secret put NW_FOLDER_ID
+#   npx wrangler secret put ALLOWED_ORIGIN
+#
+# 각 명령어 실행 시 값을 입력하라는 프롬프트가 뜹니다.
