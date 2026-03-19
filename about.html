@@ -22,7 +22,7 @@
     </a>
     <nav class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
-      <a href="about.html" class="nav-link active">About Us</a>
+      <div class="nav-dropdown"><a class="nav-link active" style="cursor:default">About Us ▾</a><div class="dropdown-menu"><a href="about.html">법인 소개</a><a href="director.html">대표자 소개</a></div></div>
       <a href="service.html" class="nav-link">Service</a>
       <a href="lmaster.html" class="nav-link lmaster-link">L-Master</a>
       <a href="column.html" class="nav-link">Column</a>
@@ -32,7 +32,7 @@
     <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html" class="mob-link">Home</a><a href="about.html" class="mob-link">About Us</a>
+    <a href="index.html" class="mob-link">Home</a><a href="about.html" class="mob-link">About Us — 법인 소개</a><a href="director.html" class="mob-link">About Us — 대표자 소개</a>
     <a href="service.html" class="mob-link">Service</a><a href="lmaster.html" class="mob-link">L-Master</a>
     <a href="column.html" class="mob-link">Column</a><a href="clients.html" class="mob-link">Clients</a>
     <a href="contact.html" class="mob-link">Contact</a>
@@ -43,7 +43,11 @@
   <div class="container">
     <div class="section-label">About Us</div>
     <h1>Why 노무법인 C&amp;L?</h1>
-    <p>2018년 설립 — 공인노무사(CPLA)가 직접 담당하는<br/>HR · 노무 · 조직 전문 컨설팅 그룹</p>
+    <p>공인노무사(CPLA)가 직접 담당하는 믿을 수 있는<br/>HR · 노무 · 조직 전문 컨설팅 그룹</p>
+    <div style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap">
+      <a href="director.html" class="btn-primary">대표자 소개 보기 →</a>
+      <a href="contact.html" class="btn-outline">상담 문의</a>
+    </div>
   </div>
 </div>
 
@@ -109,7 +113,8 @@
         <div class="about-stats" style="margin-top:40px">
           <div class="stat"><span class="stat-num">2018</span><span class="stat-label">설립연도</span></div>
           <div class="stat"><span class="stat-num">500+</span><span class="stat-label">자문 기업</span></div>
-          <div class="stat"><span class="stat-num">CPLA</span><span class="stat-label">공인노무사 직접 담당</span></div>
+          <div class="stat"><span class="stat-num">8</span><span class="stat-label">전문 서비스 분야</span></div>
+          <div class="stat"><span class="stat-num">E·S·G</span><span class="stat-label">ESG 전 분야 대응</span></div>
         </div>
       </div><!-- end about-text -->
 
@@ -117,14 +122,35 @@
   </div>
 </section>
 
-<!-- Director 링크 -->
-<section class="section" style="background:#f5f0e8;padding:40px 0">
-  <div class="container" style="text-align:center">
-    <p style="color:#6b7280;font-size:14px;margin-bottom:16px">노무법인 C&amp;L을 이끄는 전문가들을 소개합니다</p>
-    <a href="director.html" class="btn-outline dark">대표 소개 보기 →</a>
+<!-- 핵심 강점 4개 카드 -->
+<section class="section" style="background:#f5f0e8;padding:56px 0">
+  <div class="container">
+    <div class="section-label">Our Strengths</div>
+    <h2 class="section-title centered">노무법인 C&amp;L이 다른 이유</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:36px">
+      <div style="background:#fff;padding:28px 22px;border-top:3px solid var(--gold)">
+        <div style="font-size:22px;margin-bottom:12px">⚖️</div>
+        <h4 style="font-family:var(--ff-serif);font-size:16px;font-weight:600;color:var(--navy);margin-bottom:8px">공인노무사 직접 담당</h4>
+        <p style="font-size:13px;color:#6b7280;line-height:1.75">보조 인력이 아닌 공인노무사(CPLA)가 처음부터 끝까지 직접 담당합니다</p>
+      </div>
+      <div style="background:#fff;padding:28px 22px;border-top:3px solid var(--gold)">
+        <div style="font-size:22px;margin-bottom:12px">🎯</div>
+        <h4 style="font-family:var(--ff-serif);font-size:16px;font-weight:600;color:var(--navy);margin-bottom:8px">맞춤형 솔루션</h4>
+        <p style="font-size:13px;color:#6b7280;line-height:1.75">정해진 보고서 틀이 아닌, 우리 회사에 실제로 맞는 실행 가능한 대안을 제시합니다</p>
+      </div>
+      <div style="background:#fff;padding:28px 22px;border-top:3px solid var(--gold)">
+        <div style="font-size:22px;margin-bottom:12px">🛡️</div>
+        <h4 style="font-family:var(--ff-serif);font-size:16px;font-weight:600;color:var(--navy);margin-bottom:8px">법률 리스크 예방</h4>
+        <p style="font-size:13px;color:#6b7280;line-height:1.75">노동관계법률 위반 리스크까지 선제적으로 고려한 컨설팅으로 사전 예방에 집중합니다</p>
+      </div>
+      <div style="background:#fff;padding:28px 22px;border-top:3px solid var(--gold)">
+        <div style="font-size:22px;margin-bottom:12px">🏆</div>
+        <h4 style="font-family:var(--ff-serif);font-size:16px;font-weight:600;color:var(--navy);margin-bottom:8px">풍부한 실전 경험</h4>
+        <p style="font-size:13px;color:#6b7280;line-height:1.75">대기업·중견·중소·공공기관 등 다양한 규모와 업종의 기업을 다수 자문한 경험이 있습니다</p>
+      </div>
+    </div>
   </div>
 </section>
-  <div class="container">
     <div class="section-label">Our Values</div>
     <h2 class="section-title centered">노무법인 C&amp;L의 3V</h2>
     <p class="section-sub centered">

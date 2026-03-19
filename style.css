@@ -1150,6 +1150,15 @@ body {
   border: 1.5px solid rgba(13,27,42,.15) !important;
   color: var(--navy) !important;
 }
+.contact-page-body .contact-form select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230d1b2a' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 14px center !important;
+}
+.contact-page-body .contact-form select option {
+  background: #fff !important;
+  color: var(--navy) !important;
+}
 .contact-page-body .contact-form input::placeholder,
 .contact-page-body .contact-form textarea::placeholder {
   color: #9ca3af !important;
@@ -1163,3 +1172,21 @@ body {
 
 /* index.html 의 contact section — 기존 navy 배경 유지 */
 /* (별도 override 불필요, 원래 .contact-section 스타일 그대로) */
+
+/* ── Nav Dropdown ── */
+.nav-dropdown { position: relative; }
+.nav-dropdown .nav-link { cursor: pointer; user-select: none; }
+.dropdown-menu {
+  display: none; position: absolute; top: calc(100% + 8px); left: 50%;
+  transform: translateX(-50%);
+  background: var(--navy); border: 1px solid rgba(201,168,76,.2);
+  border-top: 2px solid var(--gold);
+  min-width: 150px; z-index: 999; padding: 6px 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+.nav-dropdown:hover .dropdown-menu { display: block; }
+.dropdown-menu a {
+  display: block; padding: 10px 20px; font-size: 13px; color: rgba(255,255,255,.7);
+  text-decoration: none; white-space: nowrap; transition: color .15s, background .15s;
+}
+.dropdown-menu a:hover { color: var(--gold); background: rgba(201,168,76,.07); }
