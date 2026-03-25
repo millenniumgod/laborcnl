@@ -119,6 +119,7 @@
     <div class="auth-bar-inner">
       <span class="auth-status" id="authStatus"></span>
       <button class="btn-sm line" id="loginBtn" onclick="openLogin()">로그인</button>
+      <button class="btn-sm line" id="changePwBtn" onclick="openChangePw()" style="display:none">비밀번호 변경</button>
       <button class="btn-sm line" id="logoutBtn" onclick="doLogout()" style="display:none">로그아웃</button>
     </div>
   </div>
@@ -181,10 +182,42 @@
         <button class="btn-sm line" onclick="closeModal('loginModal')">취소</button>
         <button class="btn-sm gold" onclick="doLogin()">로그인</button>
       </div>
-      <p style="font-size:12px;color:#9ca3af;margin-top:16px;line-height:1.6">
-        관리자 계정으로 로그인하면 칼럼을 작성할 수 있습니다.<br/>
-        방문자는 로그인 없이 모든 칼럼을 읽을 수 있습니다.
+      <p style="font-size:12px;color:#9ca3af;margin-top:14px;text-align:right">
+        <span style="cursor:pointer;text-decoration:underline" onclick="closeModal('loginModal');openFindPw()">비밀번호 찾기</span>
       </p>
+    </div>
+  </div>
+
+  <!-- 비밀번호 변경 모달 (로그인 후) -->
+  <div class="overlay" id="changePwModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('changePwModal')">×</button>
+      <h2 class="modal-title">비밀번호 변경</h2>
+      <div class="err-msg" id="changePwErr"></div>
+      <div class="mf"><label>현재 비밀번호</label><input type="password" id="cpCurrent"/></div>
+      <div class="mf"><label>새 비밀번호</label><input type="password" id="cpNew" placeholder="8자 이상"/></div>
+      <div class="mf"><label>새 비밀번호 확인</label><input type="password" id="cpConfirm"/></div>
+      <div class="modal-actions">
+        <button class="btn-sm line" onclick="closeModal('changePwModal')">취소</button>
+        <button class="btn-sm gold" onclick="doChangePw()">변경하기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 비밀번호 찾기 모달 -->
+  <div class="overlay" id="findPwModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('findPwModal')">×</button>
+      <h2 class="modal-title">비밀번호 찾기</h2>
+      <div class="err-msg" id="findPwErr"></div>
+      <div class="ok-msg" id="findPwOk" style="display:none;background:rgba(39,174,96,.08);border:1px solid rgba(39,174,96,.25);color:#1a7a3a;font-size:13px;padding:10px 12px;margin-bottom:12px"></div>
+      <p style="font-size:13px;color:#6b7280;margin-bottom:16px;line-height:1.7">등록된 복구 이메일로 임시 비밀번호를 발송합니다.</p>
+      <div class="mf"><label>아이디</label><input type="text" id="fpId" placeholder="admin"/></div>
+      <div class="mf"><label>복구 이메일</label><input type="email" id="fpEmail" placeholder="cnlcg@cnlcg.co.kr"/></div>
+      <div class="modal-actions">
+        <button class="btn-sm line" onclick="closeModal('findPwModal')">취소</button>
+        <button class="btn-sm gold" onclick="doFindPw()">임시 비밀번호 발송</button>
+      </div>
     </div>
   </div>
 
@@ -218,7 +251,7 @@
         <div class="footer-brand">
           <img src="logo_white.png" alt="노무법인 C&amp;L" class="footer-logo-img" style="height:40px;width:auto;display:block;margin-bottom:12px"/>
           <p>노동의 가치를 법으로 증명합니다.</p>
-          <p class="footer-copy">©2024 노무법인 C&amp;L. ALL RIGHTS RESERVED.</p>
+          <p class="footer-copy">©2018 노무법인 C&amp;L. ALL RIGHTS RESERVED.</p>
         </div>
         <div class="footer-links"><h4>정보</h4><a href="about.html">About Us</a><a href="column.html">Column</a><a href="contact.html">Contact</a></div>
         <div class="footer-links"><h4>법적 고지</h4><a href="#">개인정보처리방침</a><a href="#">이용약관</a></div>
@@ -257,29 +290,99 @@
   function savePosts(list) { localStorage.setItem('cnl_posts', JSON.stringify(list)); }
   function isAdmin() { return localStorage.getItem('cnl_auth') === 'ok'; }
 
+  /* ── 비밀번호 관리 (localStorage에 저장) ── */
+  const PW_KEY = 'cnl_admin_pw';
+  const RECOVERY_EMAIL = 'cnlcg@cnlcg.co.kr'; // 복구 이메일 (실제 운영 시 변경)
+
+  function getAdminPw() {
+    return localStorage.getItem(PW_KEY) || ADMIN.pw;
+  }
+
   function updateAuthUI() {
     const ok = isAdmin();
-    document.getElementById('authStatus').innerHTML = ok
-      ? '관리자 로그인 중 — <strong>글 작성 가능</strong>'
-      : '';
-    document.getElementById('loginBtn').style.display  = ok ? 'none' : '';
-    document.getElementById('logoutBtn').style.display = ok ? ''     : 'none';
-    document.getElementById('writeBtn').style.display  = ok ? ''     : 'none';
+    document.getElementById('authStatus').innerHTML = ok ? '관리자 로그인 중' : '';
+    document.getElementById('loginBtn').style.display    = ok ? 'none' : '';
+    document.getElementById('changePwBtn').style.display = ok ? ''     : 'none';
+    document.getElementById('logoutBtn').style.display   = ok ? ''     : 'none';
+    document.getElementById('writeBtn').style.display    = ok ? ''     : 'none';
   }
 
   function openLogin()  { openModal('loginModal'); setTimeout(()=>document.getElementById('loginId').focus(),100); }
   function doLogin() {
     const id = document.getElementById('loginId').value.trim();
     const pw = document.getElementById('loginPw').value;
-    if (id === ADMIN.id && pw === ADMIN.pw) {
+    if (id === ADMIN.id && pw === getAdminPw()) {
       localStorage.setItem('cnl_auth','ok');
       closeModal('loginModal');
+      document.getElementById('loginId').value = '';
+      document.getElementById('loginPw').value = '';
       updateAuthUI(); renderList();
     } else {
       document.getElementById('loginErr').style.display = 'block';
     }
   }
   function doLogout() { localStorage.removeItem('cnl_auth'); updateAuthUI(); renderList(); }
+
+  /* ── 비밀번호 변경 ── */
+  function openChangePw() {
+    document.getElementById('cpCurrent').value = '';
+    document.getElementById('cpNew').value = '';
+    document.getElementById('cpConfirm').value = '';
+    document.getElementById('changePwErr').style.display = 'none';
+    openModal('changePwModal');
+  }
+  function doChangePw() {
+    const cur     = document.getElementById('cpCurrent').value;
+    const newPw   = document.getElementById('cpNew').value;
+    const confirm = document.getElementById('cpConfirm').value;
+    const errEl   = document.getElementById('changePwErr');
+
+    if (cur !== getAdminPw()) {
+      errEl.textContent = '현재 비밀번호가 올바르지 않습니다.';
+      errEl.style.display = 'block'; return;
+    }
+    if (newPw.length < 8) {
+      errEl.textContent = '새 비밀번호는 8자 이상이어야 합니다.';
+      errEl.style.display = 'block'; return;
+    }
+    if (newPw !== confirm) {
+      errEl.textContent = '새 비밀번호가 일치하지 않습니다.';
+      errEl.style.display = 'block'; return;
+    }
+    localStorage.setItem(PW_KEY, newPw);
+    closeModal('changePwModal');
+    alert('비밀번호가 변경되었습니다.');
+  }
+
+  /* ── 비밀번호 찾기 ── */
+  function openFindPw() {
+    document.getElementById('fpId').value = '';
+    document.getElementById('fpEmail').value = '';
+    document.getElementById('findPwErr').style.display = 'none';
+    document.getElementById('findPwOk').style.display  = 'none';
+    openModal('findPwModal');
+  }
+  function doFindPw() {
+    const id    = document.getElementById('fpId').value.trim();
+    const email = document.getElementById('fpEmail').value.trim().toLowerCase();
+    const errEl = document.getElementById('findPwErr');
+    const okEl  = document.getElementById('findPwOk');
+
+    if (id !== ADMIN.id) {
+      errEl.textContent = '등록된 아이디가 없습니다.';
+      errEl.style.display = 'block'; return;
+    }
+    if (email !== RECOVERY_EMAIL.toLowerCase()) {
+      errEl.textContent = '등록된 복구 이메일과 일치하지 않습니다.';
+      errEl.style.display = 'block'; return;
+    }
+    // 임시 비밀번호 생성 (실제 이메일 발송은 서버 필요 — 현재는 화면에 표시)
+    const tmpPw = 'CNL' + Math.random().toString(36).slice(2,7).toUpperCase() + '!';
+    localStorage.setItem(PW_KEY, tmpPw);
+    errEl.style.display = 'none';
+    okEl.innerHTML = '임시 비밀번호가 설정되었습니다.<br/><strong style="font-size:15px;letter-spacing:.05em">' + tmpPw + '</strong><br/><small>로그인 후 반드시 비밀번호를 변경해주세요.</small>';
+    okEl.style.display = 'block';
+  }
 
   function renderList() {
     const posts = getPosts().sort((a,b)=>b.id-a.id);
