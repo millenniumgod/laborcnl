@@ -2,10 +2,10 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --navy:    #0d1b2a;
-  --navy2:   #1b2e45;
-  --gold:    #c9a84c;
-  --gold2:   #e8c96a;
+  --navy:    #1a3f7a;
+  --navy2:   #1e4fa0;
+  --gold:    #1e4fa0;
+  --gold2:   #2d65c2;
   --cream:   #f5f0e8;
   --light:   #fafaf7;
   --gray:    #6b7280;
@@ -220,11 +220,6 @@ body {
 
 .nav-link:hover, .nav-link.active { color: var(--white); }
 .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
-
-.lmaster-link {
-  color: var(--gold) !important;
-  font-weight: 700;
-}
 
 .hamburger {
   display: none;
