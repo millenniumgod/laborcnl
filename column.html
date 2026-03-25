@@ -158,7 +158,13 @@
         <div class="pv-title" id="pvTitle"></div>
         <div class="pv-meta" id="pvMeta"></div>
         <div class="pv-body" id="pvBody"></div>
-        <span class="pv-back" onclick="showList()">← 목록으로</span>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:32px;padding-top:20px;border-top:1px solid rgba(13,27,42,.08)">
+          <span class="pv-back" onclick="showList()">← 목록으로</span>
+          <div id="pvAdminBtns" style="display:none;gap:10px;display:none">
+            <button onclick="editPost()" style="background:#1a3f7a;color:#fff;border:none;font-family:var(--ff-sans);font-size:12px;font-weight:700;padding:8px 18px;cursor:pointer;letter-spacing:.05em">수정</button>
+            <button onclick="deletePost()" style="background:#c0392b;color:#fff;border:none;font-family:var(--ff-sans);font-size:12px;font-weight:700;padding:8px 18px;cursor:pointer;letter-spacing:.05em">삭제</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -281,6 +287,7 @@
     document.getElementById('postCount').textContent = total;
     const slice = posts.slice((page-1)*PER_PAGE, page*PER_PAGE);
     const tbody = document.getElementById('postList');
+    const admin = isAdmin();
     if (!slice.length) {
       tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:48px;color:#9ca3af;font-size:14px">등록된 칼럼이 없습니다.</td></tr>';
     } else {
@@ -292,7 +299,13 @@
             <span class="post-title-link" onclick="showPost(${p.id})">${p.title}</span>
           </td>
           <td>${p.author}</td>
-          <td>${p.date}</td>
+          <td style="white-space:nowrap">
+            ${p.date}
+            ${admin ? \`<span style="margin-left:8px;display:inline-flex;gap:4px">
+              <button onclick="event.stopPropagation();editPostById(\${p.id})" style="background:#1a3f7a;color:#fff;border:none;font-size:10px;font-weight:700;padding:3px 8px;cursor:pointer;font-family:sans-serif">수정</button>
+              <button onclick="event.stopPropagation();deletePostById(\${p.id})" style="background:#c0392b;color:#fff;border:none;font-size:10px;font-weight:700;padding:3px 8px;cursor:pointer;font-family:sans-serif">삭제</button>
+            </span>\` : ''}
+          </td>
         </tr>`).join('');
     }
     const pages = Math.ceil(total / PER_PAGE);
@@ -302,13 +315,19 @@
   }
   function goPage(p) { page=p; renderList(); window.scrollTo(0,300); }
 
+  let currentPostId = null;
+
   function showPost(id) {
     const p = getPosts().find(x=>x.id===id);
     if (!p) return;
+    currentPostId = id;
     document.getElementById('pvCat').textContent   = p.cat;
     document.getElementById('pvTitle').textContent = p.title;
     document.getElementById('pvMeta').textContent  = `${p.author} · ${p.date}`;
     document.getElementById('pvBody').textContent  = p.body;
+    // 관리자 버튼 표시
+    const adminBtns = document.getElementById('pvAdminBtns');
+    adminBtns.style.display = isAdmin() ? 'flex' : 'none';
     document.getElementById('listView').style.display = 'none';
     document.getElementById('postView').style.display = '';
     window.scrollTo(0, 200);
@@ -316,6 +335,39 @@
   function showList() {
     document.getElementById('postView').style.display = 'none';
     document.getElementById('listView').style.display = '';
+    currentPostId = null;
+  }
+
+  // 상세 뷰에서 수정 버튼
+  function editPost() {
+    if (currentPostId) editPostById(currentPostId);
+  }
+  // 상세 뷰에서 삭제 버튼
+  function deletePost() {
+    if (currentPostId) deletePostById(currentPostId);
+  }
+
+  // 목록/상세에서 공통 수정
+  function editPostById(id) {
+    if (!isAdmin()) return;
+    const p = getPosts().find(x=>x.id===id);
+    if (!p) return;
+    document.getElementById('editId').value        = p.id;
+    document.getElementById('writeTitle').textContent = '칼럼 수정';
+    document.getElementById('pCat').value          = p.cat;
+    document.getElementById('pTitleInput').value   = p.title;
+    document.getElementById('pBody').value         = p.body;
+    openModal('writeModal');
+  }
+
+  // 목록/상세에서 공통 삭제
+  function deletePostById(id) {
+    if (!isAdmin()) return;
+    if (!confirm('이 칼럼을 삭제하시겠습니까?')) return;
+    const posts = getPosts().filter(x=>x.id!==id);
+    savePosts(posts);
+    if (currentPostId === id) showList();
+    renderList();
   }
 
   function openWrite() {
@@ -333,13 +385,26 @@
     const cat   = document.getElementById('pCat').value;
     if (!title || !body) { alert('제목과 본문을 모두 입력해주세요.'); return; }
     const posts = getPosts();
+    const editId = Number(document.getElementById('editId').value);
     const today = new Date();
     const d = `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,'0')}.${String(today.getDate()).padStart(2,'0')}`;
-    const newId = posts.length ? Math.max(...posts.map(x=>x.id))+1 : 1;
-    posts.push({ id:newId, cat, title, body, author:'관리자', date:d });
+
+    if (editId) {
+      // 수정 모드
+      const idx = posts.findIndex(x=>x.id===editId);
+      if (idx > -1) {
+        posts[idx] = { ...posts[idx], cat, title, body, date: d };
+      }
+    } else {
+      // 신규 등록
+      const newId = posts.length ? Math.max(...posts.map(x=>x.id))+1 : 1;
+      posts.push({ id:newId, cat, title, body, author:'관리자', date:d });
+    }
     savePosts(posts);
     closeModal('writeModal');
     renderList();
+    // 수정이었고 상세 뷰에서 열었다면 상세 뷰 갱신
+    if (editId && currentPostId === editId) showPost(editId);
   }
 
   function openModal(id)  { document.getElementById(id).classList.add('open'); }
