@@ -291,22 +291,21 @@
     if (!slice.length) {
       tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:48px;color:#9ca3af;font-size:14px">등록된 칼럼이 없습니다.</td></tr>';
     } else {
-      tbody.innerHTML = slice.map((p, i) => `
-        <tr>
-          <td>${total - (page-1)*PER_PAGE - i}</td>
-          <td>
-            <span class="post-cat-badge">${p.cat}</span>
-            <span class="post-title-link" onclick="showPost(${p.id})">${p.title}</span>
-          </td>
-          <td>${p.author}</td>
-          <td style="white-space:nowrap">
-            ${p.date}
-            ${admin ? \`<span style="margin-left:8px;display:inline-flex;gap:4px">
-              <button onclick="event.stopPropagation();editPostById(\${p.id})" style="background:#1a3f7a;color:#fff;border:none;font-size:10px;font-weight:700;padding:3px 8px;cursor:pointer;font-family:sans-serif">수정</button>
-              <button onclick="event.stopPropagation();deletePostById(\${p.id})" style="background:#c0392b;color:#fff;border:none;font-size:10px;font-weight:700;padding:3px 8px;cursor:pointer;font-family:sans-serif">삭제</button>
-            </span>\` : ''}
-          </td>
-        </tr>`).join('');
+      tbody.innerHTML = slice.map((p, i) => {
+        const adminBtns = admin
+          ? '<span style="margin-left:8px;display:inline-flex;gap:4px">'
+            + '<button onclick="event.stopPropagation();editPostById(' + p.id + ')" style="background:#1a3f7a;color:#fff;border:none;font-size:10px;font-weight:700;padding:3px 8px;cursor:pointer;font-family:sans-serif">수정</button>'
+            + '<button onclick="event.stopPropagation();deletePostById(' + p.id + ')" style="background:#c0392b;color:#fff;border:none;font-size:10px;font-weight:700;padding:3px 8px;cursor:pointer;font-family:sans-serif">삭제</button>'
+            + '</span>'
+          : '';
+        return '<tr>'
+          + '<td>' + (total - (page-1)*PER_PAGE - i) + '</td>'
+          + '<td><span class="post-cat-badge">' + p.cat + '</span>'
+          + '<span class="post-title-link" onclick="showPost(' + p.id + ')">' + p.title + '</span></td>'
+          + '<td>' + p.author + '</td>'
+          + '<td style="white-space:nowrap">' + p.date + adminBtns + '</td>'
+          + '</tr>';
+      }).join('');
     }
     const pages = Math.ceil(total / PER_PAGE);
     document.getElementById('paging').innerHTML = Array.from({length:pages},(_,i)=>
