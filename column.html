@@ -155,7 +155,10 @@
     <div id="listView">
       <div class="board-toolbar">
         <p class="board-count">총 <strong id="postCount">0</strong>개의 글</p>
-        <button class="btn-sm gold" id="writeBtn" onclick="openWrite()" style="display:none">+ 글 작성</button>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span id="saveStatusMsg" style="display:none;font-size:13px;font-weight:600"></span>
+          <button class="btn-sm gold" id="writeBtn" onclick="openWrite()" style="display:none">+ 글 작성</button>
+        </div>
       </div>
       <table class="post-table">
         <thead>
@@ -358,13 +361,18 @@
   function isAdmin()    { return localStorage.getItem('cnl_auth') === 'ok'; }
   function getToken()   { return localStorage.getItem('cnl_gh_token') || ''; }
 
+  /* ── 로컬 캐시 (즉시 반영용) ── */
+  let localCache = null;
+
   /* ── GitHub: 글 불러오기 ── */
   async function getPosts() {
+    if (localCache) return localCache;
     try {
       const res = await fetch(RAW_URL + '?t=' + Date.now());
-      if (res.ok) return await res.json();
+      if (res.ok) { localCache = await res.json(); return localCache; }
     } catch(e) {}
-    return [];
+    localCache = [];
+    return localCache;
   }
 
   /* ── GitHub: 글 저장 ── */
@@ -600,8 +608,27 @@
     if (!confirm('이 칼럼을 삭제하시겠습니까?')) return;
     const posts = await getPosts();
     const updated = posts.filter(x=>x.id!==id);
+
+    // 즉시 반영
+    localCache = updated;
+    if (currentPostId === id) showList();
+    renderList();
+
+    // 백그라운드 저장
+    const statusMsg = document.getElementById('saveStatusMsg');
+    statusMsg.style.display = 'block';
+    statusMsg.style.color = '#6b7280';
+    statusMsg.textContent = '⏳ 삭제 저장 중...';
+
     const ok = await savePosts(updated);
-    if (ok) { if (currentPostId === id) showList(); renderList(); }
+    if (ok) {
+      statusMsg.style.color = '#1a7a3a';
+      statusMsg.textContent = '✅ 삭제 완료!';
+      setTimeout(() => statusMsg.style.display = 'none', 2000);
+    } else {
+      statusMsg.style.color = '#c0392b';
+      statusMsg.textContent = '❌ 삭제 저장 실패. 새로고침 후 다시 시도해주세요.';
+    }
   }
 
   function openWrite() {
@@ -622,8 +649,7 @@
     if (!title || !body || body === '<br>') { alert('제목과 본문을 모두 입력해주세요.'); return; }
 
     const submitBtn = document.getElementById('submitPostBtn');
-    submitBtn.textContent = '저장 중...';
-    submitBtn.disabled = true;
+    const statusMsg = document.getElementById('saveStatusMsg');
 
     const posts  = await getPosts();
     const editId = Number(document.getElementById('editId').value);
@@ -638,14 +664,29 @@
       posts.push({ id:newId, cat, title, body, author:'관리자', date:d });
     }
 
+    // 즉시 로컬 캐시 업데이트 & 화면 반영
+    localCache = posts;
+    closeModal('writeModal');
+    await renderList();
+    if (editId && currentPostId === editId) await showPost(editId);
+
+    // 백그라운드로 GitHub 저장
+    statusMsg.style.display = 'block';
+    statusMsg.style.color = '#6b7280';
+    statusMsg.textContent = '⏳ GitHub에 저장 중...';
+    submitBtn.disabled = true;
+
     const ok = await savePosts(posts);
     submitBtn.textContent = '등록하기';
     submitBtn.disabled = false;
 
     if (ok) {
-      closeModal('writeModal');
-      await renderList();
-      if (editId && currentPostId === editId) await showPost(editId);
+      statusMsg.style.color = '#1a7a3a';
+      statusMsg.textContent = '✅ GitHub 저장 완료!';
+      setTimeout(() => statusMsg.style.display = 'none', 2000);
+    } else {
+      statusMsg.style.color = '#c0392b';
+      statusMsg.textContent = '❌ GitHub 저장 실패. 새로고침 후 다시 시도해주세요.';
     }
   }
 
