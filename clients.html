@@ -320,18 +320,101 @@
   </div>
 </div>
 
+
+
+  <!-- 개인정보처리방침 팝업 -->
+  <div id="privacyModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:99999;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto">
+    <div style="background:#fff;max-width:680px;width:100%;padding:48px 40px;position:relative;margin:auto">
+      <button onclick="document.getElementById('privacyModal').style.display='none'" style="position:absolute;top:16px;right:20px;background:none;border:none;font-size:26px;cursor:pointer;color:#9ca3af;line-height:1">×</button>
+      <div style="font-size:11px;letter-spacing:.2em;color:#1e4fa0;margin-bottom:10px;text-transform:uppercase">Legal Notice</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;color:#1a3f7a;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid rgba(13,27,42,.1)">개인정보처리방침</h2>
+      <div style="font-size:14px;color:#374151;line-height:2">
+        <p style="margin-bottom:20px">노무법인 C&amp;L(이하 "법인")은 이용자의 개인정보를 소중히 여기며, 「개인정보 보호법」 및 관련 법령을 준수합니다.</p>
+        <h4 style="font-size:15px;font-weight:700;color:#1a3f7a;margin:20px 0 8px">1. 수집하는 개인정보 항목</h4>
+        <p style="margin-bottom:16px">성함, 연락처, 이메일 주소, 문의 내용</p>
+        <h4 style="font-size:15px;font-weight:700;color:#1a3f7a;margin:20px 0 8px">2. 개인정보 수집 및 이용 목적</h4>
+        <p style="margin-bottom:16px">상담 문의 접수 및 답변, 서비스 안내</p>
+        <h4 style="font-size:15px;font-weight:700;color:#1a3f7a;margin:20px 0 8px">3. 개인정보 보유 및 이용 기간</h4>
+        <p style="margin-bottom:16px">상담 완료 후 3년간 보관 후 파기. 단, 관련 법령에 따라 보존이 필요한 경우 해당 기간 동안 보관합니다.</p>
+        <h4 style="font-size:15px;font-weight:700;color:#1a3f7a;margin:20px 0 8px">4. 개인정보의 제3자 제공</h4>
+        <p style="margin-bottom:16px">법인은 이용자의 동의 없이 개인정보를 제3자에게 제공하지 않습니다. 다만, 법령의 규정에 의한 경우는 예외로 합니다.</p>
+        <h4 style="font-size:15px;font-weight:700;color:#1a3f7a;margin:20px 0 8px">5. 개인정보 파기</h4>
+        <p style="margin-bottom:16px">보유 기간 경과 또는 처리 목적 달성 후 지체 없이 해당 개인정보를 파기합니다. 전자적 파일은 복구 불가능한 방법으로 영구 삭제하며, 출력물은 분쇄 또는 소각합니다.</p>
+        <h4 style="font-size:15px;font-weight:700;color:#1a3f7a;margin:20px 0 8px">6. 이용자의 권리</h4>
+        <p style="margin-bottom:16px">이용자는 언제든지 개인정보 열람, 수정, 삭제, 처리정지를 요구할 수 있습니다. 관련 문의는 아래 연락처로 해주시기 바랍니다.</p>
+        <h4 style="font-size:15px;font-weight:700;color:#1a3f7a;margin:20px 0 8px">7. 개인정보 보호책임자</h4>
+        <p style="margin-bottom:16px">담당: 노무법인 C&amp;L 대표<br/>이메일: cnlcg@cnlcg.co.kr<br/>전화: 02-2135-9391</p>
+        <h4 style="font-size:15px;font-weight:700;color:#1a3f7a;margin:20px 0 8px">8. 시행일</h4>
+        <p>본 방침은 2024년 1월 1일부터 시행됩니다.</p>
+      </div>
+      <div style="text-align:right;margin-top:32px">
+        <button onclick="document.getElementById('privacyModal').style.display='none'" style="padding:12px 32px;background:#1a3f7a;color:#fff;border:none;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.08em">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이용약관 팝업 -->
+  <div id="termsModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:99999;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto">
+    <div style="background:#fff;max-width:680px;width:100%;padding:48px 40px;position:relative;margin:auto">
+      <button onclick="document.getElementById('termsModal').style.display='none'" style="position:absolute;top:16px;right:20px;background:none;border:none;font-size:26px;cursor:pointer;color:#9ca3af;line-height:1">×</button>
+      <div style="font-size:11px;letter-spacing:.2em;color:#1e4fa0;margin-bottom:10px;text-transform:uppercase">Legal Notice</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;color:#1a3f7a;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid rgba(13,27,42,.1)">이용약관</h2>
+      <div style="font-size:14px;color:#374151;line-height:2">
+        <h4 style="font-size:15px;font-weight:700;color:#1a3f7a;margin:0 0 8px">제1조 (목적)</h4>
+        <p style="margin-bottom:20px">본 약관은 노무법인 C&amp;L(이하 "법인")이 운영하는 웹사이트(laborcnl.com, 이하 "사이트")의 이용에 관한 조건 및 절차, 법인과 이용자 간의 권리·의무 및 책임 사항을 규정함을 목적으로 합니다.</p>
+        <h4 style="font-size:15px;font-weight:700;color:#1a3f7a;margin:20px 0 8px">제2조 (약관의 효력 및 변경)</h4>
+        <p style="margin-bottom:20px">본 약관은 사이트에 게시함으로써 효력이 발생합니다. 법인은 합리적인 사유가 있는 경우 약관을 변경할 수 있으며, 변경된 약관은 사이트에 공지합니다.</p>
+        <h4 style="font-size:15px;font-weight:700;color:#1a3f7a;margin:20px 0 8px">제3조 (서비스의 제공)</h4>
+        <p style="margin-bottom:20px">법인은 이용자에게 노무·인사·조직 컨설팅 관련 정보 제공 및 상담 문의 접수 서비스를 제공합니다. 서비스는 연중무휴 24시간 제공을 원칙으로 하되, 시스템 점검 등 필요한 경우 일시 중단될 수 있습니다.</p>
+        <h4 style="font-size:15px;font-weight:700;color:#1a3f7a;margin:20px 0 8px">제4조 (이용자의 의무)</h4>
+        <p style="margin-bottom:20px">이용자는 사이트 이용 시 다음 행위를 하여서는 안 됩니다.<br/>① 타인의 정보 도용<br/>② 법인의 저작권 등 지적재산권 침해<br/>③ 사이트 운영을 방해하는 행위<br/>④ 기타 관련 법령에 위반되는 행위</p>
+        <h4 style="font-size:15px;font-weight:700;color:#1a3f7a;margin:20px 0 8px">제5조 (책임의 한계)</h4>
+        <p style="margin-bottom:20px">사이트에 게시된 정보는 일반적인 참고 목적으로 제공되며, 개별 사안에 대한 법률적 조언을 구성하지 않습니다. 구체적인 사안에 대하여는 반드시 전문가의 직접 상담을 받으시기 바랍니다.</p>
+        <h4 style="font-size:15px;font-weight:700;color:#1a3f7a;margin:20px 0 8px">제6조 (저작권)</h4>
+        <p style="margin-bottom:20px">사이트 내 모든 콘텐츠(텍스트, 이미지, 로고 등)의 저작권은 법인에 귀속됩니다. 사전 서면 동의 없이 무단 복제, 배포, 전송을 금지합니다.</p>
+        <h4 style="font-size:15px;font-weight:700;color:#1a3f7a;margin:20px 0 8px">제7조 (준거법 및 관할)</h4>
+        <p>본 약관은 대한민국 법령에 따라 해석되며, 분쟁 발생 시 서울중앙지방법원을 전속 관할 법원으로 합니다.</p>
+      </div>
+      <div style="text-align:right;margin-top:32px">
+        <button onclick="document.getElementById('termsModal').style.display='none'" style="padding:12px 32px;background:#1a3f7a;color:#fff;border:none;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.08em">확인</button>
+      </div>
+    </div>
+  </div>
+
 <footer class="footer">
   <div class="container">
-    <div class="footer-grid">
+    <div class="footer-grid" style="grid-template-columns:1.6fr 2fr 1fr 1fr">
       <div class="footer-brand">
         <img src="logo_white.png" alt="노무법인 C&amp;L" class="footer-logo-img" style="height:40px;width:auto;display:block;margin-bottom:12px"/>
         <p>노동의 가치를 법으로 증명합니다.</p>
         <p class="footer-copy">©2018 노무법인 C&amp;L. ALL RIGHTS RESERVED.</p>
       </div>
-      <div class="footer-links"><h4>서비스</h4><a href="service.html">HR 컨설팅</a><a href="service.html">노무 컨설팅</a>
+      <div class="footer-links">
+        <h4>서비스</h4>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 8px">
+          <a href="service.html">인사노무 자문</a>
+          <a href="service.html">노동위원회 대응</a>
+          <a href="service.html">노동청 대응</a>
+          <a href="service.html">HR 컨설팅</a>
+          <a href="service.html">노무 컨설팅</a>
+          <a href="service.html">산업재해보상</a>
+          <a href="service.html">산업안전보건 대응</a>
+          <a href="service.html">ESG 컨설팅</a>
+          <a href="service.html">교육 / 강의</a>
+        </div>
       </div>
-      <div class="footer-links"><h4>정보</h4><a href="about.html">About Us</a><a href="column.html">Column</a><a href="clients.html">Clients</a><a href="contact.html">Contact</a></div>
-      <div class="footer-links"><h4>법적 고지</h4><a href="#">개인정보처리방침</a><a href="#">이용약관</a></div>
+      <div class="footer-links">
+        <h4>정보</h4>
+        <a href="about.html">About Us</a>
+        <a href="column.html">Column</a>
+        <a href="clients.html">Clients</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-links">
+        <h4>법적 고지</h4>
+        <a href="#" onclick="event.preventDefault();var m=document.getElementById('privacyModal');m.style.display='flex'">개인정보처리방침</a>
+        <a href="#" onclick="event.preventDefault();var m=document.getElementById('termsModal');m.style.display='flex'">이용약관</a>
+      </div>
     </div>
   </div>
 </footer>
