@@ -194,11 +194,6 @@
       <div class="err-msg" id="loginErr">아이디 또는 비밀번호가 올바르지 않습니다.</div>
       <div class="mf"><label>아이디</label><input type="text" id="loginId" onkeydown="if(event.key==='Enter')doLogin()"/></div>
       <div class="mf"><label>비밀번호</label><input type="password" id="loginPw" onkeydown="if(event.key==='Enter')doLogin()"/></div>
-      <div class="mf">
-        <label>GitHub Token</label>
-        <input type="password" id="loginToken" placeholder="ghp_xxxxxxxxxxxx" onkeydown="if(event.key==='Enter')doLogin()"/>
-        <small style="color:#9ca3af;font-size:11px;margin-top:4px;display:block">GitHub → Settings → Developer settings → Personal access tokens → <strong>Contents: Read &amp; Write</strong> 권한 필요</small>
-      </div>
       <div class="modal-actions">
         <button class="btn-sm line" onclick="closeModal('loginModal')">취소</button>
         <button class="btn-sm gold" onclick="doLogin()">로그인</button>
@@ -242,6 +237,31 @@
     </div>
   </div>
 
+
+  <!-- GitHub Token 설정 모달 (최초 1회) -->
+  <div class="overlay" id="tokenModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('tokenModal')">×</button>
+      <h2 class="modal-title">GitHub Token 설정</h2>
+      <div class="err-msg" id="tokenErr"></div>
+      <p style="font-size:13px;color:#6b7280;margin-bottom:16px;line-height:1.7">
+        글 저장을 위해 GitHub Token을 <strong>최초 1회</strong>만 입력하면 됩니다.<br/>
+        이후에는 아이디/비밀번호로만 로그인하실 수 있습니다.
+      </p>
+      <div class="mf">
+        <label>GitHub Personal Access Token</label>
+        <input type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxx"/>
+        <small style="color:#9ca3af;font-size:11px;margin-top:6px;display:block;line-height:1.7">
+          GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)<br/>
+          → Generate new token → <strong>repo</strong> 권한 체크 후 발급
+        </small>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-sm line" onclick="closeModal('tokenModal')">나중에</button>
+        <button class="btn-sm gold" onclick="saveToken()">저장</button>
+      </div>
+    </div>
+  </div>
   <!-- 글 작성 모달 -->
   <div class="overlay" id="writeModal">
     <div class="modal-box wide">
@@ -330,7 +350,7 @@
   const RAW_URL = `https://raw.githubusercontent.com/${GITHUB_REPO}/${GITHUB_BRANCH}/${POSTS_FILE}`;
   const API_URL = `https://api.github.com/repos/${GITHUB_REPO}/contents/${POSTS_FILE}`;
 
-  const PW_KEY = 'cnl_admin_pw';
+  const PW_KEY     = 'cnl_admin_pw';
   const DEFAULT_PW = 'cnl2024!';
   const RECOVERY_EMAIL = 'cnlcg@cnlcg.co.kr';
 
@@ -338,7 +358,7 @@
   function isAdmin()    { return localStorage.getItem('cnl_auth') === 'ok'; }
   function getToken()   { return localStorage.getItem('cnl_gh_token') || ''; }
 
-  /* ── GitHub API: 글 불러오기 ── */
+  /* ── GitHub: 글 불러오기 ── */
   async function getPosts() {
     try {
       const res = await fetch(RAW_URL + '?t=' + Date.now());
@@ -347,129 +367,54 @@
     return [];
   }
 
-  /* ── GitHub API: 글 저장 ── */
+  /* ── GitHub: 글 저장 ── */
   async function savePosts(list) {
     const token = getToken();
-    if (!token) { alert('GitHub Token이 없습니다. 로그아웃 후 다시 로그인해주세요.'); return false; }
+    if (!token) { openModal('tokenModal'); return false; }
     try {
-      // 현재 파일 SHA 조회
       let sha = null;
       const infoRes = await fetch(API_URL, {
         headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
       });
       if (infoRes.ok) { const info = await infoRes.json(); sha = info.sha; }
-
       const jsonStr = JSON.stringify(list, null, 2);
       const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
-
       const body = { message: 'Update column posts', content: encoded, branch: GITHUB_BRANCH };
       if (sha) body.sha = sha;
-
       const putRes = await fetch(API_URL, {
         method: 'PUT',
         headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' },
         body: JSON.stringify(body)
       });
-
-      if (!putRes.ok) {
-        const err = await putRes.json();
-        alert('저장 오류: ' + (err.message || putRes.status));
-        return false;
-      }
+      if (!putRes.ok) { const err = await putRes.json(); alert('저장 오류: ' + (err.message || putRes.status)); return false; }
       return true;
-    } catch(e) {
-      alert('저장 중 오류가 발생했습니다: ' + e.message);
-      return false;
-    }
+    } catch(e) { alert('저장 중 오류: ' + e.message); return false; }
   }
 
   /* ── 인증 UI ── */
   function updateAuthUI() {
     const ok = isAdmin();
     document.getElementById('authStatus').innerHTML = ok ? '관리자 로그인 중' : '';
-    document.getElementById('loginBtn').style.display     = ok ? 'none' : '';
-    document.getElementById('changePwBtn').style.display  = ok ? ''     : 'none';
-    document.getElementById('logoutBtn').style.display    = ok ? ''     : 'none';
-    document.getElementById('writeBtn').style.display     = ok ? ''     : 'none';
+    document.getElementById('loginBtn').style.display    = ok ? 'none' : '';
+    document.getElementById('changePwBtn').style.display = ok ? ''     : 'none';
+    document.getElementById('logoutBtn').style.display   = ok ? ''     : 'none';
+    document.getElementById('writeBtn').style.display    = ok ? ''     : 'none';
   }
 
-  function openLogin()  { openModal('loginModal'); setTimeout(()=>document.getElementById('loginId').focus(),100); }
+  function openLogin() { openModal('loginModal'); setTimeout(()=>document.getElementById('loginId').focus(),100); }
 
   function doLogin() {
     const id    = document.getElementById('loginId').value.trim();
     const pw    = document.getElementById('loginPw').value;
-    const token = document.getElementById('loginToken').value.trim();
     const errEl = document.getElementById('loginErr');
     if (id === ADMIN.id && pw === getAdminPw()) {
-      if (!token) { errEl.textContent = 'GitHub Token을 입력해주세요.'; errEl.style.display='block'; return; }
       localStorage.setItem('cnl_auth', 'ok');
-      localStorage.setItem('cnl_gh_token', token);
       closeModal('loginModal');
       document.getElementById('loginId').value = '';
       document.getElementById('loginPw').value = '';
-      document.getElementById('loginToken').value = '';
-      /* ── 리치 에디터 ── */
-  function fmt(cmd, val) {
-    document.getElementById('richEditor').focus();
-    document.execCommand(cmd, false, val || null);
-  }
-
-  /* ── 이미지 GitHub 업로드 ── */
-  async function uploadImage(input) {
-    const file = input.files[0];
-    if (!file) return;
-    const token = getToken();
-    if (!token) { alert('이미지 업로드는 로그인 후 가능합니다.'); return; }
-
-    const maxSize = 5 * 1024 * 1024;
-    if (file.size > maxSize) { alert('이미지는 5MB 이하만 업로드 가능합니다.'); return; }
-
-    const progress = document.getElementById('uploadProgress');
-    progress.textContent = '업로드 중...';
-
-    try {
-      const arrayBuf = await file.arrayBuffer();
-      const bytes = new Uint8Array(arrayBuf);
-      let binary = '';
-      bytes.forEach(b => binary += String.fromCharCode(b));
-      const base64 = btoa(binary);
-
-      const ext = file.name.split('.').pop();
-      const filename = `images/${Date.now()}_${Math.random().toString(36).slice(2,7)}.${ext}`;
-      const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${filename}`;
-
-      const res = await fetch(apiUrl, {
-        method: 'PUT',
-        headers: {
-          Authorization: `token ${token}`,
-          'Content-Type': 'application/json',
-          Accept: 'application/vnd.github.v3+json'
-        },
-        body: JSON.stringify({
-          message: 'Upload column image',
-          content: base64,
-          branch: GITHUB_BRANCH
-        })
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.message || res.status);
-      }
-
-      const imgUrl = `https://raw.githubusercontent.com/${GITHUB_REPO}/${GITHUB_BRANCH}/${filename}`;
-      document.getElementById('richEditor').focus();
-      document.execCommand('insertImage', false, imgUrl);
-      progress.textContent = '✅ 업로드 완료';
-      setTimeout(() => progress.textContent = '', 2000);
-    } catch(e) {
-      progress.textContent = '❌ 업로드 실패';
-      alert('이미지 업로드 오류: ' + e.message);
-    }
-    input.value = '';
-  }
-
-  updateAuthUI(); renderList();
+      updateAuthUI();
+      renderList();
+      if (!getToken()) setTimeout(() => openModal('tokenModal'), 300);
     } else {
       errEl.textContent = '아이디 또는 비밀번호가 올바르지 않습니다.';
       errEl.style.display = 'block';
@@ -478,69 +423,23 @@
 
   function doLogout() {
     localStorage.removeItem('cnl_auth');
-    localStorage.removeItem('cnl_gh_token');
-    /* ── 리치 에디터 ── */
-  function fmt(cmd, val) {
-    document.getElementById('richEditor').focus();
-    document.execCommand(cmd, false, val || null);
+    updateAuthUI();
+    renderList();
   }
 
-  /* ── 이미지 GitHub 업로드 ── */
-  async function uploadImage(input) {
-    const file = input.files[0];
-    if (!file) return;
-    const token = getToken();
-    if (!token) { alert('이미지 업로드는 로그인 후 가능합니다.'); return; }
-
-    const maxSize = 5 * 1024 * 1024;
-    if (file.size > maxSize) { alert('이미지는 5MB 이하만 업로드 가능합니다.'); return; }
-
-    const progress = document.getElementById('uploadProgress');
-    progress.textContent = '업로드 중...';
-
-    try {
-      const arrayBuf = await file.arrayBuffer();
-      const bytes = new Uint8Array(arrayBuf);
-      let binary = '';
-      bytes.forEach(b => binary += String.fromCharCode(b));
-      const base64 = btoa(binary);
-
-      const ext = file.name.split('.').pop();
-      const filename = `images/${Date.now()}_${Math.random().toString(36).slice(2,7)}.${ext}`;
-      const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${filename}`;
-
-      const res = await fetch(apiUrl, {
-        method: 'PUT',
-        headers: {
-          Authorization: `token ${token}`,
-          'Content-Type': 'application/json',
-          Accept: 'application/vnd.github.v3+json'
-        },
-        body: JSON.stringify({
-          message: 'Upload column image',
-          content: base64,
-          branch: GITHUB_BRANCH
-        })
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.message || res.status);
-      }
-
-      const imgUrl = `https://raw.githubusercontent.com/${GITHUB_REPO}/${GITHUB_BRANCH}/${filename}`;
-      document.getElementById('richEditor').focus();
-      document.execCommand('insertImage', false, imgUrl);
-      progress.textContent = '✅ 업로드 완료';
-      setTimeout(() => progress.textContent = '', 2000);
-    } catch(e) {
-      progress.textContent = '❌ 업로드 실패';
-      alert('이미지 업로드 오류: ' + e.message);
+  /* ── GitHub Token 저장 ── */
+  function saveToken() {
+    const token = document.getElementById('tokenInput').value.trim();
+    const errEl = document.getElementById('tokenErr');
+    if (!token || !token.startsWith('ghp_')) {
+      errEl.textContent = '올바른 GitHub Token을 입력해주세요. (ghp_로 시작)';
+      errEl.style.display = 'block'; return;
     }
-    input.value = '';
-  }
-
-  updateAuthUI(); renderList();
+    localStorage.setItem('cnl_gh_token', token);
+    document.getElementById('tokenInput').value = '';
+    errEl.style.display = 'none';
+    closeModal('tokenModal');
+    alert('✅ Token이 저장되었습니다. 이제 글을 작성할 수 있습니다!');
   }
 
   /* ── 비밀번호 변경 ── */
@@ -556,9 +455,9 @@
     const newPw   = document.getElementById('cpNew').value;
     const confirm = document.getElementById('cpConfirm').value;
     const errEl   = document.getElementById('changePwErr');
-    if (cur !== getAdminPw()) { errEl.textContent='현재 비밀번호가 올바르지 않습니다.'; errEl.style.display='block'; return; }
-    if (newPw.length < 8)     { errEl.textContent='새 비밀번호는 8자 이상이어야 합니다.'; errEl.style.display='block'; return; }
-    if (newPw !== confirm)    { errEl.textContent='새 비밀번호가 일치하지 않습니다.'; errEl.style.display='block'; return; }
+    if (cur !== getAdminPw())  { errEl.textContent='현재 비밀번호가 올바르지 않습니다.'; errEl.style.display='block'; return; }
+    if (newPw.length < 8)      { errEl.textContent='새 비밀번호는 8자 이상이어야 합니다.'; errEl.style.display='block'; return; }
+    if (newPw !== confirm)     { errEl.textContent='새 비밀번호가 일치하지 않습니다.'; errEl.style.display='block'; return; }
     localStorage.setItem(PW_KEY, newPw);
     closeModal('changePwModal');
     alert('비밀번호가 변경되었습니다.');
@@ -576,8 +475,51 @@
     const tmpPw = 'CNL' + Math.random().toString(36).slice(2,7).toUpperCase() + '!';
     localStorage.setItem(PW_KEY, tmpPw);
     errEl.style.display = 'none';
-    okEl.innerHTML = '임시 비밀번호가 설정되었습니다.<br/><strong style="font-size:15px;letter-spacing:.05em">' + tmpPw + '</strong><br/><small>로그인 후 반드시 비밀번호를 변경해주세요.</small>';
+    okEl.innerHTML = '임시 비밀번호가 설정되었습니다.<br/><strong style="font-size:15px">' + tmpPw + '</strong><br/><small>로그인 후 반드시 변경해주세요.</small>';
     okEl.style.display = 'block';
+  }
+
+  /* ── 리치 에디터 ── */
+  function fmt(cmd, val) {
+    document.getElementById('richEditor').focus();
+    document.execCommand(cmd, false, val || null);
+  }
+
+  /* ── 이미지 업로드 ── */
+  async function uploadImage(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const token = getToken();
+    if (!token) { alert('이미지 업로드 전에 GitHub Token을 먼저 등록해주세요.'); openModal('tokenModal'); return; }
+    if (file.size > 5 * 1024 * 1024) { alert('이미지는 5MB 이하만 업로드 가능합니다.'); return; }
+
+    const progress = document.getElementById('uploadProgress');
+    progress.textContent = '업로드 중...';
+    try {
+      const arrayBuf = await file.arrayBuffer();
+      const bytes = new Uint8Array(arrayBuf);
+      let binary = '';
+      bytes.forEach(b => binary += String.fromCharCode(b));
+      const base64 = btoa(binary);
+      const ext = file.name.split('.').pop();
+      const filename = `images/${Date.now()}_${Math.random().toString(36).slice(2,7)}.${ext}`;
+      const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${filename}`;
+      const res = await fetch(apiUrl, {
+        method: 'PUT',
+        headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' },
+        body: JSON.stringify({ message: 'Upload column image', content: base64, branch: GITHUB_BRANCH })
+      });
+      if (!res.ok) { const err = await res.json(); throw new Error(err.message || res.status); }
+      const imgUrl = `https://raw.githubusercontent.com/${GITHUB_REPO}/${GITHUB_BRANCH}/${filename}`;
+      document.getElementById('richEditor').focus();
+      document.execCommand('insertImage', false, imgUrl);
+      progress.textContent = '✅ 완료';
+      setTimeout(() => progress.textContent = '', 2000);
+    } catch(e) {
+      progress.textContent = '❌ 실패';
+      alert('이미지 업로드 오류: ' + e.message);
+    }
+    input.value = '';
   }
 
   /* ── 목록 렌더링 ── */
@@ -595,10 +537,9 @@
       tbody.innerHTML = slice.map((p, i) => {
         const adminBtns = admin
           ? '<span style="margin-left:8px;display:inline-flex;gap:4px">'
-            + '<button onclick="event.stopPropagation();editPostById(' + p.id + ')" style="background:#1a3f7a;color:#fff;border:none;font-size:10px;font-weight:700;padding:3px 8px;cursor:pointer;font-family:sans-serif">수정</button>'
-            + '<button onclick="event.stopPropagation();deletePostById(' + p.id + ')" style="background:#c0392b;color:#fff;border:none;font-size:10px;font-weight:700;padding:3px 8px;cursor:pointer;font-family:sans-serif">삭제</button>'
-            + '</span>'
-          : '';
+            + '<button onclick="event.stopPropagation();editPostById(' + p.id + ')" style="background:#1a3f7a;color:#fff;border:none;font-size:10px;font-weight:700;padding:3px 8px;cursor:pointer">수정</button>'
+            + '<button onclick="event.stopPropagation();deletePostById(' + p.id + ')" style="background:#c0392b;color:#fff;border:none;font-size:10px;font-weight:700;padding:3px 8px;cursor:pointer">삭제</button>'
+            + '</span>' : '';
         return '<tr>'
           + '<td>' + (total - (page-1)*PER_PAGE - i) + '</td>'
           + '<td><span class="post-cat-badge">' + p.cat + '</span>'
@@ -625,7 +566,7 @@
     document.getElementById('pvCat').textContent   = p.cat;
     document.getElementById('pvTitle').textContent = p.title;
     document.getElementById('pvMeta').textContent  = `${p.author} · ${p.date}`;
-    document.getElementById('pvBody').innerHTML  = p.body;
+    document.getElementById('pvBody').innerHTML    = p.body;
     const adminBtns = document.getElementById('pvAdminBtns');
     adminBtns.style.display = isAdmin() ? 'flex' : 'none';
     document.getElementById('listView').style.display = 'none';
@@ -660,10 +601,7 @@
     const posts = await getPosts();
     const updated = posts.filter(x=>x.id!==id);
     const ok = await savePosts(updated);
-    if (ok) {
-      if (currentPostId === id) showList();
-      renderList();
-    }
+    if (ok) { if (currentPostId === id) showList(); renderList(); }
   }
 
   function openWrite() {
@@ -687,9 +625,9 @@
     submitBtn.textContent = '저장 중...';
     submitBtn.disabled = true;
 
-    const posts = await getPosts();
+    const posts  = await getPosts();
     const editId = Number(document.getElementById('editId').value);
-    const today = new Date();
+    const today  = new Date();
     const d = `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,'0')}.${String(today.getDate()).padStart(2,'0')}`;
 
     if (editId) {
@@ -721,67 +659,6 @@
   document.querySelectorAll('.overlay').forEach(el => {
     el.addEventListener('click', e => { if (e.target===el) el.classList.remove('open'); });
   });
-
-  /* ── 리치 에디터 ── */
-  function fmt(cmd, val) {
-    document.getElementById('richEditor').focus();
-    document.execCommand(cmd, false, val || null);
-  }
-
-  /* ── 이미지 GitHub 업로드 ── */
-  async function uploadImage(input) {
-    const file = input.files[0];
-    if (!file) return;
-    const token = getToken();
-    if (!token) { alert('이미지 업로드는 로그인 후 가능합니다.'); return; }
-
-    const maxSize = 5 * 1024 * 1024;
-    if (file.size > maxSize) { alert('이미지는 5MB 이하만 업로드 가능합니다.'); return; }
-
-    const progress = document.getElementById('uploadProgress');
-    progress.textContent = '업로드 중...';
-
-    try {
-      const arrayBuf = await file.arrayBuffer();
-      const bytes = new Uint8Array(arrayBuf);
-      let binary = '';
-      bytes.forEach(b => binary += String.fromCharCode(b));
-      const base64 = btoa(binary);
-
-      const ext = file.name.split('.').pop();
-      const filename = `images/${Date.now()}_${Math.random().toString(36).slice(2,7)}.${ext}`;
-      const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${filename}`;
-
-      const res = await fetch(apiUrl, {
-        method: 'PUT',
-        headers: {
-          Authorization: `token ${token}`,
-          'Content-Type': 'application/json',
-          Accept: 'application/vnd.github.v3+json'
-        },
-        body: JSON.stringify({
-          message: 'Upload column image',
-          content: base64,
-          branch: GITHUB_BRANCH
-        })
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.message || res.status);
-      }
-
-      const imgUrl = `https://raw.githubusercontent.com/${GITHUB_REPO}/${GITHUB_BRANCH}/${filename}`;
-      document.getElementById('richEditor').focus();
-      document.execCommand('insertImage', false, imgUrl);
-      progress.textContent = '✅ 업로드 완료';
-      setTimeout(() => progress.textContent = '', 2000);
-    } catch(e) {
-      progress.textContent = '❌ 업로드 실패';
-      alert('이미지 업로드 오류: ' + e.message);
-    }
-    input.value = '';
-  }
 
   updateAuthUI();
   renderList();
