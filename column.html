@@ -309,6 +309,13 @@
             <option value="5">크게</option>
             <option value="7">매우 크게</option>
           </select>
+          <select onchange="setLineHeight(this.value);this.value=''" style="font-size:12px;padding:3px 6px;border:1px solid rgba(13,27,42,.15);background:#fff;cursor:pointer;color:#374151">
+            <option value="">줄 간격</option>
+            <option value="1.2">좁게 (1.2)</option>
+            <option value="1.6">보통 (1.6)</option>
+            <option value="2.0">넓게 (2.0)</option>
+            <option value="2.5">매우 넓게 (2.5)</option>
+          </select>
           <div class="et-sep"></div>
           <label class="img-upload-label" title="이미지 삽입">
             🖼 이미지
@@ -491,6 +498,30 @@
   function fmt(cmd, val) {
     document.getElementById('richEditor').focus();
     document.execCommand(cmd, false, val || null);
+  }
+
+  function setLineHeight(val) {
+    if (!val) return;
+    const editor = document.getElementById('richEditor');
+    editor.focus();
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0) {
+      // 선택 없으면 전체 에디터에 적용
+      editor.style.lineHeight = val;
+      return;
+    }
+    // 선택된 블록에 적용
+    document.execCommand('styleWithCSS', false, true);
+    const range = sel.getRangeAt(0);
+    const div = document.createElement('div');
+    div.style.lineHeight = val;
+    try {
+      range.surroundContents(div);
+    } catch(e) {
+      // 부분 선택 등 오류 시 전체 에디터에 적용
+      editor.style.lineHeight = val;
+    }
+    document.execCommand('styleWithCSS', false, false);
   }
 
   /* ── 이미지 업로드 ── */
